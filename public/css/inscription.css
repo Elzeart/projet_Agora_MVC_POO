@@ -1,0 +1,79 @@
+main{
+    background: radial-gradient(ellipse at center, rgb(255, 255, 255), rgb(145, 183, 221));
+    font-family: normal;
+    font-weight: bold;
+}
+
+a {
+    text-decoration: none;   
+    color: rgb(4, 32, 122);
+    font-weight: bold;
+}
+
+#container{
+    width:400px;
+    margin:0 auto;
+    padding: 7rem 0 5rem 0;
+    /* margin-top:5%; */
+}
+
+form {
+    width:100%;
+    padding: 30px;
+    border: 1px solid #f1f1f1;
+    background: #ffffff;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+#container h1{
+    width: 38%;
+    margin: 0 auto;
+    padding-bottom: 10px;
+}
+
+#container input[type=text], #container input[type=password], #container input[type=email], #container input[type=date], #container input[type=number] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+#container input[type=submit] {
+    background: linear-gradient(to top, rgba(160,196,231), rgb(188, 211, 240));
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius:10px;
+    cursor: pointer;
+    width: 100%;
+}
+#container input[type=submit]:hover {
+    background-color: white;
+    color: rgb(16, 1, 102);
+    border: 1px solid rgb(16, 1, 102);
+    font-weight: bold;
+}
+
+@media (min-width: 800px) {
+
+    #container{
+        width:550px;
+        margin:0 auto;
+        padding: 7rem 0 5rem 0;
+        /* margin-top:5%; */
+    }
+
+    #displayforms{
+        width:500px;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .columnform{
+        padding: 20px 20px 0px 20px;
+    }
+
+}
