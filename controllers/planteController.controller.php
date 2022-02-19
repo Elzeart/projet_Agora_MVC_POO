@@ -1,38 +1,38 @@
 <?php
-require_once "models/plantsManager.class.php";
+require_once "models/planteManager.class.php";
 
-class PlantsController{
-    private $plantManager;
+class PlanteController{
+    private $planteManager;
 
     public function __construct(){
-        $this->plantManager = new PlantManager;
-        $this->plantManager->chargementPlants();
+        $this->planteManager = new PlantManager;
+        $this->planteManager->chargementPlantes();
     }
 
-    public function afficherPlants(){
-        $plants = $this->plantManager->getPlants();
-        require "views/plants.admin.view.php";
+    public function afficherPlantes(){
+        $plants = $this->planteManager->getPlantes();
+        require "views/plantes.admin.view.php";
     }
 
-    public function afficherPlantsV(){
-        $plants = $this->plantManager->getPlants();
-        require "views/plantsV.view.php";
+    public function afficherPlantesV(){
+        $plants = $this->planteManager->getPlantes();
+        require "views/plantesV.view.php";
     }
 
-    public function afficherPlant($id){
-        $plant = $this->plantManager->getPlantById($id);
-        require "views/afficherPlant.view.php";
+    public function afficherPlante($id){
+        $plant = $this->planteManager->getPlantById($id);
+        require "views/afficherPlante.view.php";
     }
 
-    public function ajoutPlant(){
-        require "views/ajoutPlant.view.php";
+    public function ajoutPlante(){
+        require "views/ajoutPlante.view.php";
     }
 
-    public function ajoutPlantValidation(){
+    public function ajoutPlanteValidation(){
         $file = $_FILES['image'];
         $repertoire = "public/images/";
         $nomImageAjoute = $this->ajoutImage($file,$repertoire);
-        $this->plantManager->ajoutPlantBd($_POST['titre'],$_POST['infosVegetal'],$_POST['plantationVegetal'],$nomImageAjoute);
+        $this->planteManager->ajoutPlanteBd($_POST['titre'],$_POST['infosVegetal'],$_POST['plantationVegetal'],$nomImageAjoute);
         
         $_SESSION['alert'] = [
             "type" => "success",
@@ -42,10 +42,10 @@ class PlantsController{
         header('Location: '. URL . "admin/pAdmin");
     }
 
-    public function removePlant($id){
-        $nomImage = $this->plantManager->getPlantById($id)->getImageVegetal();
+    public function supprimerPlante($id){
+        $nomImage = $this->planteManager->getPlantById($id)->getImageVegetal();
         unlink("public/images/".$nomImage);
-        $this->plantManager->removePlantBD($id);
+        $this->planteManager->supprimerPlanteBD($id);
         $_SESSION['alert'] = [
             "type" => "success",
             "msg" => "Suppression Réalisée"
@@ -53,13 +53,13 @@ class PlantsController{
         header('Location: '. URL . "admin/pAdmin");
     }
 
-    public function modifyPlant($id){
-        $plant = $this->plantManager->getPlantById($id);
-        require "views/modifyPlant.view.php";
+    public function modifierPlante($id){
+        $plant = $this->planteManager->getPlantById($id);
+        require "views/modifierPlante.view.php";
     }
 
-    public function modifyPlantValidation(){
-        $imageActuelle = $this->plantManager->getPlantById($_POST['identifiant'])->getImageVegetal();
+    public function modifierPlanteValidation(){
+        $imageActuelle = $this->planteManager->getPlantById($_POST['identifiant'])->getImageVegetal();
         $file = $_FILES['image'];
 
         if($file['size'] > 0){
@@ -69,7 +69,7 @@ class PlantsController{
         } else {
             $nomImageAjoute = $imageActuelle;
         }
-        $this->plantManager->modifyPlantBD($_POST['identifiant'], $_POST['titre'], $_POST['infos'], $nomImageAjoute);
+        $this->planteManager->modifierPlanteBD($_POST['identifiant'], $_POST['titre'], $_POST['infos'], $nomImageAjoute);
         header('Location: '. URL . "admin/pAdmin");
     }
 

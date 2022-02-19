@@ -1,20 +1,20 @@
 <?php
 
-require_once "connection_bdd.class.php";
-require_once "plant.class.php";
+require_once "connexion_bdd.class.php";
+require_once "plante.class.php";
 
 class PlantManager extends Model{
     private $plants;
 
-    public function ajoutPlant($plant){
+    public function ajoutPlante($plant){
         $this->plants[] = $plant;
     }
 
-    public function getPlants(){
+    public function getPlantes(){
         return $this->plants;
     }
 
-    public function chargementPlants(){
+    public function chargementPlantes(){
         $req = $this->getBdd()->prepare("SELECT * FROM vegetaux");
         $req->execute();
         $lesVegetaux = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -22,7 +22,7 @@ class PlantManager extends Model{
         /* var_dump($lesVegetaux); */
         foreach($lesVegetaux as $vegetal){
             $l = new Vegetal($vegetal['idVegetal'],$vegetal['nomVegetal'],$vegetal['infosVegetal'],$vegetal['plantationVegetal'],$vegetal['imageVegetal']);
-            $this->ajoutPlant($l);
+            $this->ajoutPlante($l);
         }
     }
 
@@ -35,7 +35,7 @@ class PlantManager extends Model{
         throw new Exception("La plante n'existe pas");
     }
 
-    public function ajoutPlantBd($titre,$infosVegetal,$plantationVegetal,$image){
+    public function ajoutPlanteBd($titre,$infosVegetal,$plantationVegetal,$image){
         $req = "
         INSERT INTO vegetaux (nomVegetal, infosVegetal, plantationVegetal, imageVegetal)
         values (:nomVegetal, :infosVegetal, :plantationVegetal, :imageVegetal)";
@@ -49,11 +49,11 @@ class PlantManager extends Model{
 
         if($resultat > 0){
             $plant = new Vegetal($this->getBdd()->lastInsertId(),$titre,$infosVegetal,$plantationVegetal,$image);
-            $this->ajoutPlant($plant);
+            $this->ajoutPlante($plant);
         }        
     }
 
-    public function removePlantBD($id){
+    public function supprimerPlanteBD($id){
         $req = "
         Delete from vegetaux where idVegetal = :idVegetal
         ";
@@ -67,7 +67,7 @@ class PlantManager extends Model{
         }
     }
 
-    public function modifyPlantBD($id, $titre, $infos, $image){
+    public function modifierPlanteBD($id, $titre, $infos, $image){
         $req = "
         UPDATE vegetaux 
         SET nomVegetal = :nomVegetal, infosVegetal = :infosVegetal, imageVegetal = :imageVegetal 

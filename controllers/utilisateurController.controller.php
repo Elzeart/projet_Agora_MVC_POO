@@ -10,14 +10,42 @@ class UtilsateurController
         $this->utilisateurManager = new UtilisateurManager;
     }
 
-    public function connexion(){
+    public function connexionForm(){
         require "views/connexion.view.php";
     }
     public function inscriptionForm(){
         require "views/inscription.view.php";
     }
 
-    public function inscriptionValid(){
+    public function validation_pseudo($pseudoUtilisateur,$mdp){
+        if($this->utilisateurManager->combinaisonValide($pseudoUtilisateur,$mdp)){
+            if($this->utilisateurManager->compteActive($pseudoUtilisateur)){
+                $_SESSION['profil'] = [
+                    "pseudoUtilisateur" => $pseudoUtilisateur,
+                ];
+                /* echo "<script language=javascript> alert('Bienvenue sur votre espace personnel !'); </script>";  */
+                header('Location: '.URL.'admin');
+            } else {
+            throw new Exception("Le compte n'a pas été activé par mail");
+            }
+        } else {
+            throw new Exception("Pseudo ou mot de passe non valide");
+        }
+    }
+
+    public function profil(){
+        $data = $this->utilisateurManager->getUtilisateurInformation($_SESSION['profil']['pseudoUtilisateur']);
+        $_SESSION['profil']['idDroit'] = $data['idDroit'];
+        require "views/profil.view.php";
+    }
+
+    public function deconnexion(){
+        unset($_SESSION['profil']);
+        session_destroy();
+        header('Location: '.URL.'accueil');
+    }
+
+/*     public function inscriptionValid(){
         $nomUtilisateur="";
         $prenomUtilisateur="";
         $pseudoUtilisateur="";
@@ -53,15 +81,15 @@ class UtilsateurController
     
             // Vérifier si le mail existe déjà
 
-           /*  $utilisateurExiste = $this->utilisateurManager->comparerUtilisateurMailPseudoBD($_POST['mailUtilisateur'], $_POST['pseudoUtilisateur']); */
-            /* if(!$utilisateurExiste){ */
+            // $utilisateurExiste = $this->utilisateurManager->comparerUtilisateurMailPseudoBD($_POST['mailUtilisateur'], $_POST['pseudoUtilisateur']);
+            // if(!$utilisateurExiste){
                     
                 $hash_mdp = password_hash($_POST['mdpUtilisateur'], PASSWORD_DEFAULT);
 
                 $this->utilisateurManager->insererUtilisateurDB($_POST['nomUtilisateur'], $_POST['prenomUtilisateur'], $_POST['pseudoUtilisateur'], $_POST['mailUtilisateur'], $hash_mdp);
-            /* }else{
-                throw new Exception("L'utilisateur existe déjà.");
-            } */
+            // }else{
+            //     throw new Exception("L'utilisateur existe déjà.");
+            // } 
 
             
             
@@ -69,7 +97,7 @@ class UtilsateurController
 
         header("Location: ".URL."accueil");
 
-    }
+    } */
 
 
 

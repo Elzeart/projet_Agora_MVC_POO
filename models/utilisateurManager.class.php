@@ -1,9 +1,45 @@
 <?php
 require_once "utilisateur.class.php";
-require_once "connection_bdd.class.php";
+require_once "connexion_bdd.class.php";
 class UtilisateurManager extends Model{
 
-    public function comparerUtilisateurMailPseudoBD($mailUtilisateur, $pseudoUtilisateur){
+    private function recupMdpUtilisateur($pseudoUtilisateur){
+        $req = "SELECT mdpUtilisateur FROM utilisateurs WHERE pseudoUtilisateur = :pseudoUtilisateur";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":pseudoUtilisateur", $pseudoUtilisateur,PDO::PARAM_STR);
+        $stmt->execute();
+        $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $resultat['mdpUtilisateur'];
+    }
+
+    public function combinaisonValide($pseudo,$mdp){
+        $mdpBD = $this->recupMdpUtilisateur($pseudo);
+        return password_verify($mdp,$mdpBD);
+    }
+
+    public function compteActive($pseudoUtilisateur){
+        $req = "SELECT activationCode FROM utilisateurs WHERE pseudoUtilisateur = :pseudoUtilisateur";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":pseudoUtilisateur", $pseudoUtilisateur,PDO::PARAM_STR);
+        $stmt->execute();
+        $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return ($resultat['activationCode'] == 1);
+        // return ($resultat['activationCode'] === 1) ? true : false;
+    }
+
+    public function getUtilisateurInformation($pseudoUtilisateur){
+        $req = "SELECT * FROM utilisateurs WHERE pseudoUtilisateur = :pseudoUtilisateur";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":pseudoUtilisateur", $pseudoUtilisateur,PDO::PARAM_STR);
+        $stmt->execute();
+        $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $resultat;
+    }
+
+/*     public function comparerUtilisateurMailPseudoBD($mailUtilisateur, $pseudoUtilisateur){
         $sql = "SELECT * FROM utilisateurs WHERE mailUtilisateur = :mailUtilisateur";
         $req = $this->getBdd()->prepare($sql);
         $result = $req->execute([
@@ -52,6 +88,6 @@ class UtilisateurManager extends Model{
     public function lastId(){
         $lastId = $this->getBdd()->lastInsertId();
         return $lastId;
-    }
+    } */
 
 }

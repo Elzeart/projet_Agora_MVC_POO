@@ -5,6 +5,7 @@ ob_start();
 
 <h2 class="titre-section-info">Bienvenue dans espace admin</h2>
 
+<a href="<?= URL ?>admin/profil">Gestion du profil</a> <br>
 <a href="<?= URL ?>admin/pAdmin">Gestion des synthéses des végétaux</a> <br>
 <a href="<?= URL ?>trocAdmin">Gestion des Trocs</a> <br>
 <a href="<?= URL ?>accueilAdmin">Gestion Accueil</a> <br>

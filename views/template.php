@@ -27,20 +27,17 @@
         <span class="bar"></span>
     </a>
     <div class="navbar-links">
-        <ul>
+    <ul>
             <li><a href="<?= URL ?>accueil">Accueil</a></li>
             <li><a href="<?= URL ?>vegetaux">Les végétaux</a></li>
             <li><a href="<?= URL ?>trocs">Espace de troc</a></li>
             <li><a href="<?= URL ?>contact">Contact</a></li>
-            <?php if(!isset($_SESSION['pseudoUtilisateur'])){ ?>
+            <?php if(empty($_SESSION['profil'])) : ?>
                 <li><a href="<?= URL ?>connexionInscription">Connexion/Inscription</a></li>
-            <?php } else if(isset($_SESSION['pseudoUtilisateur']) || $_SESSION['idDroit'] == 1) { ?>
-                <li><a href="<?= URL ?>admin">Espace admin</a></li>
+            <?php else : ?> 
+                <li><a href="<?= URL ?>admin">Admin</a></li>
                 <li><a href="<?= URL ?>deconnexion">Déconnexion</a></li>
-            <?php } else { ?> 
-                <li><a href="<?= URL ?>espaceMembre">Espace membre</a></li>
-                <li><a href="<?= URL ?>deconnexion">Déconnexion</a></li>
-            <?php } ?>
+            <?php endif ?>
         </ul>
     </div>
 </nav>

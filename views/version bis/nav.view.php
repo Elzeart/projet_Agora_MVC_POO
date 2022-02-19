@@ -27,15 +27,12 @@
             <li><a href="<?= URL ?>vegetaux">Les végétaux</a></li>
             <li><a href="<?= URL ?>trocs">Espace de troc</a></li>
             <li><a href="<?= URL ?>contact">Contact</a></li>
-            <?php if(!isset($_SESSION['pseudoUtilisateur'])){ ?>
+            <?php if(empty($_SESSION['profil'])) : ?>
                 <li><a href="<?= URL ?>connexionInscription">Connexion/Inscription</a></li>
-            <?php } else if($_SESSION['idDroit'] == 1) { ?>
-                <li><a href="<?= URL ?>admin">Espace admin</a></li>
-                <li><a href="<?= URL ?>deconnexion">Déconnexion</a></li>
-            <?php } else { ?> 
+            <?php else : ?> 
                 <li><a href="<?= URL ?>espaceMembre">Espace membre</a></li>
                 <li><a href="<?= URL ?>deconnexion">Déconnexion</a></li>
-            <?php } ?>
+            <?php endif ?>
         </ul>
     </div>
 </nav>
