@@ -39,6 +39,26 @@ class UtilisateurManager extends Model{
         return $resultat;
     }
 
+    public function verifPseudoDisponible($pseudoUtilisateur){
+        $utilisateur = $this->getUtilisateurInformation($pseudoUtilisateur);
+        return empty($utilisateur);
+
+    }
+
+    public function bdCreerCompte($pseudoUtilisateur, $mdpCrypte, $mailUtilisateur, $clef){
+        $req = "INSERT INTO utilisateurs (pseudoUtilisateur, mdpUtilisateur, mailUtilisateur, activationCode, clef) 
+        VALUES (:pseudoUtilisateur, :mdpUtilisateur, :mailUtilisateur, 0, :clef)";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":pseudoUtilisateur", $pseudoUtilisateur,PDO::PARAM_STR);
+        $stmt->bindValue(":mdpUtilisateur", $mdpCrypte,PDO::PARAM_STR);
+        $stmt->bindValue(":mailUtilisateur", $mailUtilisateur,PDO::PARAM_STR);
+        $stmt->bindValue(":clef", $clef,PDO::PARAM_INT);
+        $stmt->execute();
+        $estModifier = ($stmt->rowCount() > 0);
+        $stmt->closeCursor();
+        return $estModifier;
+    }
+
 /*     public function comparerUtilisateurMailPseudoBD($mailUtilisateur, $pseudoUtilisateur){
         $sql = "SELECT * FROM utilisateurs WHERE mailUtilisateur = :mailUtilisateur";
         $req = $this->getBdd()->prepare($sql);

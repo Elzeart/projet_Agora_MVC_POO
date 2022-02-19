@@ -45,7 +45,6 @@ try{
                 require "views/contact.view.php";
             break;
             case "connexionInscription" : 
-                /* require "views/connexion.view.php"; */
                 $utilisateurController->connexionForm();
             break;
             case "ValidationConnexion" : 
@@ -59,11 +58,20 @@ try{
                 }
             break;
             case "inscription" : 
-                /* require "views/inscription.view.php"; */
                 $utilisateurController->inscriptionForm();
             break;
-            case "inscriptionValid" : 
-                /* $utilisateurController->inscriptionValid(); */
+            case "inscriptionValidation" : 
+                if(!empty($_POST['nomUtilisateur']) && !empty($_POST['prenomUtilisateur']) && !empty($_POST['pseudoUtilisateur']) && !empty($_POST['mailUtilisateur']) && !empty($_POST['mdpUtilisateur']) && !empty($_POST['confirmMdpUtilisateur'])){
+                    $nomUtilisateur = htmlentities($_POST['nomUtilisateur']);
+                    $prenomUtilisateur = htmlentities($_POST['prenomUtilisateur']);
+                    $pseudoUtilisateur = htmlentities($_POST['pseudoUtilisateur']);
+                    $mailUtilisateur = htmlentities($_POST['mailUtilisateur']);
+                    $mdpUtilisateur = htmlentities($_POST['mdpUtilisateur']);
+                    $confirmMdpUtilisateur = htmlentities($_POST['confirmMdpUtilisateur']);
+                    $utilisateurController->inscriptionValid($pseudoUtilisateur, $mdpUtilisateur, $mailUtilisateur);
+                } else {
+                    throw new Exception("Veuillez remplir les informations oblligatoires !");
+                }
             break;
             case "admin" : 
                 if(empty($_SESSION['profil'])){

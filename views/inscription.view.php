@@ -1,5 +1,13 @@
 <?php 
 ob_start(); 
+if(!empty($_SESSION['alert'])) :
+?>
+<div class="alert alert-<?= $_SESSION['alert']['type'] ?>" role="alert">
+    <?= $_SESSION['alert']['msg'] ?>
+</div>
+<?php 
+unset($_SESSION['alert']);
+endif; 
 ?>
 <link rel="stylesheet" href="<?= URL ?>/public/css/inscription.css">
 
@@ -7,7 +15,7 @@ ob_start();
 
 <main>
         <div id="container">
-            <form action="<?=URL?>inscriptionValid" method="post">
+            <form action="<?=URL?>inscriptionValidation" method="post">
                     <h1>Inscription</h1>
                 <div id="displayforms">
                     <div class="columnform">
@@ -16,9 +24,11 @@ ob_start();
                         <label for="prenomUtilisateur">Prénom</label>
                         <input type="text" name="prenomUtilisateur" placeholder="Entrez un prénom" required> <br>
                         <label for="pseudoUtilisateur">Pseudo</label>
-                        <input type="text" name="pseudoUtilisateur" placeholder="Entrez un pseudonyme"> <br>
+                        <input type="text" name="pseudoUtilisateur" placeholder="Entrez un pseudonyme" required> <br>
                     </div>
                     <div class="columnform">
+                        <label for="mailUtilisateur">Mail</label>
+                        <input type="text" name="mailUtilisateur" placeholder="Entrez un mail" required> <br>
                         <label for="mdpUtilisateur">Mot de passe</label>
                         <input type="password" name="mdpUtilisateur" minlength="8" placeholder="Entrez un mot de passe" required> <br>
                         <label for="confirmMdpUtilisateur">Confirmer mot de passe</label>

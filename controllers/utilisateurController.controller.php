@@ -23,7 +23,6 @@ class UtilsateurController
                 $_SESSION['profil'] = [
                     "pseudoUtilisateur" => $pseudoUtilisateur,
                 ];
-                /* echo "<script language=javascript> alert('Bienvenue sur votre espace personnel !'); </script>";  */
                 header('Location: '.URL.'admin');
             } else {
             throw new Exception("Le compte n'a pas été activé par mail");
@@ -43,6 +42,25 @@ class UtilsateurController
         unset($_SESSION['profil']);
         session_destroy();
         header('Location: '.URL.'accueil');
+    }
+
+    public function inscriptionValid($pseudoUtilisateur, $mdpUtilisateur, $mailUtilisateur){
+        if($this->utilisateurManager->verifPseudoDisponible($pseudoUtilisateur)){
+            $mdpCrypte = password_hash($mdpUtilisateur, PASSWORD_DEFAULT);
+            $clef = rand(0,9999);
+            if($this->utilisateurManager->bdCreerCompte($pseudoUtilisateur, $mdpCrypte, $mailUtilisateur, $clef)){
+                $_SESSION['alert'] = [
+                    "type" => "success",
+                    "msg" => "Inscription Réalisée"
+                ];
+                header('Location: '.URL.'connexionInscription');
+                // echo "<script language=javascript> alert('inscription réussit, vous pouvez vous connecter !'); </script>";
+            } else {
+                throw new Exception("Errreur lors de la création du compte !");
+            }
+        } else {
+            throw new Exception("Le psuedo est déjà utilisé !");
+        }
     }
 
 /*     public function inscriptionValid(){

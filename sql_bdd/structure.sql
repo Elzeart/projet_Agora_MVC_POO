@@ -15,10 +15,9 @@ create table utilisateurs(
     prenomUtilisateur varchar(50) not null,
     pseudoUtilisateur varchar(50) not null,
     mailUtilisateur varchar(100) not null,
-    ageUtilisateur date,
-    telephoneUtilisateur int,
     mdpUtilisateur varchar(100) not null,
-    activationCode bool not null,
+    activationCode tinyint not null,
+    clef int,
     idDroit int
 );
 
