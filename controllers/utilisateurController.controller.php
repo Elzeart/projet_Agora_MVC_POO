@@ -25,7 +25,12 @@ class UtilsateurController
                 ];
                 header('Location: '.URL.'admin');
             } else {
-            throw new Exception("Le compte n'a pas été activé par mail");
+            $_SESSION['alert'][] = [
+                "type" => "alert-danger",
+                "message" => "Le compte ".$pseudoUtilisateur." n'a pas été activé par mail <a href='renvoyerMailValidation/".$pseudoUtilisateur."'>Renvoyer le mail de validation</a>"
+            ];
+            header('Location: '.URL.'connexionInscription');
+            //throw new Exception("Le compte ".$pseudoUtilisateur." n'a pas été activé par mail <a href='renvoyerMailValidation/".$pseudoUtilisateur."'>Renvoyer le mail de validation</a>");
             }
         } else {
             throw new Exception("Pseudo ou mot de passe non valide");
@@ -49,12 +54,13 @@ class UtilsateurController
             $mdpCrypte = password_hash($mdpUtilisateur, PASSWORD_DEFAULT);
             $clef = rand(0,9999);
             if($this->utilisateurManager->bdCreerCompte($pseudoUtilisateur, $mdpCrypte, $mailUtilisateur, $clef)){
-                $_SESSION['alert'] = [
-                    "type" => "success",
-                    "msg" => "Inscription Réalisée"
+                $this->envoiMailValidation($pseudoUtilisateur, $mailUtilisateur, $clef);
+                $_SESSION['alert'][] = [
+                    "type" => "alert-success",
+                    "message" => "Le compte a été créé, un mail de validation vous a été envoyé !"
                 ];
+                // Toolbox::ajouterMessageAlerte("La compte a été créé, Un mail de validation vous a été envoyé !", Toolbox::COULEUR_VERTE);
                 header('Location: '.URL.'connexionInscription');
-                // echo "<script language=javascript> alert('inscription réussit, vous pouvez vous connecter !'); </script>";
             } else {
                 throw new Exception("Errreur lors de la création du compte !");
             }
@@ -63,60 +69,36 @@ class UtilsateurController
         }
     }
 
-/*     public function inscriptionValid(){
-        $nomUtilisateur="";
-        $prenomUtilisateur="";
-        $pseudoUtilisateur="";
-        $mailUtilisateur="";
-        $mdpUtilisateur="";
+    private function envoiMailValidation($pseudoUtilisateur, $mailUtilisateur, $clef){
+        $urlVerification = URL."validationMail/".$pseudoUtilisateur."/".$clef;
+        $sujet = "Création du compte sur le site Agora";
+        $message = "Pour valider votre compte veuillez cliquer sur le lien suivant ".$urlVerification;
+        self::envoiMail($mailUtilisateur, $sujet, $message);
+    }
 
-        
-        if(isset($_POST['nomUtilisateur'], $_POST['prenomUtilisateur'], $_POST['pseudoUtilisateur'], $_POST['mailUtilisateur'], $_POST['mdpUtilisateur'], $_POST['confirmMdpUtilisateur']))
-        {
-            $nomUtilisateur = htmlspecialchars($_POST['nomUtilisateur']);
-            $prenomUtilisateur = htmlspecialchars($_POST['prenomUtilisateur']);
-            $pseudoUtilisateur = htmlspecialchars($_POST['pseudoUtilisateur']);
-            $mailUtilisateur = htmlspecialchars($_POST['mailUtilisateur']);
-            $mdpUtilisateur = htmlspecialchars($_POST['mdpUtilisateur']);
-            $confirmMdpUtilisateur = htmlspecialchars($_POST['confirmMdpUtilisateur']);
+    public static function envoiMail($destinataire, $sujet, $message){
+        $header = "From: luipourquoi1@gmail.com";
+        if(mail($destinataire, $sujet, $message, $header)){
+            $_SESSION['alert'][] = [
+                "type" => "alert-success",
+                "message" => "Mail envoyé"
+            ];
+            // echo "<script language=javascript> alert('Mail envoyé !'); </script>"; 
+            // Toolbox::ajouterMessageAlerte("Mail envoyé !", Toolbox::COULEUR_VERTE);
+        } else {
+            $_SESSION['alert'][] = [
+                "type" => "alert-danger",
+                "message" => "Mail non envoyé"
+            ];
+            // echo "<script language=javascript> alert('Mail non envoyé !'); </script>"; 
+            // Toolbox::ajouterMessageAlerte("Mail non envoyé !", Toolbox::COULEUR_ROUGE);
+        };
+    }
 
-        }
-
-        if($nomUtilisateur != null && $prenomUtilisateur != null && $pseudoUtilisateur!= null &&  $mailUtilisateur != null && $mdpUtilisateur != null && $confirmMdpUtilisateur != null)
-        {
-            // Vérifier si mdp correspond à la confirmation mdp
-            if($mdpUtilisateur != $confirmMdpUtilisateur){
-                // die('Mot de passe et confirmation mot de passe ne sont pas identiques');
-                // echo "<script language=javascript type=text/javascript> window.alert('Le mot de passe et la confirmation du mot de passe ne sont pas identiques'); </script>"; die;
-                echo "<script language=javascript> alert('Le mot de passe et la confirmation du mot de passe ne sont pas identiques'); </script>"; die;
-            }
-
-            // Vérifier que le contenu email est un email. Pour éviter de contourner le front
-            if(!filter_var($mailUtilisateur, FILTER_VALIDATE_EMAIL)){
-                // die('L\'adresse email est incorrecte');
-                echo "<script language=javascript> alert('L\'adresse email est incorrecte'); </script>"; die;
-            }
-    
-            // Vérifier si le mail existe déjà
-
-            // $utilisateurExiste = $this->utilisateurManager->comparerUtilisateurMailPseudoBD($_POST['mailUtilisateur'], $_POST['pseudoUtilisateur']);
-            // if(!$utilisateurExiste){
-                    
-                $hash_mdp = password_hash($_POST['mdpUtilisateur'], PASSWORD_DEFAULT);
-
-                $this->utilisateurManager->insererUtilisateurDB($_POST['nomUtilisateur'], $_POST['prenomUtilisateur'], $_POST['pseudoUtilisateur'], $_POST['mailUtilisateur'], $hash_mdp);
-            // }else{
-            //     throw new Exception("L'utilisateur existe déjà.");
-            // } 
-
-            
-            
-        }
-
-        header("Location: ".URL."accueil");
-
-    } */
-
-
+    public function renvoyerMailValidation($pseudoUtilisateur){
+        $utilisateur = $this->utilisateurManager->getUtilisateurInformation($pseudoUtilisateur);
+        $this->envoiMailValidation($pseudoUtilisateur, $utilisateur['mailUtilisateur'], $utilisateur['clef']);
+        header('Location: '.URL."connexionInscription");
+    }
 
 }

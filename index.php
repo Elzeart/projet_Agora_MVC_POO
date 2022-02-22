@@ -6,6 +6,7 @@ define("URL", str_replace("index.php","",(isset($_SERVER['HTTPS']) ? "https" : "
 
 require_once "controllers/planteController.controller.php";
 require_once "controllers/utilisateurController.controller.php";
+require_once "controllers/Toolbox.class.php";
 $planteController = new PlanteController;
 $utilisateurController = new UtilsateurController;
 
@@ -72,6 +73,10 @@ try{
                 } else {
                     throw new Exception("Veuillez remplir les informations oblligatoires !");
                 }
+            break;
+            case "renvoyerMailValidation" : $utilisateurController->renvoyerMailValidation($url[1]);
+            break;
+            case "validationMail" : echo "test validation mail";
             break;
             case "admin" : 
                 if(empty($_SESSION['profil'])){

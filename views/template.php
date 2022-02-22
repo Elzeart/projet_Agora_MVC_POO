@@ -42,10 +42,21 @@
     </div>
 </nav>
 
-    <div class="container">
+    <!-- <div class="container"> -->
+        <?php 
+            if(!empty($_SESSION['alert'])) {
+                echo '<link rel="stylesheet" href="https://bootswatch.com/4/sketchy/bootstrap.min.css">';
+                foreach($_SESSION['alert'] as $alert){
+                    echo "<div class='alert ". $alert['type'] ."' role='alert'>
+                        ".$alert['message']."
+                    </div>";
+                }
+                unset($_SESSION['alert']);
+            }
+        ?>
         <!-- <h1 class="rounded border border-dark p-2 m-2 text-center text-white bg-info"><?= $titre ?></h1> -->
         <?= $content ?>
-    </div>
+    <!-- </div> -->
 
     <footer>
 

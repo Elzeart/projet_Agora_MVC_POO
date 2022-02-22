@@ -1,15 +1,8 @@
 <?php 
 ob_start(); 
-if(!empty($_SESSION['alert'])) :
 ?>
-<link rel="stylesheet" href="https://bootswatch.com/4/sketchy/bootstrap.min.css">
-<div class="alert alert-<?= $_SESSION['alert']['type'] ?>" role="alert">
-    <?= $_SESSION['alert']['msg'] ?>
-</div>
-<?php 
-unset($_SESSION['alert']);
-endif; 
-?>
+<!-- <link rel="stylesheet" href="https://bootswatch.com/4/sketchy/bootstrap.min.css"> -->
+
 
 <link rel="stylesheet" href="<?= URL ?>/public/css/connexion.css">
 <!-- <h2 class="titre-section-info">Ici la page de connexion</h2> -->
