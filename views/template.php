@@ -15,7 +15,8 @@
     <!-- <link rel="stylesheet" href="<?= URL ?>/public/css/plants.css"> -->
     <!-- <link rel="stylesheet" href="<?= URL ?>/public/css/singIn.css"> -->
     <link rel="icon" type="image/pngn" href="<?= URL ?>public/images/favicon.png">
-    <script src="./public/javascript/nav.js" defer></script>
+    <script src="<?= URL ?>/public/javascript/nav.js" defer></script>
+    
 </head>
 <body>
 
@@ -34,18 +35,22 @@
             <li><a href="<?= URL ?>contact">Contact</a></li>
             <?php if(empty($_SESSION['profil'])) : ?>
                 <li><a href="<?= URL ?>connexionInscription">Connexion/Inscription</a></li>
-            <?php else : ?> 
+            <?php elseif (!empty($_SESSION['profil']) && !empty($_SESSION['profil']['idDroit'] == 1)) : ?>
                 <li><a href="<?= URL ?>admin">Admin</a></li>
+                <li><a href="<?= URL ?>deconnexion">Déconnexion</a></li>
+            <?php else : ?> 
+                <li><a href="<?= URL ?>espaceMembre">Espace membre</a></li>
                 <li><a href="<?= URL ?>deconnexion">Déconnexion</a></li>
             <?php endif ?>
         </ul>
     </div>
 </nav>
 
-    <!-- <div class="container"> -->
+    <div class="container">
         <?php 
             if(!empty($_SESSION['alert'])) {
-                echo '<link rel="stylesheet" href="https://bootswatch.com/4/sketchy/bootstrap.min.css">';
+                /* echo '<link rel="stylesheet" href="https://bootswatch.com/4/sketchy/bootstrap.min.css">'; */
+                echo '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">';
                 foreach($_SESSION['alert'] as $alert){
                     echo "<div class='alert ". $alert['type'] ."' role='alert'>
                         ".$alert['message']."
@@ -56,7 +61,7 @@
         ?>
         <!-- <h1 class="rounded border border-dark p-2 m-2 text-center text-white bg-info"><?= $titre ?></h1> -->
         <?= $content ?>
-    <!-- </div> -->
+    </div>
 
     <footer>
 

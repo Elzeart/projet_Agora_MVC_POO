@@ -25,17 +25,7 @@ try{
                     $planteController->afficherPlantesV();
                 } else if($url[1] === "p") {
                     $planteController->afficherPlante($url[2]);
-                } /* else if($url[1] === "a") {
-                    $plantController->ajoutPlant();
-                } else if($url[1] === "av") {
-                    $plantController->ajoutPlantValidation();
-                } else if($url[1] === "m") {
-                    $plantController->modifyPlant($url[2]);
-                } else if($url[1] === "mv") {
-                    $plantController->modifyPlantValidation();
-                } else if($url[1] === "s") {
-                    $plantController->removePlant($url[2]);
-                } */ else {
+                } else {
                     throw new Exception("La page n'existe pas. Erreur 404 !!!");
                 }
             break;
@@ -76,15 +66,74 @@ try{
             break;
             case "renvoyerMailValidation" : $utilisateurController->renvoyerMailValidation($url[1]);
             break;
-            case "validationMail" : echo "test validation mail";
+            case "validationMail" : $utilisateurController->validationCompte($url[1], $url[2]);
+            break;
+            case "espaceMembre" : 
+                if(empty($_SESSION['profil'])){
+                    throw new Exception("Veuillez vous connecter !");
+                } elseif (!empty($_SESSION['profil']) && !empty($_SESSION['profil']['idDroit'] != 2)) {
+                    throw new Exception("Vous n'avez pas les droits pour cette page !");
+                } 
+/*                 elseif (!Toolbox::checkCookieConnexion()) {
+                    setcookie(Toolbox::COOKIE_NAME,"",time() - 3600);
+                    unset($_SESSION['profil']);
+                    throw new Exception("Veuillez vous reconnecter !");
+                } */ else {
+                    /* Toolbox::genererCookieConnexion(); *///Regénérer le cookie
+                    if(empty($url[1])){
+                        require "views/espaceMembre.view.php";
+                    } else if($url[1] === "pTroc") {
+                        echo 'Future page de proposition de troc';
+                    } else if($url[1] === "profil") {
+                        $utilisateurController->profil();
+                    } else if($url[1] === "validationModificationMail") {
+                        $utilisateurController->validationModificationMail(htmlentities($_POST['mailUtilisateur']));
+                    } else if($url[1] === "modificationMdp") {
+                        $utilisateurController->modificationMdp();
+                    } 
+                    else if($url[1] === "validationModificationMdp") {
+                        if(!empty($_POST['ancienMdpUtilisateur']) && !empty($_POST['nouveauMdpUtilisateur']) && !empty($_POST['confirmNouveauMdpUtilisateur'])){
+                            $ancienMdpUtilisateur = htmlentities($_POST['ancienMdpUtilisateur']);
+                            $nouveauMdpUtilisateur = htmlentities($_POST['nouveauMdpUtilisateur']);
+                            $confirmNouveauMdpUtilisateur = htmlentities($_POST['confirmNouveauMdpUtilisateur']);
+                            $utilisateurController->validationModificationMdp($ancienMdpUtilisateur, $nouveauMdpUtilisateur, $confirmNouveauMdpUtilisateur);
+                        } else {
+                            $_SESSION['alert'][] = [
+                                "type" => "alert-danger",
+                                "message" => "Vous n'avez pas renseigné toutes les informations"
+                            ];
+                            header("Location: ".URL."admin/modificationMdp");
+                        }
+                        
+                    } else if($url[1] === "suppressionCompte") {
+                        $utilisateurController->suppressionCompte();
+                    } 
+                    else if($url[1] === "validationModificationImage") {
+                        if($_FILES['image']['size'] > 0){
+                            $utilisateurController->validationModificationImage($_FILES['image']);
+                        } else {
+                            $_SESSION['alert'][] = [
+                                "type" => "alert-danger",
+                                "message" => "Vous n'avez pas modifié l'image"
+                            ];
+                            header("Location: ".URL."admin/validationModificationImage");
+                        }
+                        
+                    }
+                    else {
+                        throw new Exception("La page n'existe pas. Erreur 404 !!!");
+                    }
+                }
             break;
             case "admin" : 
                 if(empty($_SESSION['profil'])){
                     throw new Exception("Veuillez vous connecter !");
-                } else {
+                } elseif (!empty($_SESSION['profil']) && !empty($_SESSION['profil']['idDroit'] != 1)) {
+                    throw new Exception("Vous n'avez pas les droits pour cette page !");
+                }
+                else {
                     if(empty($url[1])){
                         require "views/admin.view.php";
-                        /* $plantController->afficherPlants(); */
                     } else if($url[1] === "pAdmin") {
                         $planteController->afficherPlantes();
                     } else if($url[1] === "p") {
@@ -101,29 +150,52 @@ try{
                         $planteController->supprimerPlante($url[2]);
                     } else if($url[1] === "profil") {
                         $utilisateurController->profil();
-                    } else {
+                    } else if($url[1] === "validationModificationMail") {
+                        $utilisateurController->validationModificationMail(htmlentities($_POST['mailUtilisateur']));
+                    } else if($url[1] === "modificationMdp") {
+                        $utilisateurController->modificationMdp();
+                    } 
+                    else if($url[1] === "validationModificationMdp") {
+                        if(!empty($_POST['ancienMdpUtilisateur']) && !empty($_POST['nouveauMdpUtilisateur']) && !empty($_POST['confirmNouveauMdpUtilisateur'])){
+                            $ancienMdpUtilisateur = htmlentities($_POST['ancienMdpUtilisateur']);
+                            $nouveauMdpUtilisateur = htmlentities($_POST['nouveauMdpUtilisateur']);
+                            $confirmNouveauMdpUtilisateur = htmlentities($_POST['confirmNouveauMdpUtilisateur']);
+                            $utilisateurController->validationModificationMdp($ancienMdpUtilisateur, $nouveauMdpUtilisateur, $confirmNouveauMdpUtilisateur);
+                        } else {
+                            $_SESSION['alert'][] = [
+                                "type" => "alert-danger",
+                                "message" => "Vous n'avez pas renseigné toutes les informations"
+                            ];
+                            header("Location: ".URL."admin/modificationMdp");
+                        }
+                        
+                    } else if($url[1] === "suppressionCompte") {
+                        $utilisateurController->suppressionCompte();
+                    } 
+                    else if($url[1] === "validationModificationImage") {
+                        if($_FILES['image']['size'] > 0){
+                            $utilisateurController->validationModificationImage($_FILES['image']);
+                        } else {
+                            $_SESSION['alert'][] = [
+                                "type" => "alert-danger",
+                                "message" => "Vous n'avez pas modifié l'image"
+                            ];
+                            header("Location: ".URL."admin/validationModificationImage");
+                        }
+                        
+                    } else if($url[1] === "droits") {
+                        $utilisateurController->droits();
+                    } else if($url[1] === "modificationDroit") {
+                        $utilisateurController->modificationDroit($_POST['pseudoUtilisateur'], $_POST['idDroit']);
+                    }
+                    else {
                         throw new Exception("La page n'existe pas. Erreur 404 !!!");
                     }
                 }
             break;
-            case "espaceMembre" : 
-                if(empty($url[1])){
-                    require "views/espaceMembre.view.php";
-                    /* $plantController->afficherPlants(); */
-                } else if($url[1] === "pMembre") {
-                    $planteController->afficherPlantes();
-                } else {
-                    throw new Exception("La page n'existe pas. Erreur 404 !!!");
-                }
-            break;
             case "deconnexion" : 
                 $utilisateurController->deconnexion();
-/*                 session_start();
-                session_destroy();
-                echo "<script language=javascript> alert('Deconnexion !'); </script>"; 
-                header('Location: '.URL.'accueil'); */
             break;
-
             default : throw new Exception("La page n'existe pas. Erreur 404 !!!");
         }
     }

@@ -16,6 +16,7 @@ create table utilisateurs(
     pseudoUtilisateur varchar(50) not null,
     mailUtilisateur varchar(100) not null,
     mdpUtilisateur varchar(100) not null,
+    imageUtilisateur varchar(50) not null,
     activationCode tinyint not null,
     clef int,
     idDroit int

@@ -45,69 +45,104 @@ class UtilisateurManager extends Model{
 
     }
 
-    public function bdCreerCompte($pseudoUtilisateur, $mdpCrypte, $mailUtilisateur, $clef){
-        $req = "INSERT INTO utilisateurs (pseudoUtilisateur, mdpUtilisateur, mailUtilisateur, activationCode, clef) 
-        VALUES (:pseudoUtilisateur, :mdpUtilisateur, :mailUtilisateur, 0, :clef)";
+    public function bdCreerCompte($pseudoUtilisateur, $mdpCrypte, $mailUtilisateur, $clef, $imageUtilisateur, $idDroit){
+        $req = "INSERT INTO utilisateurs (pseudoUtilisateur, mdpUtilisateur, mailUtilisateur, activationCode, clef, imageUtilisateur, idDroit) 
+        VALUES (:pseudoUtilisateur, :mdpUtilisateur, :mailUtilisateur, 0, :clef, :imageUtilisateur, :idDroit)";
         $stmt = $this->getBdd()->prepare($req);
         $stmt->bindValue(":pseudoUtilisateur", $pseudoUtilisateur,PDO::PARAM_STR);
         $stmt->bindValue(":mdpUtilisateur", $mdpCrypte,PDO::PARAM_STR);
         $stmt->bindValue(":mailUtilisateur", $mailUtilisateur,PDO::PARAM_STR);
         $stmt->bindValue(":clef", $clef,PDO::PARAM_INT);
+        $stmt->bindValue(":imageUtilisateur", $imageUtilisateur,PDO::PARAM_STR);
+        $stmt->bindValue(":idDroit", $idDroit,PDO::PARAM_INT);
         $stmt->execute();
         $estModifier = ($stmt->rowCount() > 0);
         $stmt->closeCursor();
         return $estModifier;
     }
 
-/*     public function comparerUtilisateurMailPseudoBD($mailUtilisateur, $pseudoUtilisateur){
-        $sql = "SELECT * FROM utilisateurs WHERE mailUtilisateur = :mailUtilisateur";
-        $req = $this->getBdd()->prepare($sql);
-        $result = $req->execute([
-            ":mailUtilisateur"=>$mailUtilisateur
-        ]);
-        $data = $req->fetch(PDO::FETCH_OBJ);
-        if (empty($data)){
-            $sql2 = "SELECT * FROM utilisateurs WHERE pseudoUtilisateur = :pseudoUtilisateur";
-            $req2 = $this->getBdd()->prepare($sql2);
-            $result2 = $req2->execute([
-                ":pseudoUtilisateur"=>$pseudoUtilisateur
-            ]);
-            $data2 = $req2->fetch(PDO::FETCH_OBJ);
-            if(empty($data2)){
-                $utilisateur = new Utilisateur($data2->idUtilisateur, $data2->nomUtilisateur, $data2->prenomUtilisateur, $data2->pseudoUtilisateur, $data2->mailUtilisateur, $data2->mdpUtilisateur);
-                return $utilisateur;
-            }
-            else{
-                // return null;
-                echo "<script language=javascript> alert('Ce pseudo est déjà utilisé'); </script>";
-                header('Location: '. URL . "inscription");
-            }
-            // $user = new User($data->id_user,$data->pseudo,$data->password,$data->id_role);
-            // return $user;
-        }
-        else{
-            //return null;
-            echo "<script language=javascript> alert('Ce mail est déjà utilisé'); </script>";
-            header('Location: '. URL . "inscription");
-        }
+    public function bdValidationCompte($pseudoUtilisateur, $clef){
+        $req = "UPDATE utilisateurs set activationCode = 1 WHERE pseudoUtilisateur = :pseudoUtilisateur and clef = :clef";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":pseudoUtilisateur", $pseudoUtilisateur, PDO::PARAM_STR);
+        $stmt->bindValue(":clef", $clef, PDO::PARAM_INT);
+        $stmt->execute();
+        $estModifier = ($stmt->rowCount() > 0);
+        $stmt->closeCursor();
+        return $estModifier;
     }
 
-    public function insererUtilisateurDB($nomUtilisateur, $prenomUtilisateur, $pseudoUtilisateur, $mailUtilisateur, $mdpUtilisateur){
-        $sql = "INSERT INTO utilisateurs (nomUtilisateur, prenomUtilisateur, pseudoUtilisateur, mailUtilisateur, mdpUtilisateur) VALUES (:nomUtilisateur, :prenomUtilisateur, :pseudoUtilisateur, :mailUtilisateur, :mdpUtilisateur)";
-        $req = $this->getBdd()->prepare($sql);
-        $result = $req->execute([
-            ":nomUtilisateur"=>$nomUtilisateur,
-            ":prenomUtilisateur"=>$prenomUtilisateur,
-            ":pseudoUtilisateur"=>$pseudoUtilisateur,
-            ":mailUtilisateur"=>$mailUtilisateur,
-            ":mdpUtilisateur"=>$mdpUtilisateur,
-        ]);
-        return $result;
+    public function bdModificationMailUtilisateur($pseudoUtilisateur, $mailUtilisateur){
+        $req = "UPDATE utilisateurs set mailUtilisateur = :mailUtilisateur WHERE pseudoUtilisateur = :pseudoUtilisateur";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindParam(':mailUtilisateur', $mailUtilisateur, PDO::PARAM_STR);
+        $stmt->bindParam(':pseudoUtilisateur', $pseudoUtilisateur, PDO::PARAM_STR);
+        $stmt->execute();
+        $estModifier = ($stmt->rowCount() > 0);
+        $stmt->closeCursor();
+        return $estModifier;
     }
-    
-    public function lastId(){
-        $lastId = $this->getBdd()->lastInsertId();
-        return $lastId;
-    } */
+
+    public function bdModificationMdpUtilisateur($pseudoUtilisateur, $mdpHash){
+        $req = "UPDATE utilisateurs set mdpUtilisateur = :mdpUtilisateur WHERE pseudoUtilisateur = :pseudoUtilisateur";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindParam(':mdpUtilisateur', $mdpHash, PDO::PARAM_STR);
+        $stmt->bindParam(':pseudoUtilisateur', $pseudoUtilisateur, PDO::PARAM_STR);
+        $stmt->execute();
+        $estModifier = ($stmt->rowCount() > 0);
+        $stmt->closeCursor();
+        return $estModifier;
+    }
+
+    public function bdSuppressionCompte($pseudoUtilisateur){
+        $req = "DELETE FROM utilisateurs WHERE pseudoUtilisateur = :pseudoUtilisateur";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindParam(':pseudoUtilisateur', $pseudoUtilisateur, PDO::PARAM_STR);
+        $stmt->execute();
+        $estModifier = ($stmt->rowCount() > 0);
+        $stmt->closeCursor();
+        return $estModifier;
+    }
+
+    public function bdAjoutImage($pseudoUtilisateur, $nomImageBd){
+        $req = "UPDATE utilisateurs set imageUtilisateur = :imageUtilisateur WHERE pseudoUtilisateur = :pseudoUtilisateur";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":pseudoUtilisateur", $pseudoUtilisateur,PDO::PARAM_STR);
+        $stmt->bindValue(":imageUtilisateur", $nomImageBd,PDO::PARAM_STR);
+        $stmt->execute();
+        $estModifier = ($stmt->rowCount() > 0);
+        $stmt->closeCursor();
+        return $estModifier;
+    }
+
+    public function getImageUtilisateur($pseudoUtilisateur){
+        $req = "SELECT imageUtilisateur FROM utilisateurs WHERE pseudoUtilisateur = :pseudoUtilisateur";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":pseudoUtilisateur", $pseudoUtilisateur,PDO::PARAM_STR);
+        $stmt->execute();
+        $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $resultat['imageUtilisateur'];
+    }
+
+    public function getUtilisateurs(){
+        $req = "SELECT * FROM utilisateurs";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->execute();
+        $datas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $datas;
+    }
+
+    public function bdModificationDroitUtilisateur($pseudoUtilisateur, $idDroit){
+        $req = "UPDATE utilisateurs set idDroit = :idDroit WHERE pseudoUtilisateur = :pseudoUtilisateur";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":pseudoUtilisateur", $pseudoUtilisateur,PDO::PARAM_STR);
+        $stmt->bindValue(":idDroit", $idDroit,PDO::PARAM_INT);
+        $stmt->execute();
+        $estModifier = ($stmt->rowCount() > 0);
+        $stmt->closeCursor();
+        return $estModifier;
+    }
 
 }
