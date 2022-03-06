@@ -255,4 +255,5 @@ class UtilsateurController
         header("Location: ".URL."admin/droits");
     }
 
+
 }

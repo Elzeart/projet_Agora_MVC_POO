@@ -15,11 +15,9 @@ endif;
 
 <main>
 
-    <h2 class="titre-section-info">Fiches végétaux</h2>
+    <h2 class="titre-section-info">Fiches végétaux par Type</h2>
 
-
-    
-        <form method="POST" action="<?= URL ?>vegetaux/pTriParFamille/">
+    <form method="POST" action="<?= URL ?>vegetaux/pTriParFamille/">
             <div class="chekboxs">
             
                 <label for="idFamilleVegetal">Familles de végétaux</label>
@@ -30,7 +28,7 @@ endif;
                     </select>
             </div>
         </form>
-    
+
         <form method="POST" action="<?= URL ?>vegetaux/pTriParType/">
             <div class="chekboxs">
             
@@ -69,16 +67,16 @@ endif;
         </form>
 
     <section class="section-info" id="infos">
-<?php foreach ($plants as $plant) : ?>
+<?php foreach ($typeVegetaux as $plant) : ?>
     
-    <a href="<?= URL ?>vegetaux/p/<?= $plant->getIdVegetal(); ?>">
+    <a href="<?= URL ?>vegetaux/p/<?= $plant['idVegetal']; ?>">
                 <div class="carte-info">
                     <div class="container-photo-info">
-                        <img src="public/images/<?= $plant->getImageVegetal(); ?>">
+                        <img src="<?= URL ?>public/images/<?= $plant['imageVegetal']; ?>">
                     </div>
-                    <h2><?= $plant->getNomVegetal(); ?></h2>
+                    <h2><?= $plant['nomVegetal']; ?></h2>
                     <p>
-                        <?= $plant->getInfosVegetal(); ?>
+                        <?= $plant['infosVegetal']; ?>
                     </p>
                 </div>
             </a>

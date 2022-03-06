@@ -16,8 +16,15 @@ class PlanteController{
 
     public function afficherPlantesV(){
         $plants = $this->planteManager->getPlantes();
+        $famillesVegetaux = $this->planteManager->getFamillesVegetauxBd();
+        $typesVegetaux = $this->planteManager->getTypesVegetauxBd();
         require "views/plantesV.view.php";
     }
+/* 
+    public function afficherParFamilleVegetal(){
+        $resultat = $this->planteManager->getFamilleVegetalBd();
+    } */
+
 
     public function afficherPlante($id){
         $plant = $this->planteManager->getPlantById($id);
@@ -71,6 +78,27 @@ class PlanteController{
         }
         $this->planteManager->modifierPlanteBD($_POST['identifiant'], $_POST['titre'], $_POST['infos'], $nomImageAjoute);
         header('Location: '. URL . "admin/pAdmin");
+    }
+
+    public function afficherPlanteParFamille($idFamilleVegetal){
+        $familleVegetaux = $this->planteManager->getFamilleVegetauxBd($idFamilleVegetal);
+        $famillesVegetaux = $this->planteManager->getFamillesVegetauxBd();
+        $typesVegetaux = $this->planteManager->getTypesVegetauxBd();
+        require "views/plantesParFamille.view.php";
+    }
+
+    public function afficherPlanteParType($idTypeVegetal){
+        $typeVegetaux = $this->planteManager->getTypeVegetauxBd($idTypeVegetal);
+        $typesVegetaux = $this->planteManager->getTypesVegetauxBd();
+        $famillesVegetaux = $this->planteManager->getFamillesVegetauxBd();
+        require "views/plantesParType.view.php";
+    }
+
+    public function afficherPlanteParFamilleEtType($idFamilleVegetal,$idTypeVegetal){
+        $familleEtTypeVegetaux = $this->planteManager->getFamilleEtTypeVegetauxBd($idFamilleVegetal,$idTypeVegetal);
+        $typesVegetaux = $this->planteManager->getTypesVegetauxBd();
+        $famillesVegetaux = $this->planteManager->getFamillesVegetauxBd();
+        require "views/plantesParFamilleEtType.view.php";
     }
 
     private function ajoutImage($file, $dir){

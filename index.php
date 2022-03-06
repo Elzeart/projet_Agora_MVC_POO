@@ -12,7 +12,7 @@ $utilisateurController = new UtilsateurController;
 
 try{
     if(empty($_GET['page'])){
-        require "views/accueil.view.php";
+        require "views/accueil.view.php";        
     } else {
         $url = explode("/", filter_var($_GET['page']),FILTER_SANITIZE_URL);
 
@@ -25,7 +25,17 @@ try{
                     $planteController->afficherPlantesV();
                 } else if($url[1] === "p") {
                     $planteController->afficherPlante($url[2]);
-                } else {
+                } 
+                else if($url[1] === "pTriParFamille") {
+                    $planteController->afficherPlanteParFamille($_POST['idFamilleVegetal']);
+                } 
+                else if($url[1] === "pTriParType") {
+                    $planteController->afficherPlanteParType($_POST['idTypeVegetal']);
+                } 
+                else if($url[1] === "pTriParFamilleEtType") {
+                    $planteController->afficherPlanteParFamilleEtType($_POST['idFamilleVegetal'],$_POST['idTypeVegetal']);
+                } 
+                else {
                     throw new Exception("La page n'existe pas. Erreur 404 !!!");
                 }
             break;

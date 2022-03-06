@@ -15,7 +15,7 @@ class PlantManager extends Model{
     }
 
     public function chargementPlantes(){
-        $req = $this->getBdd()->prepare("SELECT * FROM vegetaux");
+        $req = $this->getBdd()->prepare("SELECT * FROM vegetaux ORDER BY nomVegetal");
         $req->execute();
         $lesVegetaux = $req->fetchAll(PDO::FETCH_ASSOC);
         $req->closeCursor();
@@ -89,5 +89,105 @@ class PlantManager extends Model{
             $this->getPlantById($id)->setImageVegetal($image);
         }
     }
+
+    public function getFamillesVegetauxBd(){
+        $req = "SELECT * FROM familleVegetaux ORDER BY nomFamilleVegetal"; 
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->execute();
+        $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $resultat;
+    }
+
+    public function getTypesVegetauxBd(){
+        $req = "SELECT * FROM typeVegetaux ORDER BY nomTypeVegetal"; 
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->execute();
+        $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $resultat;
+    }
+
+    //SELECT * FROM `vegetaux` WHERE idFamilleVegetal = 1
+    public function getFamilleVegetauxBd($idFamilleVegetal){
+        $req = "SELECT * FROM vegetaux WHERE idFamilleVegetal = :idFamilleVegetal ORDER BY nomVegetal"; 
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":idFamilleVegetal",$idFamilleVegetal,PDO::PARAM_INT);
+        $stmt->execute();
+        $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $resultat;
+    }
+
+    // SELECT * FROM `vegetaux` 
+    // INNER JOIN appartenir ON vegetaux.idVegetal = appartenir.idVegetal
+    // INNER JOIN typevegetaux ON typevegetaux.idTypeVegetal = appartenir.idTypeVegetal
+    // WHERE typevegetaux.idTypeVegetal = 3;
+    public function getTypeVegetauxBd($idTypeVegetal){
+        $req = "SELECT * FROM vegetaux 
+        INNER JOIN appartenir ON vegetaux.idVegetal = appartenir.idVegetal 
+        INNER JOIN typevegetaux ON typevegetaux.idTypeVegetal = appartenir.idTypeVegetal
+        WHERE typevegetaux.idTypeVegetal = :idTypeVegetal
+        ORDER BY nomVegetal";  
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":idTypeVegetal",$idTypeVegetal,PDO::PARAM_INT);
+        $stmt->execute();
+        $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $resultat;
+    }
+
+    // ok avec query au lieu de prepare
+/*     public function getTypeVegetauxBd($idTypeVegetal){
+        $req = "SELECT * FROM vegetaux 
+        INNER JOIN appartenir ON vegetaux.idVegetal = appartenir.idVegetal 
+        INNER JOIN typevegetaux ON typevegetaux.idTypeVegetal = appartenir.idTypeVegetal
+        WHERE typevegetaux.idTypeVegetal = $idTypeVegetal"; 
+        $stmt = $this->getBdd()->query($req);
+        //$stmt->bindValue(":idTypeVegetal",$idTypeVegetal,PDO::PARAM_INT);
+        $stmt->execute();
+        $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $resultat;
+    } */
+
+    //SELECT * FROM `vegetaux` 
+    //INNER JOIN appartenir ON vegetaux.idVegetal = appartenir.idVegetal 
+    //INNER JOIN typevegetaux ON typevegetaux.idTypeVegetal = appartenir.idTypeVegetal 
+    //WHERE typevegetaux.idTypeVegetal = 3 AND vegetaux.idFamilleVegetal = 3; 
+    public function getFamilleEtTypeVegetauxBd($idFamilleVegetal,$idTypeVegetal){
+        $req = "SELECT * FROM vegetaux 
+        INNER JOIN appartenir ON vegetaux.idVegetal = appartenir.idVegetal 
+        INNER JOIN typevegetaux ON typevegetaux.idTypeVegetal = appartenir.idTypeVegetal
+        WHERE typevegetaux.idTypeVegetal = :idTypeVegetal AND vegetaux.idFamilleVegetal = :idFamilleVegetal
+        ORDER BY nomVegetal";  
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":idTypeVegetal",$idTypeVegetal,PDO::PARAM_INT);
+        $stmt->bindValue(":idFamilleVegetal",$idFamilleVegetal,PDO::PARAM_INT);
+        $stmt->execute();
+        $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $resultat;
+    }
+
+
+/*     $data = array();
+
+if($received_data->query != '')
+{
+    $query="SELECT * FROM utilisateurs WHERE nomUtilisateur LIKE '%".$received_data->query."%' ORDER BY idUtilisateur DESC ";
+}
+else
+{
+	$query = "SELECT * FROM utilisateurs ORDER BY idUtilisateur DESC";
+}
+
+$statement = $bdd->prepare($query);
+$statement->execute();
+while($row = $statement->fetch(PDO::FETCH_ASSOC))
+{
+	$data[] = $row;
+} */
+
 
 }
