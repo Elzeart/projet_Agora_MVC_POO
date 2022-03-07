@@ -18,11 +18,12 @@ endif;
     <h2 class="titre-section-info">Fiches végétaux</h2>
 
 
-    
+    <div id="container-boxs">
+        <h3>Classement par Famille ou Type</h3>
         <form method="POST" action="<?= URL ?>vegetaux/pTriParFamille/">
             <div class="chekboxs">
             
-                <label for="idFamilleVegetal">Familles de végétaux</label>
+                <label for="idFamilleVegetal">Familles de végétaux</label> &ensp;
                     <select name="idFamilleVegetal" onchange="submit()">
                         <?php foreach ($famillesVegetaux as $familleVegetal) : ?>
                             <option value="<?= $familleVegetal['idFamilleVegetal'] ?>"><?= $familleVegetal['nomFamilleVegetal'] ?></option>
@@ -34,7 +35,7 @@ endif;
         <form method="POST" action="<?= URL ?>vegetaux/pTriParType/">
             <div class="chekboxs">
             
-                <label for="idTypeVegetal">Types de végétaux</label>
+                <label for="idTypeVegetal">Types de végétaux</label> &ensp;
                     <select name="idTypeVegetal" onchange="submit()">
                         <?php foreach ($typesVegetaux as $typeVegetal) : ?>
                             <option value="<?= $typeVegetal['idTypeVegetal'] ?>"><?= $typeVegetal['nomTypeVegetal'] ?></option>
@@ -42,31 +43,33 @@ endif;
                     </select>
             </div>
         </form>
+    </div>
 
-        <br><br>
-
-        <h3>Classement par Famille et Type</h3>
-        <form method="POST" action="<?= URL ?>vegetaux/pTriParFamilleEtType/">
-            <div class="chekboxs">
-                
-                <label for="idFamilleVegetal">Familles de végétaux</label>
-                    <select name="idFamilleVegetal">
-                        <?php foreach ($famillesVegetaux as $familleVegetal) : ?>
-                            <option value="<?= $familleVegetal['idFamilleVegetal'] ?>"><?= $familleVegetal['nomFamilleVegetal'] ?></option>
-                        <?php endforeach?>
-                    </select>
-            </div>
-            <div class="chekboxs">
-                
-                <label for="idTypeVegetal">Types de végétaux</label>
-                    <select name="idTypeVegetal">
-                        <?php foreach ($typesVegetaux as $typeVegetal) : ?>
-                            <option value="<?= $typeVegetal['idTypeVegetal'] ?>"><?= $typeVegetal['nomTypeVegetal'] ?></option>
-                        <?php endforeach?>
-                    </select>
-            </div>
-            <button>Envoyer</button>
-        </form>
+        <div id="container-boxs">
+            <form method="POST" action="<?= URL ?>vegetaux/pTriParFamilleEtType/">
+                <h3>Classement par Famille et Type</h3>
+                <div class="chekboxs">
+                    
+                    <label for="idFamilleVegetal">Familles de végétaux</label> &ensp;
+                        <select name="idFamilleVegetal">
+                            <?php foreach ($famillesVegetaux as $familleVegetal) : ?>
+                                <option value="<?= $familleVegetal['idFamilleVegetal'] ?>"><?= $familleVegetal['nomFamilleVegetal'] ?></option>
+                            <?php endforeach?>
+                        </select>
+                </div>
+                <div class="chekboxs">
+                    
+                    <label for="idTypeVegetal">Types de végétaux</label> &ensp;
+                        <select name="idTypeVegetal">
+                            <?php foreach ($typesVegetaux as $typeVegetal) : ?>
+                                <option value="<?= $typeVegetal['idTypeVegetal'] ?>"><?= $typeVegetal['nomTypeVegetal'] ?></option>
+                            <?php endforeach?>
+                        </select>
+                    
+                </div>
+                <div class="button"><button>Envoyer</button></div>
+            </form>
+        </div>
 
     <section class="section-info" id="infos">
 <?php foreach ($plants as $plant) : ?>
@@ -74,7 +77,7 @@ endif;
     <a href="<?= URL ?>vegetaux/p/<?= $plant->getIdVegetal(); ?>">
                 <div class="carte-info">
                     <div class="container-photo-info">
-                        <img src="public/images/<?= $plant->getImageVegetal(); ?>">
+                        <img src="public/images/<?= $plant->getImageVegetal(); ?>" alt="...">
                     </div>
                     <h2><?= $plant->getNomVegetal(); ?></h2>
                     <p>

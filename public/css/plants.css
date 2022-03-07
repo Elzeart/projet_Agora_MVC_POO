@@ -8,6 +8,7 @@ main a {
     text-decoration: none;
 }
 
+
 /* .chekboxs{ */
 /*     background: #f1f1f1; */
 /*     display: flex;
@@ -42,10 +43,13 @@ main a {
     color: #000;
     text-align: center;
     font-size: 65px;
-    padding: 70px 20px 50px;
+    padding-top: 70px;
+    margin-bottom: 20px;
+    /* padding: 70px 20px 0px 20px; */
     /* background: #f1f1f1; */
     font-family: 'Architects Daughter', Arial, Helvetica, sans-serif;
 }
+
 .section-info {
     display: flex;
     justify-content: center;
@@ -96,3 +100,49 @@ main a {
         margin: 0 10px 45px;
     }
 }
+
+
+.chekboxs{
+    /*     background: #f1f1f1; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 10px;
+    }
+
+#container-boxs{
+    border: 1px solid rgb(16, 1, 102);
+    border-radius:10px;
+    margin: 0px auto 50px;
+    padding-top: 10px;
+    width: 50%;
+}
+
+#container-boxs h3{
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+.button{
+    /* display: inline-block;
+    text-align: center;
+    margin-bottom: 50px; */
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+button{
+    background: linear-gradient(to top, rgba(160,196,231), rgb(188, 211, 240));
+    color: rgb(16, 1, 102);
+    font-weight: bold;
+    /* padding: 14px 20px;
+    margin: 8px 0; */
+    border: none;
+    border-radius:10px;
+    cursor: pointer;
+    width: 60px;
+    height: 30px;
+}
+
+
+

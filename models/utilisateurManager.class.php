@@ -145,4 +145,6 @@ class UtilisateurManager extends Model{
         return $estModifier;
     }
 
+    
+
 }

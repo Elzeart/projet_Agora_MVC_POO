@@ -1,5 +1,101 @@
-main{
-    background-color: rgb(160, 240, 209);
-    padding-top: 70px;
-    
+/* #active{
+    border-bottom: rgb(77, 76, 76) solid 2px;
+} */
+
+
+body{
+    background-image: url("../../public/images/desert-plant-wall.jpg");
+
 }
+
+.titre-contact{
+    border: 2px solid rgb(16, 1, 102);
+    border-radius: 10px;
+    width: 50%;
+    margin: 0px auto;
+    padding-top: 70px;
+    box-shadow: 10px 5px 5px rgb(16, 1, 102);
+}
+
+.titre-section-info {
+    color: rgb(11, 41, 141);
+    text-align: center;
+    font-size: 6rem;
+    /* padding-top: 10px; */
+    margin-bottom: 20px;
+    font-family: 'Architects Daughter', Arial, Helvetica, sans-serif;
+}
+
+.active4{
+    text-decoration: underline;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 96vh;
+    justify-content: center;
+    /* background-image:linear-gradient(to right,rgb(236, 244, 248),rgba(160,196,231)); */
+}
+
+form{
+    box-shadow: 6px 6px 20px rgb(10, 10, 10);
+    padding: 30px 25px 15px 25px;
+    background: radial-gradient(ellipse at center, rgb(255, 255, 255),rgba(160,196,231));
+    border-radius: 10px;
+}
+
+h2{
+    font-size: 3em;
+    text-shadow:5px 8px rgb(16, 1, 102, 0.7);
+}
+
+main input{
+    margin-bottom: 20px;
+}
+
+main input:last-child{
+    margin-top: 5px;
+}
+
+h2, main > p{
+    color: rgb(4, 32, 122);
+}
+
+main > p{
+    font-size: 1.5em;
+}
+
+textarea{
+    width: 100%;
+}
+
+
+
+@media screen and (max-width:1000px){
+    .titre-section-info {
+        font-size: 4rem;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    h2{
+        font-size: 6em;
+    }
+    form{
+        display: flex;
+        flex-direction: column;
+    }
+    .titre-section-info {
+        font-size: 2rem;
+    }
+    h3{
+        padding-bottom: 10px;
+    }
+
+}
+
+
+
+

@@ -20,6 +20,12 @@ class PlanteController{
         $typesVegetaux = $this->planteManager->getTypesVegetauxBd();
         require "views/plantesV.view.php";
     }
+
+    public function afficherPlantesVA(){
+        $plants = $this->planteManager->getPlantes();
+        require "views/accueil.view.php";
+    }
+
 /* 
     public function afficherParFamilleVegetal(){
         $resultat = $this->planteManager->getFamilleVegetalBd();

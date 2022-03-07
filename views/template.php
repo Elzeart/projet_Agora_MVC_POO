@@ -3,17 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Agora Agriculture Urbaine</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto:ital@1&display=swap" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="https://bootswatch.com/4/sketchy/bootstrap.min.css"> -->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Montserrat&family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?= URL ?>/public/css/common.css">
     <link rel="stylesheet" href="<?= URL ?>/public/css/nav.css">
     <link rel="stylesheet" href="<?= URL ?>/public/css/footer.css">
-    <!-- <link rel="stylesheet" href="<?= URL ?>/public/css/homepage.css"> -->
-    <!-- <link rel="stylesheet" href="<?= URL ?>/public/css/plants.css"> -->
-    <!-- <link rel="stylesheet" href="<?= URL ?>/public/css/singIn.css"> -->
     <link rel="icon" type="image/pngn" href="<?= URL ?>public/images/favicon.png">
     <script src="<?= URL ?>/public/javascript/nav.js" defer></script>
     

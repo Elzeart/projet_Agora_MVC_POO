@@ -1,0 +1,85 @@
+.container{
+    padding-top: 70px;
+    background: #f1f1f1;
+}
+
+section{
+    margin: 0 40px;
+}
+
+.titre-section-info {
+    color: #000;
+    text-align: center;
+    font-size: 65px;
+    padding: 0px 20px;
+    /* background: #f1f1f1; */
+    font-family: 'Architects Daughter', Arial, Helvetica, sans-serif;
+}
+article{
+    background: radial-gradient(ellipse at center, rgb(255, 255, 255), rgb(145, 183, 221));
+    border: rgb(4, 32, 122) 1px solid;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+article div{
+    display: flex;
+}
+
+article img{
+    /* margin-right: 10px; */
+    /* height: 100%; */
+    width: 15vw;
+    /* height: 200px; */
+    object-fit: cover;
+}
+
+article p{
+    /* background: radial-gradient(ellipse at center, rgb(255, 255, 255), rgb(145, 183, 221)); */
+    padding: 10px 30px;
+    border-radius: 10px;
+}
+
+h4{
+    font-size: 2rem;
+    font-family: 'Architects Daughter', Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+h3{
+    font-size: 2.5rem;
+    font-family: 'Architects Daughter', Arial, Helvetica, sans-serif;
+    text-align: center;
+    padding: 20px 0px 20px 0px;
+}
+
+@media screen and (max-width:1000px){
+    article div{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    article img{
+        width: 50%;
+        object-fit: cover;
+    }
+}
+
+@media screen and (max-width:550px){
+    article p{
+        font-size: smaller;
+    }
+    .titre-section-info {
+        font-size: 3rem;
+    }
+    h4{
+        font-size: 1.5rem;
+        font-family: 'Architects Daughter', Arial, Helvetica, sans-serif;
+    }
+    h3{
+        font-size: 2rem;
+    }
+}
+
+

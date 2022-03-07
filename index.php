@@ -18,7 +18,8 @@ try{
 
         switch($url[0]){
             case "accueil" : 
-                require "views/accueil.view.php";
+                $planteController->afficherPlantesVA();
+                
             break;
             case "vegetaux" : 
                 if(empty($url[1])){

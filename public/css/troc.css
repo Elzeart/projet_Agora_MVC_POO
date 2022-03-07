@@ -1,194 +1,93 @@
-/* main{
-    background-color: rgb(228, 240, 160);
-    padding-top: 70px;
-    
-} */
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
 
 body {
-    display: flex;
-    flex-direction: column;
-  }
-
-span:nth-child(2){
-    padding-left: 20px;
+/*   display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; */
+  background-color: #34495e;
 }
 
-  main {
-    background: #f1f1f1;
+.titre-section-info {
+  font-size: 3rem;
+  color: #fff;
+  padding-top: 70px;
+  text-align: center;
+  color: #000;
+  font-family: 'Architects Daughter', Arial, Helvetica, sans-serif;
 }
 
-  .titre-portfolio {
-    text-align: center;
-    font-size: 60px;
-    font-family: 'Architects Daughter', Arial, Helvetica, sans-serif;
-    margin: 70px 0 70px;
-    color: #000;
+
+.cards {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.card {
+  margin: 40px;
+  position: relative;
+  max-width: 250px;
+  max-height: 350px;
+  box-shadow: 0 40px 60px -6px black;
+}
+
+.card-title {
+  display: block;
+  text-align: center;
+  color: #fff;
+  background-color: #6184a8;
+  padding: 2%;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.card img {
+  width: 100%;
+  height: 98%;
+  object-fit: cover;
+  display: block;
+  position: relative;
+}
+
+.card-desc {
+  display: block;
+  font-size: 1.2rem;
+  position: absolute;
+  height: 0;
+  top: 0;
+  opacity: 0;
+  padding: 18px 8%;
+  background-color: white;
+  overflow-y: scroll;
+  transition: 0.8s ease;
+}
+
+.card:hover .card-desc {
+  opacity: 1;
+  height: 100%;
+}
+
+.card a{
+  background: radial-gradient(ellipse at center, rgb(255, 255, 255), rgb(145, 183, 221));
+  color: rgb(4, 32, 122) ;
+  text-decoration: none;
+  border-radius:10px;
+  padding: 2px 5px;
+}
+
+.chekboxs{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px 0px 20px 0px;
   }
 
-  .chekboxs{
-    /*     background: #f1f1f1; */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding-bottom: 20px;
-    }
-
-    .chekboxs input{
-        /*     background: #f1f1f1; */
-            border-radius: 10px;
-        }
-    
-    .chekboxs label{
-        margin: 0px 3px 0px 20px;
-    }
-    
-    .bouton{
-        text-align: center;
-        margin-bottom: 100px;
-    }
-
-    .bouton input[type=submit] {
-        background: linear-gradient(to top, rgba(160,196,231), rgb(188, 211, 240));
-        color: rgb(16, 1, 102);
-        font-weight: bold;
-        /* padding: 14px 20px;
-        margin: 8px 0; */
-        border: none;
-        border-radius:10px;
-        cursor: pointer;
-        width: 60px;
-        height: 30px;
-    }
-
-  .grille-portfolio {
-    width: 90%;
-    max-width: 1700px;
-    min-width: 300px;
-    height: auto;
-    margin: 30px auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 400px);
-    justify-content: center;
-  }
-  .grid-item {
-    height: 250px;
-    cursor: pointer;
-    /* position: relative; */
-    margin: 30px 15px;
-  }
-  .grid-item img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    padding-bottom: 50px;
-  }
-  .description {
-    position: relative;
-    /* top: -25px;
-    left: 0px; */
-    font-size: 18px;
-  }
-  .quantite {
-    position: relative;
-    /* top: -27px;
-    right: 0px; */
-    font-size: 23px;
-    font-weight: bold;
-  }
-  
-  @media screen and (max-width: 550px) {
-    .grille-portfolio {
-      grid-template-columns: repeat(auto-fill, 300px);
-    }
-    h1 {
-      font-size: 30px;
-    }
-  }
-  
-  /* Slider */
-  
-  /* .slider-portfolio {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    z-index: 1000;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(45deg, #333, #000);
-    display: none;
-  }
-  .btn-fermer-slider {
-    position: absolute;
-    top: 3%;
-    right: 2%;
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    font-size: 30px;
-    outline: none;
-    border: none;
-    background: #000;
-    color: #fff;
-    border: 1px solid #fff;
-  }
-  .btn-left,
-  .btn-right {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    font-size: 30px;
-    outline: none;
-    border: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .btn-left {
-    left: 2%;
-  }
-  .btn-right {
-    right: 2%;
-  }
-  .btn-left img,
-  .btn-right img {
-    width: 30px;
-    height: 30px;
-  }
-  
-  .img-visible-slider {
-    width: 60%;
-    height: 700px;
-    object-fit: cover;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  } */
-  
-  @media screen and (max-width: 700px) {
-    .btn-fermer-slider {
-      width: 50px;
-      height: 50px;
-      font-size: 25px;
-    }
-    .btn-left,
-    .btn-right {
-      width: 40px;
-      height: 40px;
-    }
-    .btn-left img,
-    .btn-right img {
-      width: 20px;
-      height: 20px;
-    }
-    .img-visible-slider {
-        width: 95%;
-        height: 500px;
-    }
-  }
-  
+  .chekboxs label{
+    margin: 0px 3px 0px 20px;
+}
