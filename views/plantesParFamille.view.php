@@ -76,7 +76,7 @@ endif;
     <a href="<?= URL ?>vegetaux/p/<?= $plant['idVegetal']; ?>">
                 <div class="carte-info">
                     <div class="container-photo-info">
-                        <img src="<?= URL ?>public/images/<?= $plant['imageVegetal']; ?>">
+                        <img src="<?= URL ?>public/images/plants/<?= $plant['imageVegetal']; ?>">
                     </div>
                     <h2><?= $plant['nomVegetal']; ?></h2>
                     <p>

@@ -51,8 +51,8 @@ try{
             break;
             case "ValidationConnexion" : 
                 if(!empty($_POST['pseudoUtilisateur']) && !empty($_POST['mdpUtilisateur'])){
-                    $pseudo = htmlentities($_POST['pseudoUtilisateur']);
-                    $mdp = htmlentities($_POST['mdpUtilisateur']);
+                    $pseudo = htmlspecialchars(strip_tags($_POST['pseudoUtilisateur']));
+                    $mdp = htmlspecialchars(strip_tags($_POST['mdpUtilisateur']));
                     $utilisateurController->validation_pseudo($pseudo,$mdp);
                 } else {
                     throw new Exception("Pseudo ou mot de passe non renseigné");

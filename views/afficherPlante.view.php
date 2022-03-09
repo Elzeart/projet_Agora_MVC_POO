@@ -6,7 +6,7 @@ ob_start();
 
 <div class="row">
     <div class="col-6">
-        <img src="<?= URL ?>public/images/<?= $plant->getImageVegetal(); ?>" width="200px;">
+        <img src="<?= URL ?>public/images/plants/<?= $plant->getImageVegetal(); ?>" width="200px;">
     </div>
     <div class="col-6">
         <p>Titre : <?= $plant->getNomVegetal(); ?></p>

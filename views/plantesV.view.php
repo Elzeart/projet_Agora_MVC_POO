@@ -1,14 +1,14 @@
 <?php 
-ob_start(); 
+    ob_start(); 
 
-if(!empty($_SESSION['alert'])) :
+    if(!empty($_SESSION['alert'])) :
 ?>
 <div class="alert alert-<?= $_SESSION['alert']['type'] ?>" role="alert">
     <?= $_SESSION['alert']['msg'] ?>
 </div>
 <?php 
-unset($_SESSION['alert']);
-endif; 
+    unset($_SESSION['alert']);
+    endif; 
 ?>
 
 <link rel="stylesheet" href="<?= URL ?>/public/css/plants.css">
@@ -77,7 +77,7 @@ endif;
     <a href="<?= URL ?>vegetaux/p/<?= $plant->getIdVegetal(); ?>">
                 <div class="carte-info">
                     <div class="container-photo-info">
-                        <img src="public/images/<?= $plant->getImageVegetal(); ?>" alt="...">
+                        <img src="public/images/plants/<?= $plant->getImageVegetal(); ?>" alt="...">
                     </div>
                     <h2><?= $plant->getNomVegetal(); ?></h2>
                     <p>
@@ -94,8 +94,5 @@ endif;
 
 <?php
 $content = ob_get_clean();
-$titre = "Les Végétaux";
-// $titre = "Bienvenue dans xxx";
-// $css = "nom_de_la_page_css";               Il est possible je pense de faire l'algo dans le template qui prend le css en inscrivant le css comme ceci.
 require "template.php";
 ?>

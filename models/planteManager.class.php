@@ -19,9 +19,9 @@ class PlantManager extends Model{
         $req->execute();
         $lesVegetaux = $req->fetchAll(PDO::FETCH_ASSOC);
         $req->closeCursor();
-        /* var_dump($lesVegetaux); */
         foreach($lesVegetaux as $vegetal){
-            $l = new Vegetal($vegetal['idVegetal'],$vegetal['nomVegetal'],$vegetal['infosVegetal'],$vegetal['plantationVegetal'],$vegetal['imageVegetal']);
+            $l = new Vegetal($vegetal['idVegetal'],$vegetal['nomVegetal'],$vegetal['infosVegetal'],
+            $vegetal['plantationVegetal'],$vegetal['imageVegetal']);
             $this->ajoutPlante($l);
         }
     }
@@ -53,10 +53,18 @@ class PlantManager extends Model{
         }        
     }
 
+    // Requête php my admin     DELETE vegetaux FROM `vegetaux` INNER JOIN appartenir ON vegetaux.idVegetal = appartenir.idVegetal INNER JOIN typevegetaux ON typevegetaux.idTypeVegetal = appartenir.idTypeVegetal WHERE `vegetaux`.`idVegetal` = 6; 
+    /* $req = "
+    DELETE vegetaux FROM vegetaux 
+    INNER JOIN appartenir ON vegetaux.idVegetal = appartenir.idVegetal 
+    INNER JOIN typevegetaux ON typevegetaux.idTypeVegetal = appartenir.idTypeVegetal 
+    WHERE vegetaux.idVegetal = :idVegetal"; */
     public function supprimerPlanteBD($id){
         $req = "
-        Delete from vegetaux where idVegetal = :idVegetal
-        ";
+        DELETE vegetaux FROM vegetaux 
+        INNER JOIN appartenir ON vegetaux.idVegetal = appartenir.idVegetal 
+        INNER JOIN typevegetaux ON typevegetaux.idTypeVegetal = appartenir.idTypeVegetal 
+        WHERE vegetaux.idVegetal = :idVegetal";
         $stmt = $this->getBdd()->prepare($req);
         $stmt->bindValue(":idVegetal",$id,PDO::PARAM_INT);
         $resultat = $stmt->execute();
@@ -155,6 +163,7 @@ class PlantManager extends Model{
     //INNER JOIN appartenir ON vegetaux.idVegetal = appartenir.idVegetal 
     //INNER JOIN typevegetaux ON typevegetaux.idTypeVegetal = appartenir.idTypeVegetal 
     //WHERE typevegetaux.idTypeVegetal = 3 AND vegetaux.idFamilleVegetal = 3; 
+
     public function getFamilleEtTypeVegetauxBd($idFamilleVegetal,$idTypeVegetal){
         $req = "SELECT * FROM vegetaux 
         INNER JOIN appartenir ON vegetaux.idVegetal = appartenir.idVegetal 

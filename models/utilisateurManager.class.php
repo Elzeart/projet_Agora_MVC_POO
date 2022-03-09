@@ -26,7 +26,6 @@ class UtilisateurManager extends Model{
         $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
         $stmt->closeCursor();
         return ($resultat['activationCode'] == 1);
-        // return ($resultat['activationCode'] === 1) ? true : false;
     }
 
     public function getUtilisateurInformation($pseudoUtilisateur){

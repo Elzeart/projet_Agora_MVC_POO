@@ -25,7 +25,6 @@ class UtilsateurController
                     "pseudoUtilisateur" => $data['pseudoUtilisateur'],
                     "idDroit" => $data['idDroit'],
                 ];
-                /* Toolbox::genererCookieConnexion(); */
                 if($_SESSION['profil']['idDroit'] == 1){
                     header('Location: '.URL.'admin');
                 } else {
@@ -34,10 +33,10 @@ class UtilsateurController
             } else {
             $_SESSION['alert'][] = [
                 "type" => "alert-danger",
-                "message" => "Le compte ".$pseudoUtilisateur." n'a pas été activé par mail <a href='renvoyerMailValidation/".$pseudoUtilisateur."'>Renvoyer le mail de validation</a>"
+                "message" => "Le compte ".$pseudoUtilisateur." n'a pas été activé par mail 
+                <a href='renvoyerMailValidation/".$pseudoUtilisateur."'>Renvoyer le mail de validation</a>"
             ];
             header('Location: '.URL.'connexionInscription');
-            //throw new Exception("Le compte ".$pseudoUtilisateur." n'a pas été activé par mail <a href='renvoyerMailValidation/".$pseudoUtilisateur."'>Renvoyer le mail de validation</a>");
             }
         } else {
             throw new Exception("Pseudo ou mot de passe non valide");
@@ -95,15 +94,11 @@ class UtilsateurController
                 "type" => "alert-success",
                 "message" => "Mail envoyé"
             ];
-            // echo "<script language=javascript> alert('Mail envoyé !'); </script>"; 
-            // Toolbox::ajouterMessageAlerte("Mail envoyé !", Toolbox::COULEUR_VERTE);
         } else {
             $_SESSION['alert'][] = [
                 "type" => "alert-danger",
                 "message" => "Mail non envoyé"
             ];
-            // echo "<script language=javascript> alert('Mail non envoyé !'); </script>"; 
-            // Toolbox::ajouterMessageAlerte("Mail non envoyé !", Toolbox::COULEUR_ROUGE);
         };
     }
 

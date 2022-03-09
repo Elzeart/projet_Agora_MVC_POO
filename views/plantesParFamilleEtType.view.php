@@ -21,7 +21,6 @@ endif;
         <h3>Classement par Famille ou Type</h3>
         <form method="POST" action="<?= URL ?>vegetaux/pTriParFamille/">
             <div class="chekboxs">
-            
                 <label for="idFamilleVegetal">Familles de végétaux</label> &ensp;
                     <select name="idFamilleVegetal" onchange="submit()">
                         <?php foreach ($famillesVegetaux as $familleVegetal) : ?>
@@ -72,21 +71,21 @@ endif;
 
         
     <section class="section-info" id="infos">
-<?php foreach ($familleEtTypeVegetaux as $plant) : ?>
-    
-    <a href="<?= URL ?>vegetaux/p/<?= $plant['idVegetal']; ?>">
-                <div class="carte-info">
-                    <div class="container-photo-info">
-                        <img src="<?= URL ?>public/images/<?= $plant['imageVegetal']; ?>">
-                    </div>
-                    <h2><?= $plant['nomVegetal']; ?></h2>
-                    <p>
-                        <?= $plant['infosVegetal']; ?>
-                    </p>
-                </div>
-            </a>
-    
-    <?php endforeach?>
+
+        <?php foreach ($familleEtTypeVegetaux as $plant) : ?>
+            <a href="<?= URL ?>vegetaux/p/<?= $plant['idVegetal']; ?>">
+                        <div class="carte-info">
+                            <div class="container-photo-info">
+                                <img src="<?= URL ?>public/images/plants/<?= $plant['imageVegetal']; ?>">
+                            </div>
+                            <h2><?= $plant['nomVegetal']; ?></h2>
+                            <p>
+                                <?= $plant['infosVegetal']; ?>
+                            </p>
+                        </div>
+                    </a>
+        <?php endforeach?>
+        
     </section>
 
 

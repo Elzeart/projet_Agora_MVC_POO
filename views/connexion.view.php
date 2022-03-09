@@ -1,11 +1,9 @@
 <?php 
 ob_start(); 
 ?>
-<!-- <link rel="stylesheet" href="https://bootswatch.com/4/sketchy/bootstrap.min.css"> -->
 
 
 <link rel="stylesheet" href="<?= URL ?>/public/css/connexion.css">
-<!-- <h2 class="titre-section-info">Ici la page de connexion</h2> -->
 
 <main>
         <div id="container">
@@ -33,8 +31,5 @@ ob_start();
 
 <?php
 $content = ob_get_clean();
-$titre = "Formulaire inscription";
-// $titre = "Bienvenue dans xxx";
-// $css = "nom_de_la_page_css";               Il est possible je pense de faire l'algo dans le template qui prend le css en inscrivant le css comme ceci.
 require "template.php";
 ?>

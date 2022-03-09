@@ -99,6 +99,9 @@ main a {
     .carte-info {
         margin: 0 10px 45px;
     }
+    .chekboxs{
+        flex-direction: column;
+    }
 }
 
 
