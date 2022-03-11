@@ -70,7 +70,6 @@ class UtilsateurController
                     "type" => "alert-success",
                     "message" => "Le compte a été créé, un mail de validation vous a été envoyé !"
                 ];
-                // Toolbox::ajouterMessageAlerte("La compte a été créé, Un mail de validation vous a été envoyé !", Toolbox::COULEUR_VERTE);
                 header('Location: '.URL.'connexionInscription');
             } else {
                 throw new Exception("Errreur lors de la création du compte !");

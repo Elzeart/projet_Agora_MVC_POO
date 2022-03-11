@@ -51,8 +51,8 @@ try{
             break;
             case "ValidationConnexion" : 
                 if(!empty($_POST['pseudoUtilisateur']) && !empty($_POST['mdpUtilisateur'])){
-                    $pseudo = htmlspecialchars(strip_tags($_POST['pseudoUtilisateur']));
-                    $mdp = htmlspecialchars(strip_tags($_POST['mdpUtilisateur']));
+                    $pseudo = htmlspecialchars(strip_tags(trim($_POST['pseudoUtilisateur'])));
+                    $mdp = htmlspecialchars(strip_tags(trim($_POST['mdpUtilisateur'])));
                     $utilisateurController->validation_pseudo($pseudo,$mdp);
                 } else {
                     throw new Exception("Pseudo ou mot de passe non renseigné");
@@ -64,12 +64,12 @@ try{
             break;
             case "inscriptionValidation" : 
                 if(!empty($_POST['nomUtilisateur']) && !empty($_POST['prenomUtilisateur']) && !empty($_POST['pseudoUtilisateur']) && !empty($_POST['mailUtilisateur']) && !empty($_POST['mdpUtilisateur']) && !empty($_POST['confirmMdpUtilisateur'])){
-                    $nomUtilisateur = htmlentities($_POST['nomUtilisateur']);
-                    $prenomUtilisateur = htmlentities($_POST['prenomUtilisateur']);
-                    $pseudoUtilisateur = htmlentities($_POST['pseudoUtilisateur']);
-                    $mailUtilisateur = htmlentities($_POST['mailUtilisateur']);
-                    $mdpUtilisateur = htmlentities($_POST['mdpUtilisateur']);
-                    $confirmMdpUtilisateur = htmlentities($_POST['confirmMdpUtilisateur']);
+                    $nomUtilisateur = htmlspecialchars(strip_tags(trim($_POST['nomUtilisateur'])));
+                    $prenomUtilisateur = htmlspecialchars(strip_tags(trim($_POST['prenomUtilisateur'])));
+                    $pseudoUtilisateur = htmlspecialchars(strip_tags(trim($_POST['pseudoUtilisateur'])));
+                    $mailUtilisateur = htmlspecialchars(strip_tags(trim($_POST['mailUtilisateur'])));
+                    $mdpUtilisateur = htmlspecialchars(strip_tags(trim($_POST['mdpUtilisateur'])));
+                    $confirmMdpUtilisateur = htmlspecialchars(strip_tags(trim($_POST['confirmMdpUtilisateur'])));
                     $utilisateurController->inscriptionValid($pseudoUtilisateur, $mdpUtilisateur, $mailUtilisateur);
                 } else {
                     throw new Exception("Veuillez remplir les informations oblligatoires !");
@@ -98,15 +98,15 @@ try{
                     } else if($url[1] === "profil") {
                         $utilisateurController->profil();
                     } else if($url[1] === "validationModificationMail") {
-                        $utilisateurController->validationModificationMail(htmlentities($_POST['mailUtilisateur']));
+                        $utilisateurController->validationModificationMail(htmlspecialchars(strip_tags(trim($_POST['mailUtilisateur']))));
                     } else if($url[1] === "modificationMdp") {
                         $utilisateurController->modificationMdp();
                     } 
                     else if($url[1] === "validationModificationMdp") {
                         if(!empty($_POST['ancienMdpUtilisateur']) && !empty($_POST['nouveauMdpUtilisateur']) && !empty($_POST['confirmNouveauMdpUtilisateur'])){
-                            $ancienMdpUtilisateur = htmlentities($_POST['ancienMdpUtilisateur']);
-                            $nouveauMdpUtilisateur = htmlentities($_POST['nouveauMdpUtilisateur']);
-                            $confirmNouveauMdpUtilisateur = htmlentities($_POST['confirmNouveauMdpUtilisateur']);
+                            $ancienMdpUtilisateur = htmlspecialchars(strip_tags(trim($_POST['ancienMdpUtilisateur'])));
+                            $nouveauMdpUtilisateur = htmlspecialchars(strip_tags(trim($_POST['nouveauMdpUtilisateur'])));
+                            $confirmNouveauMdpUtilisateur = htmlspecialchars(strip_tags(trim($_POST['confirmNouveauMdpUtilisateur'])));
                             $utilisateurController->validationModificationMdp($ancienMdpUtilisateur, $nouveauMdpUtilisateur, $confirmNouveauMdpUtilisateur);
                         } else {
                             $_SESSION['alert'][] = [
@@ -162,15 +162,15 @@ try{
                     } else if($url[1] === "profil") {
                         $utilisateurController->profil();
                     } else if($url[1] === "validationModificationMail") {
-                        $utilisateurController->validationModificationMail(htmlentities($_POST['mailUtilisateur']));
+                        $utilisateurController->validationModificationMail(htmlspecialchars(strip_tags(trim($_POST['mailUtilisateur']))));
                     } else if($url[1] === "modificationMdp") {
                         $utilisateurController->modificationMdp();
                     } 
                     else if($url[1] === "validationModificationMdp") {
                         if(!empty($_POST['ancienMdpUtilisateur']) && !empty($_POST['nouveauMdpUtilisateur']) && !empty($_POST['confirmNouveauMdpUtilisateur'])){
-                            $ancienMdpUtilisateur = htmlentities($_POST['ancienMdpUtilisateur']);
-                            $nouveauMdpUtilisateur = htmlentities($_POST['nouveauMdpUtilisateur']);
-                            $confirmNouveauMdpUtilisateur = htmlentities($_POST['confirmNouveauMdpUtilisateur']);
+                            $ancienMdpUtilisateur = htmlspecialchars(strip_tags(trim($_POST['ancienMdpUtilisateur'])));
+                            $nouveauMdpUtilisateur = htmlspecialchars(strip_tags(trim($_POST['nouveauMdpUtilisateur'])));
+                            $confirmNouveauMdpUtilisateur = htmlspecialchars(strip_tags(trim($_POST['confirmNouveauMdpUtilisateur'])));
                             $utilisateurController->validationModificationMdp($ancienMdpUtilisateur, $nouveauMdpUtilisateur, $confirmNouveauMdpUtilisateur);
                         } else {
                             $_SESSION['alert'][] = [

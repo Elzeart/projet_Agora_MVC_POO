@@ -1,0 +1,6 @@
+Pour la démonstration, tous les mots de passe pour les utilisateurs sont 123456789
+
+Les pseudo sont :
+	Administrateur:	pseudo=>azerty	
+	Membre qui a activé par mail son inscription: pseudo=>membre1
+	Membre qui n'a pas activé par mail son inscription: pseudo=>membre2
