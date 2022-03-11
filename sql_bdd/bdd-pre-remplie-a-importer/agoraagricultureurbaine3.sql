@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 11 mars 2022 à 12:58
+-- Généré le : ven. 11 mars 2022 à 17:29
 -- Version du serveur : 10.4.21-MariaDB
 -- Version de PHP : 8.0.12
 
@@ -212,6 +212,20 @@ CREATE TABLE `participer` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `realisations`
+--
+
+CREATE TABLE `realisations` (
+  `idRealisation` int(11) NOT NULL,
+  `nomRealisation` varchar(50) NOT NULL,
+  `infosRealisation` text NOT NULL,
+  `imageRealisation` varchar(50) NOT NULL,
+  `idUtilisateur` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `recettes`
 --
 
@@ -293,8 +307,6 @@ CREATE TABLE `utilisateurs` (
   `prenomUtilisateur` varchar(50) NOT NULL,
   `pseudoUtilisateur` varchar(50) NOT NULL,
   `mailUtilisateur` varchar(100) DEFAULT NULL,
-  `ageUtilisateur` date DEFAULT NULL,
-  `telephoneUtilisateur` int(11) DEFAULT NULL,
   `mdpUtilisateur` varchar(100) NOT NULL,
   `imageUtilisateur` varchar(50) NOT NULL,
   `activationCode` tinyint(1) DEFAULT NULL,
@@ -306,10 +318,10 @@ CREATE TABLE `utilisateurs` (
 -- Déchargement des données de la table `utilisateurs`
 --
 
-INSERT INTO `utilisateurs` (`idUtilisateur`, `nomUtilisateur`, `prenomUtilisateur`, `pseudoUtilisateur`, `mailUtilisateur`, `ageUtilisateur`, `telephoneUtilisateur`, `mdpUtilisateur`, `imageUtilisateur`, `activationCode`, `clef`, `idDroit`) VALUES
-(18, '', '', 'membre2', 'arnaud.depetris@gmail.com', NULL, NULL, '$2y$10$bBMUTAenRhTFHDh5X7sT8e7XdOOWlXxVsmmFCbtYgGW2oruanp7du', '', 0, 2603, 3),
-(33, '', '', 'membre1', 'arnaud.depetris@gmail.com', NULL, NULL, '$2y$10$C/EzsA5tIoHo43UeUR8ZquPmtS9EJwYn7VWZgxchwPxhzww7wwJyC', 'profils/profil.png', 1, 7914, 2),
-(35, '', '', 'azerty', 'arnaud.depetris@gmail.com', NULL, NULL, '$2y$10$e2zfUO1PzcFyt5MAnTTkIuSCFWrNQt/f9pKGmYCieo0p.Lb/3zIYK', 'profils/profil.png', 1, 8266, 1);
+INSERT INTO `utilisateurs` (`idUtilisateur`, `nomUtilisateur`, `prenomUtilisateur`, `pseudoUtilisateur`, `mailUtilisateur`, `mdpUtilisateur`, `imageUtilisateur`, `activationCode`, `clef`, `idDroit`) VALUES
+(18, 'NomMembre2', 'PrenomMembre2', 'membre2', 'arnaud.depetris@gmail.com', '$2y$10$bBMUTAenRhTFHDh5X7sT8e7XdOOWlXxVsmmFCbtYgGW2oruanp7du', '', 0, 2603, 2),
+(33, 'NomMembre1', 'PrenomMembre1', 'membre1', 'arnaud.depetris@gmail.com', '$2y$10$C/EzsA5tIoHo43UeUR8ZquPmtS9EJwYn7VWZgxchwPxhzww7wwJyC', 'profils/profil.png', 1, 7914, 2),
+(35, 'Admin1', 'Admin', 'azerty', 'arnaud.depetris@gmail.com', '$2y$10$e2zfUO1PzcFyt5MAnTTkIuSCFWrNQt/f9pKGmYCieo0p.Lb/3zIYK', 'profils/profil.png', 1, 8266, 1);
 
 -- --------------------------------------------------------
 
@@ -447,6 +459,13 @@ ALTER TABLE `participer`
   ADD KEY `idUtilisateur` (`idUtilisateur`);
 
 --
+-- Index pour la table `realisations`
+--
+ALTER TABLE `realisations`
+  ADD PRIMARY KEY (`idRealisation`),
+  ADD KEY `idUtilisateur` (`idUtilisateur`);
+
+--
 -- Index pour la table `recettes`
 --
 ALTER TABLE `recettes`
@@ -546,6 +565,12 @@ ALTER TABLE `lieux`
 --
 ALTER TABLE `notations`
   MODIFY `idNotation` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `realisations`
+--
+ALTER TABLE `realisations`
+  MODIFY `idRealisation` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `recettes`
@@ -660,6 +685,12 @@ ALTER TABLE `notations`
 ALTER TABLE `participer`
   ADD CONSTRAINT `participer_ibfk_1` FOREIGN KEY (`idEvenement`) REFERENCES `evenements` (`idEvenement`),
   ADD CONSTRAINT `participer_ibfk_2` FOREIGN KEY (`idUtilisateur`) REFERENCES `utilisateurs` (`idUtilisateur`);
+
+--
+-- Contraintes pour la table `realisations`
+--
+ALTER TABLE `realisations`
+  ADD CONSTRAINT `realisations_ibfk_1` FOREIGN KEY (`idUtilisateur`) REFERENCES `utilisateurs` (`idUtilisateur`);
 
 --
 -- Contraintes pour la table `recettes`

@@ -4,6 +4,14 @@ create database agoraAgricultureUrbaine3;
 
 use agoraAgricultureUrbaine3;
 
+create table realisations(
+	idRealisation int primary key auto_increment not null,
+    nomRealisation varchar(50) not null,
+    infosRealisation text not null,
+    imageRealisation varchar(50) not null,
+    idUtilisateur int
+);
+
 create table droits(
 	idDroit int primary key auto_increment not null,
     typeDroits varchar(50) not null
