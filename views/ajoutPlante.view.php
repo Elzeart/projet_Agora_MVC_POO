@@ -1,18 +1,8 @@
 <?php 
 ob_start(); 
-
-if(!empty($_SESSION['alert'])) :
 ?>
 
-<div class="alert alert-<?= $_SESSION['alert']['type'] ?>" role="alert">
-    <?= $_SESSION['alert']['msg'] ?>
-</div>
-<?php 
-unset($_SESSION['alert']);
-endif; 
-?>
-
-<link rel="stylesheet" href="https://bootswatch.com/4/sketchy/bootstrap.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 
 <h2 class="titre-section-info">Ajout plante</h2>
 
@@ -33,12 +23,31 @@ endif;
         <label for="image">Image : </label>
         <input type="file" class="form-control-file" id="image" name="image">
     </div>
+    <br>
+
+    <div class="form-group">
+        <label for="idFamilleVegetal">Familles de végétaux</label> &ensp;
+        <select name="idFamilleVegetal">
+            <?php foreach ($famillesVegetaux as $familleVegetal) : ?>
+                <option value="<?= $familleVegetal['idFamilleVegetal'] ?>"><?= $familleVegetal['nomFamilleVegetal'] ?></option>
+            <?php endforeach?>
+        </select>
+    </div>
+    <br>
+
+    <div class="form-group">
+        <label for="idTypeVegetal">Types de végétaux</label> &ensp;
+        <select name="idTypeVegetal">
+            <?php foreach ($typesVegetaux as $typeVegetal) : ?>
+                <option value="<?= $typeVegetal['idTypeVegetal'] ?>"><?= $typeVegetal['nomTypeVegetal'] ?></option>
+            <?php endforeach?>
+        </select>
+    </div>
+    <br>
+
     <button type="submit" class="btn btn-primary">Valider</button>
 </form>
 <?php
 $content = ob_get_clean();
-$titre = "Ajout dune plante";
-// $titre = "Bienvenue dans xxx";
-// $css = "nom_de_la_page_css";               Il est possible je pense de faire l'algo dans le template qui prend le css en inscrivant le css comme ceci.
 require "template.php";
 ?>

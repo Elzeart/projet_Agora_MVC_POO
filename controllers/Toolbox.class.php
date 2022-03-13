@@ -13,6 +13,10 @@ class Toolbox {
         ];
     } */
 
+    public static function secureHTML($chaine){
+        return htmlspecialchars(strip_tags(trim($chaine)));
+    }
+
     public static function ajoutImage($file, $dir){
         if(!isset($file['name']) || empty($file['name']))
             throw new Exception("Vous devez indiquer une image");
@@ -35,6 +39,15 @@ class Toolbox {
             throw new Exception("l'ajout de l'image n'a pas fonctionné");
         else return ($random."_".$file['name']);
     }
+
+/*     public static function sendMail($destinataire, $sujet, $message){
+        $headers = "From: luipourquoi1@gmail.com";
+        if(mail($destinataire,$sujet,$message,$headers)){
+            self::ajouterMessageAlerte("Mail envoyé", self::COULEUR_VERTE);
+        } else {
+            self::ajouterMessageAlerte("Mail non envoyé", self::COULEUR_ROUGE);
+        }
+    } */
 
 /*     public static function genererCookieConnexion(){
         $ticket = session_id().microtime().rand(0,99999);

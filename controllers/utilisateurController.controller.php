@@ -60,19 +60,23 @@ class UtilsateurController
         header('Location: '.URL.'accueil');
     }
 
-    public function inscriptionValid($pseudoUtilisateur, $mdpUtilisateur, $mailUtilisateur){
+    public function inscriptionValid($nomUtilisateur, $prenomUtilisateur, $pseudoUtilisateur, $mdpUtilisateur, $mailUtilisateur, ){
         if($this->utilisateurManager->verifPseudoDisponible($pseudoUtilisateur)){
-            $mdpCrypte = password_hash($mdpUtilisateur, PASSWORD_DEFAULT);
-            $clef = rand(0,9999);
-            if($this->utilisateurManager->bdCreerCompte($pseudoUtilisateur, $mdpCrypte, $mailUtilisateur, $clef, "profils/profil.png", 2)){
-                $this->envoiMailValidation($pseudoUtilisateur, $mailUtilisateur, $clef);
-                $_SESSION['alert'][] = [
-                    "type" => "alert-success",
-                    "message" => "Le compte a été créé, un mail de validation vous a été envoyé !"
-                ];
-                header('Location: '.URL.'connexionInscription');
+            if($this->utilisateurManager->verifMailDisponible($mailUtilisateur)){
+                $mdpCrypte = password_hash($mdpUtilisateur, PASSWORD_DEFAULT);
+                $clef = rand(0,9999);
+                if($this->utilisateurManager->bdCreerCompte($nomUtilisateur, $prenomUtilisateur, $pseudoUtilisateur, $mdpCrypte, $mailUtilisateur, $clef, "profils/profil.png", 2)){
+                    $this->envoiMailValidation($pseudoUtilisateur, $mailUtilisateur, $clef);
+                    $_SESSION['alert'][] = [
+                        "type" => "alert-success",
+                        "message" => "Le compte a été créé, un mail de validation vous a été envoyé !"
+                    ];
+                    header('Location: '.URL.'connexionInscription');
+                } else {
+                    throw new Exception("Errreur lors de la création du compte !");
+                }
             } else {
-                throw new Exception("Errreur lors de la création du compte !");
+                throw new Exception("Ce mail est déjà utilisé !");
             }
         } else {
             throw new Exception("Le psuedo est déjà utilisé !");

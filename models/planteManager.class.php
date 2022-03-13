@@ -21,7 +21,7 @@ class PlantManager extends Model{
         $req->closeCursor();
         foreach($lesVegetaux as $vegetal){
             $l = new Vegetal($vegetal['idVegetal'],$vegetal['nomVegetal'],$vegetal['infosVegetal'],
-            $vegetal['plantationVegetal'],$vegetal['imageVegetal']);
+            $vegetal['plantationVegetal'],$vegetal['imageVegetal'], $vegetal['idFamilleVegetal']);
             $this->ajoutPlante($l);
         }
     }
@@ -35,21 +35,32 @@ class PlantManager extends Model{
         throw new Exception("La plante n'existe pas");
     }
 
-    public function ajoutPlanteBd($titre,$infosVegetal,$plantationVegetal,$image){
+    public function ajoutPlanteBd($titre,$infosVegetal,$plantationVegetal,$image, $idFamilleVegetal, $idTypeVegetal){
         $req = "
-        INSERT INTO vegetaux (nomVegetal, infosVegetal, plantationVegetal, imageVegetal)
-        values (:nomVegetal, :infosVegetal, :plantationVegetal, :imageVegetal)";
+        INSERT INTO vegetaux (nomVegetal, infosVegetal, plantationVegetal, imageVegetal, idFamilleVegetal)
+        values (:nomVegetal, :infosVegetal, :plantationVegetal, :imageVegetal, :idFamilleVegetal)";
         $stmt = $this->getBdd()->prepare($req);
         $stmt->bindValue(":nomVegetal",$titre,PDO::PARAM_STR);
         $stmt->bindValue(":infosVegetal",$infosVegetal,PDO::PARAM_STR);
         $stmt->bindValue(":plantationVegetal",$plantationVegetal,PDO::PARAM_STR);
         $stmt->bindValue(":imageVegetal",$image,PDO::PARAM_STR);
+        $stmt->bindValue(":idFamilleVegetal",$idFamilleVegetal,PDO::PARAM_INT);
         $resultat = $stmt->execute();
         $stmt->closeCursor();
 
         if($resultat > 0){
-            $plant = new Vegetal($this->getBdd()->lastInsertId(),$titre,$infosVegetal,$plantationVegetal,$image);
+            $lastInsertId = $this->getBdd()->lastInsertId();
+            $plant = new Vegetal($lastInsertId,$titre,$infosVegetal,$plantationVegetal,$image, $idFamilleVegetal);
             $this->ajoutPlante($plant);
+
+            $req = "
+            INSERT INTO appartenir (idTypeVegetal, idVegetal)
+            values (:idTypeVegetal, :idVegetal)";
+            $stmt = $this->getBdd()->prepare($req);
+            $stmt->bindValue(":idTypeVegetal",$idTypeVegetal,PDO::PARAM_INT);
+            $stmt->bindValue(":idVegetal",$lastInsertId,PDO::PARAM_INT);
+            $stmt->execute();
+            $stmt->closeCursor();
         }        
     }
 

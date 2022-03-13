@@ -40,14 +40,31 @@ class UtilisateurManager extends Model{
 
     public function verifPseudoDisponible($pseudoUtilisateur){
         $utilisateur = $this->getUtilisateurInformation($pseudoUtilisateur);
-        return empty($utilisateur);
-
+        return empty($utilisateur); //On test si utilisateur est vide ou non.
     }
 
-    public function bdCreerCompte($pseudoUtilisateur, $mdpCrypte, $mailUtilisateur, $clef, $imageUtilisateur, $idDroit){
-        $req = "INSERT INTO utilisateurs (pseudoUtilisateur, mdpUtilisateur, mailUtilisateur, activationCode, clef, imageUtilisateur, idDroit) 
-        VALUES (:pseudoUtilisateur, :mdpUtilisateur, :mailUtilisateur, 0, :clef, :imageUtilisateur, :idDroit)";
+    public function getUtilisateurInformationMail($mailUtilisateur){
+        $req = "SELECT * FROM utilisateurs WHERE mailUtilisateur = :mailUtilisateur";
         $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":mailUtilisateur", $mailUtilisateur,PDO::PARAM_STR);
+        $stmt->execute();
+        $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $resultat;
+    }
+
+    public function verifMailDisponible($mailUtilisateur){
+        $utilisateur = $this->getUtilisateurInformationMail($mailUtilisateur);
+        return empty($utilisateur); //On test si utilisateur est vide ou non. 
+    }
+
+
+    public function bdCreerCompte($nomUtilisateur, $prenomUtilisateur, $pseudoUtilisateur, $mdpCrypte, $mailUtilisateur, $clef, $imageUtilisateur, $idDroit){
+        $req = "INSERT INTO utilisateurs (nomUtilisateur, prenomUtilisateur, pseudoUtilisateur, mdpUtilisateur, mailUtilisateur, activationCode, clef, imageUtilisateur, idDroit) 
+        VALUES (:nomUtilisateur, :prenomUtilisateur, :pseudoUtilisateur, :mdpUtilisateur, :mailUtilisateur, 0, :clef, :imageUtilisateur, :idDroit)";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":nomUtilisateur", $nomUtilisateur,PDO::PARAM_STR);
+        $stmt->bindValue(":prenomUtilisateur", $prenomUtilisateur,PDO::PARAM_STR);
         $stmt->bindValue(":pseudoUtilisateur", $pseudoUtilisateur,PDO::PARAM_STR);
         $stmt->bindValue(":mdpUtilisateur", $mdpCrypte,PDO::PARAM_STR);
         $stmt->bindValue(":mailUtilisateur", $mailUtilisateur,PDO::PARAM_STR);

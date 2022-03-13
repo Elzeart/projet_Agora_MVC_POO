@@ -38,6 +38,8 @@ class PlanteController{
     }
 
     public function ajoutPlante(){
+        $famillesVegetaux = $this->planteManager->getFamillesVegetauxBd();
+        $typesVegetaux = $this->planteManager->getTypesVegetauxBd();
         require "views/ajoutPlante.view.php";
     }
 
@@ -45,7 +47,7 @@ class PlanteController{
         $file = $_FILES['image'];
         $repertoire = "public/images/plants/";
         $nomImageAjoute = Toolbox::ajoutImage($file,$repertoire);
-        $this->planteManager->ajoutPlanteBd($_POST['titre'],$_POST['infosVegetal'],$_POST['plantationVegetal'],$nomImageAjoute);
+        $this->planteManager->ajoutPlanteBd($_POST['titre'],$_POST['infosVegetal'],$_POST['plantationVegetal'],$nomImageAjoute, $_POST['idFamilleVegetal'], $_POST['idTypeVegetal']);
         
         $_SESSION['alert'] = [
             "type" => "success",
