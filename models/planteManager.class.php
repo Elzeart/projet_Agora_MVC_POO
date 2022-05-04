@@ -26,6 +26,20 @@ class PlantManager extends Model{
         }
     }
 
+    public function getRecherche($recherche){
+        $req = "SELECT * FROM vegetaux WHERE nomVegetal LIKE :nomVegetal ORDER BY nomVegetal"; 
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":nomVegetal","%$recherche%",PDO::PARAM_STR);
+        $stmt->execute();
+        $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        foreach($resultat as $vegetal){
+            $l = new Vegetal($vegetal['idVegetal'],$vegetal['nomVegetal'],$vegetal['infosVegetal'],
+            $vegetal['plantationVegetal'],$vegetal['imageVegetal'], $vegetal['idFamilleVegetal']);
+            $this->ajoutPlante($l);
+        }
+    }
+
     public function getPlantById($id){
         for($i=0; $i < count($this->plants);$i++){
             if($this->plants[$i]->getIdVegetal() === $id){
@@ -64,12 +78,6 @@ class PlantManager extends Model{
         }        
     }
 
-    // Requête php my admin     DELETE vegetaux FROM `vegetaux` INNER JOIN appartenir ON vegetaux.idVegetal = appartenir.idVegetal INNER JOIN typevegetaux ON typevegetaux.idTypeVegetal = appartenir.idTypeVegetal WHERE `vegetaux`.`idVegetal` = 6; 
-    /* $req = "
-    DELETE vegetaux FROM vegetaux 
-    INNER JOIN appartenir ON vegetaux.idVegetal = appartenir.idVegetal 
-    INNER JOIN typevegetaux ON typevegetaux.idTypeVegetal = appartenir.idTypeVegetal 
-    WHERE vegetaux.idVegetal = :idVegetal"; */
     public function supprimerPlanteBD($id){
         $req = "
         DELETE vegetaux FROM vegetaux 
@@ -86,26 +94,28 @@ class PlantManager extends Model{
         }
     }
 
-    public function modifierPlanteBD($id, $titre, $infos, $image){
+    public function modifierPlanteBD($id, $titre, $infos, $infoPlantation, $image){
         $req = "
         UPDATE vegetaux 
-        SET nomVegetal = :nomVegetal, infosVegetal = :infosVegetal, imageVegetal = :imageVegetal 
+        SET nomVegetal = :nomVegetal, infosVegetal = :infosVegetal, plantationVegetal = :plantationVegetal, imageVegetal = :imageVegetal 
         WHERE idVegetal = :idVegetal
         ";
         $stmt = $this->getBdd()->prepare($req);
         $stmt->bindValue(":idVegetal",$id,PDO::PARAM_INT);
         $stmt->bindValue(":nomVegetal",$titre,PDO::PARAM_STR);
         $stmt->bindValue(":infosVegetal",$infos,PDO::PARAM_STR);
+        $stmt->bindValue(":plantationVegetal",$infoPlantation,PDO::PARAM_STR);
         $stmt->bindValue(":imageVegetal",$image,PDO::PARAM_STR);
         $resultat = $stmt->execute();
         $stmt->closeCursor();
         if($resultat > 0){
-/*             $this->getPlantById($id)->setNomVegetal($titre);
-            $this->getPlantById($id)->setNomVegetal($infos);
-            $this->getPlantById($id)->setNomVegetal($image); */
+            // $this->getPlantById($id)->setNomVegetal($titre);
+            // $this->getPlantById($id)->setNomVegetal($infos);
+            // $this->getPlantById($id)->setNomVegetal($image);
             $this->getPlantById($id)->setNomVegetal($titre);
             $this->getPlantById($id)->setinfosVegetal($infos);
             $this->getPlantById($id)->setImageVegetal($image);
+            $this->getPlantById($id)->setPlantationVegetal($infoPlantation);
         }
     }
 
@@ -127,7 +137,6 @@ class PlantManager extends Model{
         return $resultat;
     }
 
-    //SELECT * FROM `vegetaux` WHERE idFamilleVegetal = 1
     public function getFamilleVegetauxBd($idFamilleVegetal){
         $req = "SELECT * FROM vegetaux WHERE idFamilleVegetal = :idFamilleVegetal ORDER BY nomVegetal"; 
         $stmt = $this->getBdd()->prepare($req);
@@ -138,10 +147,6 @@ class PlantManager extends Model{
         return $resultat;
     }
 
-    // SELECT * FROM `vegetaux` 
-    // INNER JOIN appartenir ON vegetaux.idVegetal = appartenir.idVegetal
-    // INNER JOIN typevegetaux ON typevegetaux.idTypeVegetal = appartenir.idTypeVegetal
-    // WHERE typevegetaux.idTypeVegetal = 3;
     public function getTypeVegetauxBd($idTypeVegetal){
         $req = "SELECT * FROM vegetaux 
         INNER JOIN appartenir ON vegetaux.idVegetal = appartenir.idVegetal 
@@ -155,25 +160,6 @@ class PlantManager extends Model{
         $stmt->closeCursor();
         return $resultat;
     }
-
-    // ok avec query au lieu de prepare
-/*     public function getTypeVegetauxBd($idTypeVegetal){
-        $req = "SELECT * FROM vegetaux 
-        INNER JOIN appartenir ON vegetaux.idVegetal = appartenir.idVegetal 
-        INNER JOIN typevegetaux ON typevegetaux.idTypeVegetal = appartenir.idTypeVegetal
-        WHERE typevegetaux.idTypeVegetal = $idTypeVegetal"; 
-        $stmt = $this->getBdd()->query($req);
-        //$stmt->bindValue(":idTypeVegetal",$idTypeVegetal,PDO::PARAM_INT);
-        $stmt->execute();
-        $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $stmt->closeCursor();
-        return $resultat;
-    } */
-
-    //SELECT * FROM `vegetaux` 
-    //INNER JOIN appartenir ON vegetaux.idVegetal = appartenir.idVegetal 
-    //INNER JOIN typevegetaux ON typevegetaux.idTypeVegetal = appartenir.idTypeVegetal 
-    //WHERE typevegetaux.idTypeVegetal = 3 AND vegetaux.idFamilleVegetal = 3; 
 
     public function getFamilleEtTypeVegetauxBd($idFamilleVegetal,$idTypeVegetal){
         $req = "SELECT * FROM vegetaux 
@@ -189,25 +175,5 @@ class PlantManager extends Model{
         $stmt->closeCursor();
         return $resultat;
     }
-
-
-/*     $data = array();
-
-if($received_data->query != '')
-{
-    $query="SELECT * FROM utilisateurs WHERE nomUtilisateur LIKE '%".$received_data->query."%' ORDER BY idUtilisateur DESC ";
-}
-else
-{
-	$query = "SELECT * FROM utilisateurs ORDER BY idUtilisateur DESC";
-}
-
-$statement = $bdd->prepare($query);
-$statement->execute();
-while($row = $statement->fetch(PDO::FETCH_ASSOC))
-{
-	$data[] = $row;
-} */
-
 
 }

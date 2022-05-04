@@ -12,14 +12,13 @@ $utilisateurController = new UtilsateurController;
 
 try{
     if(empty($_GET['page'])){
-        require "views/accueil.view.php";        
+        $planteController->afficherPlantesVA();     
     } else {
         $url = explode("/", filter_var($_GET['page']),FILTER_SANITIZE_URL);
 
         switch($url[0]){
             case "accueil" : 
                 $planteController->afficherPlantesVA();
-                
             break;
             case "vegetaux" : 
                 if(empty($url[1])){
@@ -28,13 +27,15 @@ try{
                     $planteController->afficherPlante($url[2]);
                 } 
                 else if($url[1] === "pTriParFamille") {
-                    $planteController->afficherPlanteParFamille($_POST['idFamilleVegetal']);
+                    $planteController->afficherPlanteParFamille(Toolbox::secureHTML($_POST['idFamilleVegetal']));
                 } 
                 else if($url[1] === "pTriParType") {
-                    $planteController->afficherPlanteParType($_POST['idTypeVegetal']);
+                    $planteController->afficherPlanteParType(Toolbox::secureHTML($_POST['idTypeVegetal']));
                 } 
                 else if($url[1] === "pTriParFamilleEtType") {
-                    $planteController->afficherPlanteParFamilleEtType($_POST['idFamilleVegetal'],$_POST['idTypeVegetal']);
+                    $planteController->afficherPlanteParFamilleEtType(Toolbox::secureHTML($_POST['idFamilleVegetal']),Toolbox::secureHTML($_POST['idTypeVegetal']));
+                } else if($url[1] === "recherche") {
+                    $planteController->recherche(Toolbox::secureHTML($_POST["recherche"]));
                 } 
                 else {
                     throw new Exception("La page n'existe pas. Erreur 404 !!!");
@@ -103,6 +104,7 @@ try{
                         $utilisateurController->profil();
                     } else if($url[1] === "validationModificationMail") {
                         $utilisateurController->validationModificationMail(Toolbox::secureHTML($_POST['mailUtilisateur'])); 
+                        header("Location: ".URL."espaceMembre/profil");
                     } else if($url[1] === "modificationMdp") {
                         $utilisateurController->modificationMdp();
                     } 
@@ -117,8 +119,8 @@ try{
                                 "type" => "alert-danger",
                                 "message" => "Vous n'avez pas renseigné toutes les informations"
                             ];
-                            header("Location: ".URL."admin/modificationMdp");
                         }
+                        header("Location: ".URL."espaceMembre/profil");
                         
                     } else if($url[1] === "suppressionCompte") {
                         $utilisateurController->suppressionCompte();
@@ -131,9 +133,8 @@ try{
                                 "type" => "alert-danger",
                                 "message" => "Vous n'avez pas modifié l'image"
                             ];
-                            header("Location: ".URL."admin/validationModificationImage");
                         }
-                        
+                        header("Location: ".URL."espaceMembre/profil");
                     }
                     else {
                         throw new Exception("La page n'existe pas. Erreur 404 !!!");
@@ -166,9 +167,11 @@ try{
                     } else if($url[1] === "profil") {
                         $utilisateurController->profil();
                     } else if($url[1] === "validationModificationMail") {
-                        $utilisateurController->validationModificationMail(htmlspecialchars(strip_tags(trim($_POST['mailUtilisateur']))));
+                        $utilisateurController->validationModificationMail(Toolbox::secureHTML($_POST['mailUtilisateur']));
+                        header("Location: ".URL."admin/profil");
                     } else if($url[1] === "modificationMdp") {
                         $utilisateurController->modificationMdp();
+                        header("Location: ".URL."admin/profil");
                     } 
                     else if($url[1] === "validationModificationMdp") {
                         if(!empty($_POST['ancienMdpUtilisateur']) && !empty($_POST['nouveauMdpUtilisateur']) && !empty($_POST['confirmNouveauMdpUtilisateur'])){
@@ -181,11 +184,12 @@ try{
                                 "type" => "alert-danger",
                                 "message" => "Vous n'avez pas renseigné toutes les informations"
                             ];
-                            header("Location: ".URL."admin/modificationMdp");
                         }
+                        header("Location: ".URL."admin/profil");
                         
                     } else if($url[1] === "suppressionCompte") {
                         $utilisateurController->suppressionCompte();
+                        header("Location: ".URL."accueil");
                     } 
                     else if($url[1] === "validationModificationImage") {
                         if($_FILES['image']['size'] > 0){
@@ -195,13 +199,13 @@ try{
                                 "type" => "alert-danger",
                                 "message" => "Vous n'avez pas modifié l'image"
                             ];
-                            header("Location: ".URL."admin/validationModificationImage");
                         }
+                        header("Location: ".URL."admin/profil");
                         
                     } else if($url[1] === "droits") {
                         $utilisateurController->droits();
                     } else if($url[1] === "modificationDroit") {
-                        $utilisateurController->modificationDroit($_POST['pseudoUtilisateur'], $_POST['idDroit']);
+                        $utilisateurController->modificationDroit(Toolbox::secureHTML($_POST['pseudoUtilisateur']), Toolbox::secureHTML($_POST['idDroit']));
                     }
                     else {
                         throw new Exception("La page n'existe pas. Erreur 404 !!!");

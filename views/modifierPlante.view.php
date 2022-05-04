@@ -20,8 +20,12 @@ endif;
         <input type="text" class="form-control" id="titre" name="titre" value="<?= $plant->getNomVegetal() ?>">
     </div>
     <div class="form-group">
-        <label for="nbPages">Changer infos : </label>
-        <input type="text" class="form-control" id="nbPages" name="infos" value="<?= $plant->getInfosVegetal() ?>">
+        <label for="infos">Changer infos : </label>
+        <input type="text" class="form-control" id="infos" name="infos" value="<?= $plant->getInfosVegetal() ?>">
+    </div>
+    <div class="form-group">
+        <label for="infoPlantation">Infos plantation : </label>
+        <input type="text" class="form-control" id="infoPlantation" name="infoPlantation" value="<?= $plant->getPlantationVegetal() ?>">
     </div>
     <h3>Image : </h3>
     <img src="<?= URL ?>public/images/<?= $plant->getImageVegetal() ?>" alt="">

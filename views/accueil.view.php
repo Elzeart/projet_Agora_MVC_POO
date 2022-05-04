@@ -3,7 +3,11 @@ ob_start();
 ?>
 <link rel="stylesheet" href="<?= URL ?>/public/css/accueil.css">
 
-<h2 class="titre-section-info">Bienvenue à l'agora</h2>
+    <div id="imageAccueil" style="background-image: url(<?= URL ?>/public/images/saisons/<?= $imageAccueil ?>.jpg)">
+        <div id="titreAccueil">
+            <h2 class="titre-section-info">Bienvenue </br> à l'agora</h2>
+        </div>
+    </div>
 
 <section>
     <h3>Evenements à venir</h3>

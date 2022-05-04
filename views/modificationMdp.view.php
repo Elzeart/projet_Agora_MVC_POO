@@ -7,7 +7,8 @@ ob_start();
 <main>
         <div id="container">
             <h1>Modification du mot de passe - <?= $_SESSION['profil']['pseudoUtilisateur']?></h1>
-            <form method="POST" action="<?= URL ?>admin/validationModificationMdp">
+            <?php if($_SESSION['profil']['idDroit'] == 1){$url="admin";} elseif($_SESSION['profil']['idDroit'] == 2){$url="espaceMembre";} ?>
+            <form method="POST" action="<?= URL ?>/<?= $url ?>/validationModificationMdp">
             
                 
                 <label for="ancienMdpUtilisateur"><b>Ancien mot de passe</b></label>
@@ -33,7 +34,5 @@ ob_start();
 
 <?php
 $content = ob_get_clean();
-// $titre = "Bienvenue dans xxx";
-// $css = "nom_de_la_page_css";               Il est possible je pense de faire l'algo dans le template qui prend le css en inscrivant le css comme ceci.
 require "template.php";
 ?>

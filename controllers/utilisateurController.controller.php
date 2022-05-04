@@ -138,7 +138,7 @@ class UtilsateurController
                 "message" => "Aucune modification effectuée"
             ];
         }
-        header('Location: '.URL.'admin/profil');
+        //header('Location: '.URL.'admin/profil');
     }
 
     public function modificationMdp(){
@@ -154,27 +154,27 @@ class UtilsateurController
                         "type" => "alert-success",
                         "message" => "La modification du mot de passe a été effectuée"
                     ];
-                    header("Location: ".URL."admin/profil");
+                    // header("Location: ".URL."admin/profil");
                 } else {
                     $_SESSION['alert'][] = [
                         "type" => "alert-danger",
                         "message" => "La modification de mot de passe a échouée"
                     ];
-                    header("Location: ".URL."admin/modificationMdp");
+                    // header("Location: ".URL."admin/modificationMdp");
                 }
             } else {
                 $_SESSION['alert'][] = [
                     "type" => "alert-danger",
                     "message" => "Votre pseudo et votre mot de passe ne correspondent pas"
                 ];
-                header("Location: ".URL."admin/modificationMdp");
+                // header("Location: ".URL."admin/modificationMdp");
             }
         } else {
             $_SESSION['alert'][] = [
                 "type" => "alert-danger",
                 "message" => "Les mots de passe ne correspondent pas"
             ];
-            header("Location: ".URL."admin/modificationMdp");
+            // header("Location: ".URL."admin/modificationMdp");
         }
     }
 

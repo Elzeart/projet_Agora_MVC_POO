@@ -5,6 +5,8 @@ ob_start();
 <!-- <link rel="stylesheet" href="https://bootswatch.com/4/sketchy/bootstrap.min.css"> -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 
+<?php if($_SESSION['profil']['idDroit'] == 1){$url="admin";} elseif($_SESSION['profil']['idDroit'] == 2){$url="espaceMembre";} ?>
+
 <div class="text-center">
 
     <h2> Bienvenue <?= $data['pseudoUtilisateur'] ?></h2>
@@ -29,7 +31,7 @@ ob_start();
     </div>
 
     <div id="formModificationMail" class="d-none">
-        <form method="POST" action="<?= URL ?>admin/validationModificationMail">
+        <form method="POST" action="<?= URL ?><?= $url ?>/validationModificationMail">
             <div class="row">
                 <label for="mailUtilisateur" class="col-2 col-form-label"> Mail: </label>
                 <div class="col-8"> 
@@ -47,14 +49,14 @@ ob_start();
     </div>
 
     <div>
-        <a href="<?= URL ?>admin/modificationMdp" class="btn btn-warning">Changer le mot de passe</a>
+        <a href="<?= URL ?><?= $url ?>/modificationMdp" class="btn btn-warning">Changer le mot de passe</a>
         <button id="btnSuprCompte" class="btn btn-danger">Supprimer son compte</button>
     </div>
     <div id="suppressionCompte" class="d-none m-2">
         <div class="alert alert-danger">
             Confirmer la suppression du compte.
             <br>
-            <a href="<?= URL ?>admin/suppressionCompte" class="btn btn-danger">Je souhaite supprimer mon compte définitivement</a>
+            <a href="<?= URL ?><?= $url ?>/suppressionCompte" class="btn btn-danger">Je souhaite supprimer mon compte définitivement</a>
         </div>
     </div>
 
@@ -63,7 +65,5 @@ ob_start();
 <script src="<?= URL ?>/public/javascript/profil.js"></script>
 <?php
 $content = ob_get_clean();
-// $titre = "Bienvenue dans xxx";
-// $css = "nom_de_la_page_css";               Il est possible je pense de faire l'algo dans le template qui prend le css en inscrivant le css comme ceci.
 require "template.php";
 ?>

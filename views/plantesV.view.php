@@ -1,15 +1,7 @@
 <?php 
     ob_start(); 
+?>
 
-    if(!empty($_SESSION['alert'])) :
-?>
-<div class="alert alert-<?= $_SESSION['alert']['type'] ?>" role="alert">
-    <?= $_SESSION['alert']['msg'] ?>
-</div>
-<?php 
-    unset($_SESSION['alert']);
-    endif; 
-?>
 
 <link rel="stylesheet" href="<?= URL ?>/public/css/plants.css">
 
@@ -17,6 +9,18 @@
 
     <h2 class="titre-section-info">Fiches végétaux</h2>
 
+    <div id="container-boxs">
+        
+            <form method="POST" action="<?= URL ?>vegetaux/recherche/">
+                <div class="chekboxs">
+                    <input type="search" name="recherche" placeholder="recherche">
+                </div>
+                <div class="button">
+                    <button type="submit">Envoyer</button>
+                </div>
+        </form>
+        
+    </div>
 
     <div id="container-boxs">
         <h3>Classement par Famille ou Type</h3>
@@ -73,11 +77,10 @@
 
     <section class="section-info" id="infos">
 <?php foreach ($plants as $plant) : ?>
-    
     <a href="<?= URL ?>vegetaux/p/<?= $plant->getIdVegetal(); ?>">
                 <div class="carte-info">
                     <div class="container-photo-info">
-                        <img src="public/images/plants/<?= $plant->getImageVegetal(); ?>" alt="...">
+                        <img src="<?= URL ?>public/images/plants/<?= $plant->getImageVegetal(); ?>" alt="...">
                     </div>
                     <h2><?= $plant->getNomVegetal(); ?></h2>
                     <p>

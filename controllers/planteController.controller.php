@@ -23,14 +23,18 @@ class PlanteController{
 
     public function afficherPlantesVA(){
         $plants = $this->planteManager->getPlantes();
+        $date = date("m");
+        if($date > "03" && $date < "06"){
+            $imageAccueil='printemps';
+        } else if($date > "06" && $date < "09"){
+            $imageAccueil='ete';
+        } else if($date > "09"){
+            $imageAccueil='automne';
+        } else {
+            $imageAccueil='hivers';
+        }
         require "views/accueil.view.php";
     }
-
-/* 
-    public function afficherParFamilleVegetal(){
-        $resultat = $this->planteManager->getFamilleVegetalBd();
-    } */
-
 
     public function afficherPlante($id){
         $plant = $this->planteManager->getPlantById($id);
@@ -84,7 +88,7 @@ class PlanteController{
         } else {
             $nomImageAjoute = $imageActuelle;
         }
-        $this->planteManager->modifierPlanteBD($_POST['identifiant'], $_POST['titre'], $_POST['infos'], $nomImageAjoute);
+        $this->planteManager->modifierPlanteBD($_POST['identifiant'], $_POST['titre'], $_POST['infos'], $_POST['infoPlantation'], $nomImageAjoute);
         header('Location: '. URL . "admin/pAdmin");
     }
 
@@ -107,6 +111,15 @@ class PlanteController{
         $typesVegetaux = $this->planteManager->getTypesVegetauxBd();
         $famillesVegetaux = $this->planteManager->getFamillesVegetauxBd();
         require "views/plantesParFamilleEtType.view.php";
+    }
+
+    public function recherche($recherche) {
+        $this->planteManager = new PlantManager;
+        $this->planteManager->getRecherche($recherche);
+        $plants = $this->planteManager->getPlantes();
+        $famillesVegetaux = $this->planteManager->getFamillesVegetauxBd();
+        $typesVegetaux = $this->planteManager->getTypesVegetauxBd();
+        require "views/plantesV.view.php";
     }
 
 }
