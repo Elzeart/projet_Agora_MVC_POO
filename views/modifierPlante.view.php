@@ -1,18 +1,10 @@
 <?php 
 ob_start(); 
-
-if(!empty($_SESSION['alert'])) :
 ?>
 
-<div class="alert alert-<?= $_SESSION['alert']['type'] ?>" role="alert">
-    <?= $_SESSION['alert']['msg'] ?>
-</div>
-<?php 
-unset($_SESSION['alert']);
-endif; 
-?>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 
-<link rel="stylesheet" href="https://bootswatch.com/4/sketchy/bootstrap.min.css">
+<h1 class="titre-section-info text-center">Modifier une plante</h1>
 
 <form method="POST" action="<?= URL ?>admin/mv" enctype="multipart/form-data">
     <div class="form-group">
@@ -27,20 +19,39 @@ endif;
         <label for="infoPlantation">Infos plantation : </label>
         <input type="text" class="form-control" id="infoPlantation" name="infoPlantation" value="<?= $plant->getPlantationVegetal() ?>">
     </div>
-    <h3>Image : </h3>
-    <img src="<?= URL ?>public/images/<?= $plant->getImageVegetal() ?>" alt="">
-    <div class="form-group">
+    <div class="form-group pt-2 pb-2">
+        <label for="image">Image actuelle : </label>
+        <img src="<?= URL ?>public/images/plants/<?= $plant->getImageVegetal() ?>" alt="Image : <?= $plant->getNomVegetal() ?>" class="w-25">
+    </div>
+    <div class="form-group pb-2">
         <label for="image">Changer image : </label>
         <input type="file" class="form-control-file" id="image" name="image">
     </div>
-    <input type="hidden" name="identifiant" value="<?= $plant->getIdVegetal() ?>">
-    <button type="submit" class="btn btn-primary">Valider</button>
+    <div class="form-group">
+        <label for="idFamilleVegetal">Familles de végétaux</label> &ensp;
+        <select name="idFamilleVegetal">
+            <?php foreach ($famillesVegetaux as $familleVegetal) : ?>
+                <option value="<?= $familleVegetal['idFamilleVegetal'] ?>"><?= $familleVegetal['nomFamilleVegetal'] ?></option>
+            <?php endforeach?>
+        </select>
+    </div>
+    <br>
+
+    <div class="form-group">
+        <label for="idTypeVegetal">Types de végétaux</label> &ensp;
+        <select name="idTypeVegetal">
+            <?php foreach ($typesVegetaux as $typeVegetal) : ?>
+                <option value="<?= $typeVegetal['idTypeVegetal'] ?>"><?= $typeVegetal['nomTypeVegetal'] ?></option>
+            <?php endforeach?>
+        </select>
+    </div>
+    <div class="form-group pb-1">
+        <input type="hidden" name="identifiant" value="<?= $plant->getIdVegetal() ?>">
+        <button type="submit" class="btn btn-primary">Valider</button>
+    </div>
 </form>
 
 <?php
 $content = ob_get_clean();
-$titre = "Modification d'une plante' : ".$plant->getIdVegetal();
-// $titre = "Bienvenue dans xxx";
-// $css = "nom_de_la_page_css";               Il est possible je pense de faire l'algo dans le template qui prend le css en inscrivant le css comme ceci.
 require "template.php";
 ?>

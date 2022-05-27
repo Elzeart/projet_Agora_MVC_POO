@@ -15,7 +15,7 @@ ob_start();
         <div>
             <img src="<?= URL ?>public/images/<?= $data['imageUtilisateur']?>" width="100px" alt="Photo de profil">
         </div>
-        <form method="post" action="<?= URL ?>admin/validationModificationImage" enctype="multipart/form-data">
+        <form method="post" action="<?= URL ?><?= $url ?>/validationModificationImage" enctype="multipart/form-data">
             <label for="image">Changer l'image de profil</label>
             <input type="file" class="form-control-file" id="image" name="image" onchange="submit()">
         </form>

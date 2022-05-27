@@ -94,10 +94,10 @@ class PlantManager extends Model{
         }
     }
 
-    public function modifierPlanteBD($id, $titre, $infos, $infoPlantation, $image){
+    public function modifierPlanteBD($id, $titre, $infos, $infoPlantation, $image, $idFamilleVegetal, $idTypeVegetal){
         $req = "
         UPDATE vegetaux 
-        SET nomVegetal = :nomVegetal, infosVegetal = :infosVegetal, plantationVegetal = :plantationVegetal, imageVegetal = :imageVegetal 
+        SET nomVegetal = :nomVegetal, infosVegetal = :infosVegetal, plantationVegetal = :plantationVegetal, imageVegetal = :imageVegetal, idFamilleVegetal = :idFamilleVegetal 
         WHERE idVegetal = :idVegetal
         ";
         $stmt = $this->getBdd()->prepare($req);
@@ -106,16 +106,24 @@ class PlantManager extends Model{
         $stmt->bindValue(":infosVegetal",$infos,PDO::PARAM_STR);
         $stmt->bindValue(":plantationVegetal",$infoPlantation,PDO::PARAM_STR);
         $stmt->bindValue(":imageVegetal",$image,PDO::PARAM_STR);
+        $stmt->bindValue(":idFamilleVegetal",$idFamilleVegetal,PDO::PARAM_INT);
         $resultat = $stmt->execute();
         $stmt->closeCursor();
+        $req2 = "
+            UPDATE appartenir SET idTypeVegetal = :idTypeVegetal
+            WHERE idVegetal = :idVegetal
+            ";
+        $stmt = $this->getBdd()->prepare($req2);
+        $stmt->bindValue(":idTypeVegetal",$idTypeVegetal,PDO::PARAM_INT);
+        $stmt->bindValue(":idVegetal",$id,PDO::PARAM_INT);
+        $stmt->execute();
+        $stmt->closeCursor();
         if($resultat > 0){
-            // $this->getPlantById($id)->setNomVegetal($titre);
-            // $this->getPlantById($id)->setNomVegetal($infos);
-            // $this->getPlantById($id)->setNomVegetal($image);
             $this->getPlantById($id)->setNomVegetal($titre);
             $this->getPlantById($id)->setinfosVegetal($infos);
             $this->getPlantById($id)->setImageVegetal($image);
             $this->getPlantById($id)->setPlantationVegetal($infoPlantation);
+            $this->getPlantById($id)->setFamilleVegetal($idFamilleVegetal);
         }
     }
 

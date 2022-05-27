@@ -1,22 +1,19 @@
 <?php 
 ob_start(); 
 ?>
-<link rel="stylesheet" href="https://bootswatch.com/4/sketchy/bootstrap.min.css">
 
-<h2 class="titre-section-info">Bienvenue dans espace admin</h2>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 
-<a href="<?= URL ?>admin/profil">Gestion du profil</a> <br>
-<a href="<?= URL ?>accueilAdmin">Gestion Accueil</a> <br>
-<a href="<?= URL ?>admin/pAdmin">Gestion des synthéses des végétaux</a> <br>
-<a href="<?= URL ?>admin/trocAdmin">Gestion des Trocs</a> <br>
-<a href="<?= URL ?>admin/ftAdmin">Gestion famille et type végétaux</a> <br>
-<a href="<?= URL ?>admin/droits">Gestion des droits</a> <br>
+<h1 class="titre-section-info">Bienvenue dans espace admin</h1>
 
+<a href="<?= URL ?>admin/profil" class="text-dark text-decoration-none">Gestion du profil</a> <br>
+<a href="<?= URL ?>accueilAdmin" class="text-dark text-decoration-none">Gestion Accueil</a> <br>
+<a href="<?= URL ?>admin/pAdmin" class="text-dark text-decoration-none">Gestion des synthéses des végétaux</a> <br>
+<a href="<?= URL ?>admin/trocAdmin" class="text-dark text-decoration-none">Gestion des Trocs</a> <br>
+<a href="<?= URL ?>admin/ftAdmin" class="text-dark text-decoration-none">Gestion famille et type végétaux</a> <br>
+<a href="<?= URL ?>admin/droits" class="text-dark text-decoration-none">Gestion des droits</a> <br>
 
 <?php
 $content = ob_get_clean();
-$titre = "Bienvenue dans espace admin";
-// $titre = "Bienvenue dans xxx";
-// $css = "nom_de_la_page_css";               Il est possible je pense de faire l'algo dans le template qui prend le css en inscrivant le css comme ceci.
 require "template.php";
 ?>

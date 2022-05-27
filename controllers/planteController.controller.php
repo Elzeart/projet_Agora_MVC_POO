@@ -74,6 +74,8 @@ class PlanteController{
 
     public function modifierPlante($id){
         $plant = $this->planteManager->getPlantById($id);
+        $famillesVegetaux = $this->planteManager->getFamillesVegetauxBd();
+        $typesVegetaux = $this->planteManager->getTypesVegetauxBd();
         require "views/modifierPlante.view.php";
     }
 
@@ -88,7 +90,7 @@ class PlanteController{
         } else {
             $nomImageAjoute = $imageActuelle;
         }
-        $this->planteManager->modifierPlanteBD($_POST['identifiant'], $_POST['titre'], $_POST['infos'], $_POST['infoPlantation'], $nomImageAjoute);
+        $this->planteManager->modifierPlanteBD($_POST['identifiant'], $_POST['titre'], $_POST['infos'], $_POST['infoPlantation'], $nomImageAjoute, $_POST['idFamilleVegetal'], $_POST['idTypeVegetal']);
         header('Location: '. URL . "admin/pAdmin");
     }
 
