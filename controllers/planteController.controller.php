@@ -93,24 +93,30 @@ class PlanteController{
     }
 
     public function afficherPlanteParFamille($idFamilleVegetal){
-        $familleVegetaux = $this->planteManager->getFamilleVegetauxBd($idFamilleVegetal);
+        $this->planteManager = new PlantManager;
+        $this->planteManager->getFamilleVegetauxBd($idFamilleVegetal);
+        $plants = $this->planteManager->getPlantes();
         $famillesVegetaux = $this->planteManager->getFamillesVegetauxBd();
         $typesVegetaux = $this->planteManager->getTypesVegetauxBd();
-        require "views/plantesParFamille.view.php";
+        require "views/plantesV.view.php";
     }
 
     public function afficherPlanteParType($idTypeVegetal){
-        $typeVegetaux = $this->planteManager->getTypeVegetauxBd($idTypeVegetal);
+        $this->planteManager = new PlantManager;
+        $this->planteManager->getTypeVegetauxBd($idTypeVegetal);
+        $plants = $this->planteManager->getPlantes();
         $typesVegetaux = $this->planteManager->getTypesVegetauxBd();
         $famillesVegetaux = $this->planteManager->getFamillesVegetauxBd();
-        require "views/plantesParType.view.php";
+        require "views/plantesV.view.php";
     }
 
     public function afficherPlanteParFamilleEtType($idFamilleVegetal,$idTypeVegetal){
-        $familleEtTypeVegetaux = $this->planteManager->getFamilleEtTypeVegetauxBd($idFamilleVegetal,$idTypeVegetal);
+        $this->planteManager = new PlantManager;
+        $this->planteManager->getFamilleEtTypeVegetauxBd($idFamilleVegetal,$idTypeVegetal);
+        $plants = $this->planteManager->getPlantes();
         $typesVegetaux = $this->planteManager->getTypesVegetauxBd();
         $famillesVegetaux = $this->planteManager->getFamillesVegetauxBd();
-        require "views/plantesParFamilleEtType.view.php";
+        require "views/plantesV.view.php";
     }
 
     public function recherche($recherche) {

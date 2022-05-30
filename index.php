@@ -24,7 +24,7 @@ try{
                 if(empty($url[1])){
                     $planteController->afficherPlantesV();
                 } else if($url[1] === "p") {
-                    $planteController->afficherPlante($url[2]);
+                    $planteController->afficherPlante(Toolbox::secureHTML($url[2]));
                 } 
                 else if($url[1] === "pTriParFamille") {
                     $planteController->afficherPlanteParFamille(Toolbox::secureHTML($_POST['idFamilleVegetal']));
@@ -80,9 +80,9 @@ try{
                     throw new Exception("Veuillez remplir les informations oblligatoires !");
                 }
             break;
-            case "renvoyerMailValidation" : $utilisateurController->renvoyerMailValidation($url[1]);
+            case "renvoyerMailValidation" : $utilisateurController->renvoyerMailValidation(Toolbox::secureHTML($url[1]));
             break;
-            case "validationMail" : $utilisateurController->validationCompte($url[1], $url[2]);
+            case "validationMail" : $utilisateurController->validationCompte(Toolbox::secureHTML($url[1]), Toolbox::secureHTML($url[2]));
             break;
             case "espaceMembre" : 
                 if(empty($_SESSION['profil'])){
@@ -152,7 +152,7 @@ try{
                     } else if($url[1] === "pAdmin") {
                         $planteController->afficherPlantes();
                     } else if($url[1] === "p") {
-                        $planteController->afficherPlante($url[2]);
+                        $planteController->afficherPlante(Toolbox::secureHTML($url[2]));
                     } else if($url[1] === "a") {
                         $planteController->ajoutPlante();
                     } else if($url[1] === "av") {
@@ -164,11 +164,11 @@ try{
                         $idTypeVegetal = Toolbox::secureHTML($_POST['idTypeVegetal']);
                         $planteController->ajoutPlanteValidation($titre,$infosVegetal,$plantationVegetal,$idFamilleVegetal,$idTypeVegetal);
                     } else if($url[1] === "m") {
-                        $planteController->modifierPlante($url[2]);
+                        $planteController->modifierPlante(Toolbox::secureHTML($url[2]));
                     } else if($url[1] === "mv") {
                         $planteController->modifierPlanteValidation();
                     } else if($url[1] === "s") {
-                        $planteController->supprimerPlante($url[2]);
+                        $planteController->supprimerPlante(Toolbox::secureHTML($url[2]));
                     } else if($url[1] === "profil") {
                         $utilisateurController->profil();
                     } else if($url[1] === "validationModificationMail") {

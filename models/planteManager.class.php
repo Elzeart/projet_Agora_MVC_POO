@@ -20,9 +20,9 @@ class PlantManager extends Model{
         $lesVegetaux = $req->fetchAll(PDO::FETCH_ASSOC);
         $req->closeCursor();
         foreach($lesVegetaux as $vegetal){
-            $l = new Vegetal($vegetal['idVegetal'],$vegetal['nomVegetal'],$vegetal['infosVegetal'],
+            $plant = new Vegetal($vegetal['idVegetal'],$vegetal['nomVegetal'],$vegetal['infosVegetal'],
             $vegetal['plantationVegetal'],$vegetal['imageVegetal'], $vegetal['idFamilleVegetal']);
-            $this->ajoutPlante($l);
+            $this->ajoutPlante($plant);
         }
     }
 
@@ -34,9 +34,9 @@ class PlantManager extends Model{
         $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $stmt->closeCursor();
         foreach($resultat as $vegetal){
-            $l = new Vegetal($vegetal['idVegetal'],$vegetal['nomVegetal'],$vegetal['infosVegetal'],
+            $plant = new Vegetal($vegetal['idVegetal'],$vegetal['nomVegetal'],$vegetal['infosVegetal'],
             $vegetal['plantationVegetal'],$vegetal['imageVegetal'], $vegetal['idFamilleVegetal']);
-            $this->ajoutPlante($l);
+            $this->ajoutPlante($plant);
         }
     }
 
@@ -152,7 +152,11 @@ class PlantManager extends Model{
         $stmt->execute();
         $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $stmt->closeCursor();
-        return $resultat;
+        foreach($resultat as $vegetal){
+            $plant = new Vegetal($vegetal['idVegetal'],$vegetal['nomVegetal'],$vegetal['infosVegetal'],
+            $vegetal['plantationVegetal'],$vegetal['imageVegetal'], $vegetal['idFamilleVegetal']);
+            $this->ajoutPlante($plant);
+        }
     }
 
     public function getTypeVegetauxBd($idTypeVegetal){
@@ -166,7 +170,11 @@ class PlantManager extends Model{
         $stmt->execute();
         $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $stmt->closeCursor();
-        return $resultat;
+        foreach($resultat as $vegetal){
+            $plant = new Vegetal($vegetal['idVegetal'],$vegetal['nomVegetal'],$vegetal['infosVegetal'],
+            $vegetal['plantationVegetal'],$vegetal['imageVegetal'], $vegetal['idFamilleVegetal']);
+            $this->ajoutPlante($plant);
+        }
     }
 
     public function getFamilleEtTypeVegetauxBd($idFamilleVegetal,$idTypeVegetal){
@@ -181,7 +189,11 @@ class PlantManager extends Model{
         $stmt->execute();
         $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $stmt->closeCursor();
-        return $resultat;
+        foreach($resultat as $vegetal){
+            $plant = new Vegetal($vegetal['idVegetal'],$vegetal['nomVegetal'],$vegetal['infosVegetal'],
+            $vegetal['plantationVegetal'],$vegetal['imageVegetal'], $vegetal['idFamilleVegetal']);
+            $this->ajoutPlante($plant);
+        }
     }
 
 }
