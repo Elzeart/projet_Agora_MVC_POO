@@ -194,7 +194,7 @@ try{
                         
                     } else if($url[1] === "suppressionCompte") {
                         $utilisateurController->suppressionCompte();
-                        header("Location: ".URL."accueil");
+                        header('Location: '.URL.'connexionInscription');
                     } 
                     else if($url[1] === "validationModificationImage") {
                         if($_FILES['image']['size'] > 0){

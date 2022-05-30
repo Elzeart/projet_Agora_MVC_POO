@@ -12,11 +12,10 @@
 
 #titreAccueil{
     position: absolute;
-    right: 20%;
+    right: 30%;
     top: 15%;
     width: 100%;
     text-align: center;   
-    color: green;
     opacity: 1.75;
 }
 
@@ -25,7 +24,8 @@ section{
 }
 
 .titre-section-info {
-    color: #000;
+    /* color: #000; */
+    color: rgb(4, 32, 122);
     text-align: center;
     font-size: 65px;
     padding: 0px 20px;
@@ -82,8 +82,19 @@ h3{
         object-fit: cover;
     }
 }
+@media screen and (max-width:800px){
+    .container{
+        padding-top: 30px;
+    }
+    #titreAccueil{
+        right: 25%;
+    }
+    .titre-section-info {
+        font-size: 3rem;
+    }
+}
 
-@media screen and (max-width:550px){
+@media screen and (max-width:600px){
     article p{
         font-size: smaller;
     }

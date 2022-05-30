@@ -1,16 +1,6 @@
 <?php 
 ob_start(); 
-
-if(!empty($_SESSION['alert'])) :
 ?>
-<div class="alert alert-<?= $_SESSION['alert']['type'] ?>" role="alert">
-    <?= $_SESSION['alert']['msg'] ?>
-</div>
-<?php 
-unset($_SESSION['alert']);
-endif; 
-?>
-
 
 <link rel="stylesheet" href="<?= URL ?>/public/css/plants.css">
 
@@ -44,7 +34,6 @@ endif;
                 </select>
             </div>
         </form>
-    
         <form method="POST" action="<?= URL ?>vegetaux/pTriParType/">
             <div class="chekboxs">
             
@@ -85,8 +74,8 @@ endif;
         </div>
 
     <section class="section-info" id="infos">
-<?php foreach ($plants as $plant) : ?>
-    <a href="<?= URL ?>vegetaux/p/<?= $plant->getIdVegetal(); ?>">
+        <?php foreach ($plants as $plant) : ?>
+            <a href="<?= URL ?>vegetaux/p/<?= $plant->getIdVegetal(); ?>">
                 <div class="carte-info">
                     <div class="container-photo-info">
                         <img src="<?= URL ?>public/images/plants/<?= $plant->getImageVegetal(); ?>" alt="...">
@@ -97,10 +86,8 @@ endif;
                     </p>
                 </div>
             </a>
-    
-    <?php endforeach?>
+        <?php endforeach?>
     </section>
-
 
 </main>
 
