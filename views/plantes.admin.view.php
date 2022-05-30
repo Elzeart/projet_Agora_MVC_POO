@@ -1,5 +1,15 @@
 <?php 
 ob_start(); 
+
+if(!empty($_SESSION['alert'])) :
+?>
+
+<div class="alert alert-<?= $_SESSION['alert']['type'] ?>" role="alert">
+    <?= $_SESSION['alert']['message'] ?>
+</div>
+<?php 
+unset($_SESSION['alert']);
+endif; 
 ?>
 
     <link rel="stylesheet" href="<?= URL ?>/public/css/plantes.admin.css">

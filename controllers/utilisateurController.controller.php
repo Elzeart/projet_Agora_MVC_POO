@@ -57,7 +57,7 @@ class UtilsateurController
         unset($_SESSION['profil']);
         /* setcookie(Toolbox::COOKIE_NAME,"",time() - 3600); */
         /* session_destroy(); */
-        header('Location: '.URL.'accueil');
+        header('Location: '.URL.'connexionInscription');
     }
 
     public function inscriptionValid($nomUtilisateur, $prenomUtilisateur, $pseudoUtilisateur, $mdpUtilisateur, $mailUtilisateur, ){

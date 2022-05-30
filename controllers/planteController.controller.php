@@ -47,17 +47,15 @@ class PlanteController{
         require "views/ajoutPlante.view.php";
     }
 
-    public function ajoutPlanteValidation(){
+    public function ajoutPlanteValidation($titre,$infosVegetal,$plantationVegetal,$idFamilleVegetal,$idTypeVegetal){
         $file = $_FILES['image'];
         $repertoire = "public/images/plants/";
         $nomImageAjoute = Toolbox::ajoutImage($file,$repertoire);
-        $this->planteManager->ajoutPlanteBd($_POST['titre'],$_POST['infosVegetal'],$_POST['plantationVegetal'],$nomImageAjoute, $_POST['idFamilleVegetal'], $_POST['idTypeVegetal']);
-        
+        $this->planteManager->ajoutPlanteBd($titre,$infosVegetal,$plantationVegetal,$nomImageAjoute,$idFamilleVegetal,$idTypeVegetal);
         $_SESSION['alert'] = [
             "type" => "success",
-            "msg" => "Ajout Réalisé"
+            "message" => "Ajout Réalisé"
         ];
-        
         header('Location: '. URL . "admin/pAdmin");
     }
 
@@ -67,7 +65,7 @@ class PlanteController{
         $this->planteManager->supprimerPlanteBD($id);
         $_SESSION['alert'] = [
             "type" => "success",
-            "msg" => "Suppression Réalisée"
+            "message" => "Suppression Réalisée"
         ];
         header('Location: '. URL . "admin/pAdmin");
     }

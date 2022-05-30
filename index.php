@@ -121,7 +121,6 @@ try{
                             ];
                         }
                         header("Location: ".URL."espaceMembre/profil");
-                        
                     } else if($url[1] === "suppressionCompte") {
                         $utilisateurController->suppressionCompte();
                     } 
@@ -157,7 +156,13 @@ try{
                     } else if($url[1] === "a") {
                         $planteController->ajoutPlante();
                     } else if($url[1] === "av") {
-                        $planteController->ajoutPlanteValidation();
+                       /*  var_dump($_POST['titre'],$_POST['infosVegetal'],$_POST['plantationVegetal'],$_FILES['image']["name"], $_POST['idFamilleVegetal'], $_POST['idTypeVegetal']); */
+                        $titre = Toolbox::secureHTML($_POST['titre']);
+                        $infosVegetal = Toolbox::secureHTML($_POST['infosVegetal']);
+                        $plantationVegetal = Toolbox::secureHTML($_POST['plantationVegetal']);
+                        $idFamilleVegetal = Toolbox::secureHTML($_POST['idFamilleVegetal']);
+                        $idTypeVegetal = Toolbox::secureHTML($_POST['idTypeVegetal']);
+                        $planteController->ajoutPlanteValidation($titre,$infosVegetal,$plantationVegetal,$idFamilleVegetal,$idTypeVegetal);
                     } else if($url[1] === "m") {
                         $planteController->modifierPlante($url[2]);
                     } else if($url[1] === "mv") {
