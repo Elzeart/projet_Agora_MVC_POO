@@ -30,7 +30,7 @@ ob_start();
     <div class="form-group">
         <label for="idFamilleVegetal">Familles de végétaux</label> &ensp;
         <select name="idFamilleVegetal">
-            <option value="1"><?= $plant->getFamilleVegetal() ?></option>
+            <option value="<?= $plant->getFamilleVegetal() ?>"><?= $familleVegetal['nomFamilleVegetal'] ?></option>
             <?php foreach ($famillesVegetaux as $familleVegetal) : ?>
                 <option value="<?= $familleVegetal['idFamilleVegetal'] ?>"><?= $familleVegetal['nomFamilleVegetal'] ?></option>
             <?php endforeach?>
@@ -41,6 +41,7 @@ ob_start();
     <div class="form-group">
         <label for="idTypeVegetal">Types de végétaux</label> &ensp;
         <select name="idTypeVegetal">
+            <option value="<?= $typeFamillePlant['idTypeVegetal'] ?>"><?= $typeFamillePlant['nomTypeVegetal'] ?></option>
             <?php foreach ($typesVegetaux as $typeVegetal) : ?>
                 <option value="<?= $typeVegetal['idTypeVegetal'] ?>"><?= $typeVegetal['nomTypeVegetal'] ?></option>
             <?php endforeach?>

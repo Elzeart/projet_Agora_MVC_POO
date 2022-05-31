@@ -24,6 +24,7 @@ class UtilsateurController
                 $_SESSION['profil'] = [
                     "pseudoUtilisateur" => $data['pseudoUtilisateur'],
                     "idDroit" => $data['idDroit'],
+                    "idUtilisateur" => $data['idUtilisateur'],
                 ];
                 if($_SESSION['profil']['idDroit'] == 1){
                     header('Location: '.URL.'admin');

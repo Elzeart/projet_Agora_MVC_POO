@@ -48,10 +48,11 @@ class PlanteController{
     }
 
     public function ajoutPlanteValidation($titre,$infosVegetal,$plantationVegetal,$idFamilleVegetal,$idTypeVegetal){
+        $idUtilisateur = $_SESSION['profil']['idUtilisateur'];
         $file = $_FILES['image'];
         $repertoire = "public/images/plants/";
         $nomImageAjoute = Toolbox::ajoutImage($file,$repertoire);
-        $this->planteManager->ajoutPlanteBd($titre,$infosVegetal,$plantationVegetal,$nomImageAjoute,$idFamilleVegetal,$idTypeVegetal);
+        $this->planteManager->ajoutPlanteBd($titre,$infosVegetal,$plantationVegetal,$nomImageAjoute,$idFamilleVegetal,$idTypeVegetal, $idUtilisateur);
         $_SESSION['alert'] = [
             "type" => "success",
             "message" => "Ajout Réalisé"
@@ -74,6 +75,9 @@ class PlanteController{
         $plant = $this->planteManager->getPlantById($id);
         $famillesVegetaux = $this->planteManager->getFamillesVegetauxBd();
         $typesVegetaux = $this->planteManager->getTypesVegetauxBd();
+        $idVegetal = $plant->getIdVegetal();
+        $typeFamillePlant = $this->planteManager->getFamilleTypeVegetauxPlant($idVegetal);
+        $familleVegetal = $this->planteManager->getFamillePlant($plant->getFamilleVegetal());
         require "views/modifierPlante.view.php";
     }
 
@@ -89,6 +93,10 @@ class PlanteController{
             $nomImageAjoute = $imageActuelle;
         }
         $this->planteManager->modifierPlanteBD($_POST['identifiant'], $_POST['titre'], $_POST['infos'], $_POST['infoPlantation'], $nomImageAjoute, $_POST['idFamilleVegetal'], $_POST['idTypeVegetal']);
+        $_SESSION['alert'] = [
+            "type" => "success",
+            "message" => "Modification Réalisée"
+        ];
         header('Location: '. URL . "admin/pAdmin");
     }
 

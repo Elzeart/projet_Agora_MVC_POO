@@ -49,16 +49,17 @@ class PlantManager extends Model{
         throw new Exception("La plante n'existe pas");
     }
 
-    public function ajoutPlanteBd($titre,$infosVegetal,$plantationVegetal,$image, $idFamilleVegetal, $idTypeVegetal){
+    public function ajoutPlanteBd($titre,$infosVegetal,$plantationVegetal,$image, $idFamilleVegetal, $idTypeVegetal, $idUtilisateur){
         $req = "
-        INSERT INTO vegetaux (nomVegetal, infosVegetal, plantationVegetal, imageVegetal, idFamilleVegetal)
-        values (:nomVegetal, :infosVegetal, :plantationVegetal, :imageVegetal, :idFamilleVegetal)";
+        INSERT INTO vegetaux (nomVegetal, infosVegetal, plantationVegetal, imageVegetal, idFamilleVegetal, idUtilisateur)
+        values (:nomVegetal, :infosVegetal, :plantationVegetal, :imageVegetal, :idFamilleVegetal, :idUtilisateur)";
         $stmt = $this->getBdd()->prepare($req);
         $stmt->bindValue(":nomVegetal",$titre,PDO::PARAM_STR);
         $stmt->bindValue(":infosVegetal",$infosVegetal,PDO::PARAM_STR);
         $stmt->bindValue(":plantationVegetal",$plantationVegetal,PDO::PARAM_STR);
         $stmt->bindValue(":imageVegetal",$image,PDO::PARAM_STR);
         $stmt->bindValue(":idFamilleVegetal",$idFamilleVegetal,PDO::PARAM_INT);
+        $stmt->bindValue(":idUtilisateur",$idUtilisateur,PDO::PARAM_INT);
         $resultat = $stmt->execute();
         $stmt->closeCursor();
 
@@ -195,5 +196,39 @@ class PlantManager extends Model{
             $this->ajoutPlante($plant);
         }
     }
+
+    public function getFamilleTypeVegetauxPlant($idVegetal){
+        $req = "SELECT * FROM typevegetaux 
+        INNER JOIN appartenir ON appartenir.idTypeVegetal = typevegetaux.idTypeVegetal
+        INNER JOIN vegetaux ON vegetaux.idVegetal = appartenir.idVegetal
+        WHERE vegetaux.idVegetal = :idVegetal";  
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":idVegetal",$idVegetal,PDO::PARAM_INT);
+        $stmt->execute();
+        $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $resultat;
+    }
+
+    public function getFamillePlant($idFamilleVegetal){
+        $req = "SELECT * FROM famillevegetaux 
+        WHERE idFamilleVegetal = :idFamilleVegetal";  
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":idFamilleVegetal",$idFamilleVegetal,PDO::PARAM_INT);
+        $stmt->execute();
+        $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $resultat;
+    }
+
+    /* SELECT * FROM `typevegetaux` 
+    INNER JOIN `appartenir` ON `appartenir`.idTypeVegetal = `typevegetaux`.idTypeVegetal
+    INNER JOIN `vegetaux` ON `vegetaux`.idVegetal = `appartenir`.idVegetal
+    WHERE `vegetaux`.idVegetal = 2; */
+
+    
+        
+/* SELECT * FROM `famillevegetaux` 
+    WHERE idFamilleVegetal = 2;  */
+        
+
 
 }
