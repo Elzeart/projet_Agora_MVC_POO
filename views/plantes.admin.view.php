@@ -38,7 +38,7 @@ endif;
                         <td class="align-middle"><a href="<?= URL ?>admin/m/<?= $plants[$i]->getIdVegetal(); ?>" class="btn btn-warning">Modifier</a></td>
                         <td class="align-middle">
                             <form method="POST" action="<?= URL ?>admin/s/<?= $plants[$i]->getIdVegetal(); ?>" onSubmit="return confirm('Voulez-vous vraiment supprimer la plante ?');">
-                                <button class="btn btn-danger" type="submit">Supprimer</button>
+                                <button class="btnSup" type="submit">Supprimer</button>
                             </form>
                         </td>
                     </tr>

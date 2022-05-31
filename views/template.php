@@ -66,7 +66,6 @@
             <li><a href="#">Végétaux</a></li>
             <li><a href="#">Trocs</a></li>
             <li><a href="#">Contact</a></li>
-            <li><a href="#">FAQ</a></li>
         </ul>
         </div>
 
