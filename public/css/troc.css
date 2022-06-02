@@ -14,12 +14,12 @@ body {
 }
 
 .titre-section-info {
-  font-size: 3rem;
-  color: #fff;
+  font-size: 65px;
   padding-top: 70px;
   text-align: center;
-  color: #000;
+  color:rgb(4, 32, 122);
   font-family: 'Architects Daughter', Arial, Helvetica, sans-serif;
+  text-shadow: 5px 8px rgb(4, 32, 122, 0.15);
 }
 
 
@@ -92,3 +92,10 @@ body {
   .chekboxs label{
     margin: 0px 3px 0px 20px;
 }
+
+@media screen and (max-width: 1000px) {
+  .titre-section-info {
+      font-size: 50px;
+  }
+}
+

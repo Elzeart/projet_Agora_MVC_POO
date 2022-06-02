@@ -24,11 +24,11 @@ class PlanteController{
     public function afficherPlantesVA(){
         $plants = $this->planteManager->getPlantes();
         $date = date("m");
-        if($date > "03" && $date < "06"){
+        if($date >= "03" && $date < "06"){
             $imageAccueil='printemps';
-        } else if($date > "06" && $date < "09"){
+        } else if($date >= "06" && $date < "09"){
             $imageAccueil='ete';
-        } else if($date > "09"){
+        } else if($date >= "09"){
             $imageAccueil='automne';
         } else {
             $imageAccueil='hivers';
@@ -52,6 +52,8 @@ class PlanteController{
         $file = $_FILES['image'];
         $repertoire = "public/images/plants/";
         $nomImageAjoute = Toolbox::ajoutImage($file,$repertoire);
+        /* Ajout ici du set. Puis mettre les this-> dans les managers */
+/*         $plant = new Vegetal($vegetal['idVegetal'],$titre,$infosVegetal,$plantationVegetal,$nomImageAjoute,$idFamilleVegetal); */
         $this->planteManager->ajoutPlanteBd($titre,$infosVegetal,$plantationVegetal,$nomImageAjoute,$idFamilleVegetal,$idTypeVegetal, $idUtilisateur);
         $_SESSION['alert'] = [
             "type" => "success",

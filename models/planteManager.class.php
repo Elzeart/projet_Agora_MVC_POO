@@ -63,6 +63,7 @@ class PlantManager extends Model{
         $resultat = $stmt->execute();
         $stmt->closeCursor();
 
+        // Facultatif ?
         if($resultat > 0){
             $lastInsertId = $this->getBdd()->lastInsertId();
             $plant = new Vegetal($lastInsertId,$titre,$infosVegetal,$plantationVegetal,$image, $idFamilleVegetal);
@@ -89,6 +90,7 @@ class PlantManager extends Model{
         $stmt->bindValue(":idVegetal",$id,PDO::PARAM_INT);
         $resultat = $stmt->execute();
         $stmt->closeCursor();
+        // Facultatif ?
         if($resultat > 0){
             $plant = $this->getPlantById($id);
             unset($plant);
@@ -119,6 +121,7 @@ class PlantManager extends Model{
         $stmt->bindValue(":idVegetal",$id,PDO::PARAM_INT);
         $stmt->execute();
         $stmt->closeCursor();
+        // Facultatif ?
         if($resultat > 0){
             $this->getPlantById($id)->setNomVegetal($titre);
             $this->getPlantById($id)->setinfosVegetal($infos);
@@ -153,6 +156,7 @@ class PlantManager extends Model{
         $stmt->execute();
         $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $stmt->closeCursor();
+        // Facultatif ?
         foreach($resultat as $vegetal){
             $plant = new Vegetal($vegetal['idVegetal'],$vegetal['nomVegetal'],$vegetal['infosVegetal'],
             $vegetal['plantationVegetal'],$vegetal['imageVegetal'], $vegetal['idFamilleVegetal']);
@@ -171,6 +175,7 @@ class PlantManager extends Model{
         $stmt->execute();
         $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $stmt->closeCursor();
+        // Facultatif ?
         foreach($resultat as $vegetal){
             $plant = new Vegetal($vegetal['idVegetal'],$vegetal['nomVegetal'],$vegetal['infosVegetal'],
             $vegetal['plantationVegetal'],$vegetal['imageVegetal'], $vegetal['idFamilleVegetal']);
@@ -190,6 +195,7 @@ class PlantManager extends Model{
         $stmt->execute();
         $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $stmt->closeCursor();
+        // Facultatif ?
         foreach($resultat as $vegetal){
             $plant = new Vegetal($vegetal['idVegetal'],$vegetal['nomVegetal'],$vegetal['infosVegetal'],
             $vegetal['plantationVegetal'],$vegetal['imageVegetal'], $vegetal['idFamilleVegetal']);
@@ -219,16 +225,12 @@ class PlantManager extends Model{
         return $resultat;
     }
 
+    // Rappel sur la syntaxe phpmyadmin
     /* SELECT * FROM `typevegetaux` 
     INNER JOIN `appartenir` ON `appartenir`.idTypeVegetal = `typevegetaux`.idTypeVegetal
     INNER JOIN `vegetaux` ON `vegetaux`.idVegetal = `appartenir`.idVegetal
     WHERE `vegetaux`.idVegetal = 2; */
-
-    
-        
-/* SELECT * FROM `famillevegetaux` 
+    /* SELECT * FROM `famillevegetaux` 
     WHERE idFamilleVegetal = 2;  */
-        
-
 
 }

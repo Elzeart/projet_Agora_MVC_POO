@@ -31,6 +31,7 @@ section{
     padding: 0px 20px;
     /* background: #f1f1f1; */
     font-family: 'Architects Daughter', Arial, Helvetica, sans-serif;
+    text-shadow: 5px 8px rgb(4, 32, 122, 0.35);
 }
 article{
     background: radial-gradient(ellipse at center, rgb(255, 255, 255), rgb(145, 183, 221));
