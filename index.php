@@ -64,7 +64,7 @@ try{
                 $utilisateurController->inscriptionForm();
             break;
             case "inscriptionValidation" : 
-                if(!empty($_POST['nomUtilisateur']) && !empty($_POST['prenomUtilisateur']) && !empty($_POST['pseudoUtilisateur']) && !empty($_POST['mailUtilisateur']) && !empty($_POST['mdpUtilisateur']) && !empty($_POST['confirmMdpUtilisateur'])){
+                if(isset($_POST['nomUtilisateur']) && !empty($_POST['nomUtilisateur']) && isset($_POST['prenomUtilisateur']) && !empty($_POST['prenomUtilisateur']) && isset($_POST['pseudoUtilisateur']) && !empty($_POST['pseudoUtilisateur']) && isset($_POST['mailUtilisateur']) && !empty($_POST['mailUtilisateur']) && isset($_POST['mdpUtilisateur']) && !empty($_POST['mdpUtilisateur']) && isset($_POST['confirmMdpUtilisateur']) && !empty($_POST['confirmMdpUtilisateur'])){
                     if($_POST['mdpUtilisateur'] === $_POST['confirmMdpUtilisateur']){
                         $nomUtilisateur = Toolbox::secureHTML($_POST['nomUtilisateur']);
                         $prenomUtilisateur = Toolbox::secureHTML($_POST['prenomUtilisateur']);
@@ -109,7 +109,7 @@ try{
                         $utilisateurController->modificationMdp();
                     } 
                     else if($url[1] === "validationModificationMdp") {
-                        if(!empty($_POST['ancienMdpUtilisateur']) && !empty($_POST['nouveauMdpUtilisateur']) && !empty($_POST['confirmNouveauMdpUtilisateur'])){
+                        if(isset($_POST['ancienMdpUtilisateur']) && !empty($_POST['ancienMdpUtilisateur']) && isset($_POST['nouveauMdpUtilisateur']) && !empty($_POST['nouveauMdpUtilisateur']) && isset($_POST['confirmNouveauMdpUtilisateur']) && !empty($_POST['confirmNouveauMdpUtilisateur'])){
                             $ancienMdpUtilisateur = Toolbox::secureHTML($_POST['ancienMdpUtilisateur']);   
                             $nouveauMdpUtilisateur = Toolbox::secureHTML($_POST['nouveauMdpUtilisateur']);   
                             $confirmNouveauMdpUtilisateur = Toolbox::secureHTML($_POST['confirmNouveauMdpUtilisateur']);   
@@ -179,7 +179,7 @@ try{
                         header("Location: ".URL."admin/profil");
                     } 
                     else if($url[1] === "validationModificationMdp") {
-                        if(!empty($_POST['ancienMdpUtilisateur']) && !empty($_POST['nouveauMdpUtilisateur']) && !empty($_POST['confirmNouveauMdpUtilisateur'])){
+                        if(isset($_POST['ancienMdpUtilisateur']) && !empty($_POST['ancienMdpUtilisateur']) && isset($_POST['nouveauMdpUtilisateur']) && !empty($_POST['nouveauMdpUtilisateur']) && isset($_POST['confirmNouveauMdpUtilisateur']) && !empty($_POST['confirmNouveauMdpUtilisateur'])){
                             $ancienMdpUtilisateur = Toolbox::secureHTML($_POST['ancienMdpUtilisateur']);   
                             $nouveauMdpUtilisateur = Toolbox::secureHTML($_POST['nouveauMdpUtilisateur']);   
                             $confirmNouveauMdpUtilisateur = Toolbox::secureHTML($_POST['confirmNouveauMdpUtilisateur']); 

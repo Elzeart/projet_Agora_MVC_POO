@@ -26,18 +26,6 @@ tbody tr:nth-child(even){
     background-color: #f3f3f3;
 }
 
-@media screen and (max-width: 920px) {
-
-    .table-style  {
-        width: 100%;
-        margin: 0px;
-        font-size: 10px;
-    }
-    th, td {
-        padding: 10px 7px;
-    }
-}
-
 tbody a {
     text-decoration: none;   
     color: rgb(4, 32, 122);
@@ -73,4 +61,22 @@ tbody a {
     font-weight: bold;
     padding: 5px;
     border-radius: 5px;
+}
+
+.alert-success{
+    background-color:#d1e7dd;
+    color: #145a4d;
+    height:30px;
+}
+
+@media screen and (max-width: 920px) {
+
+    .table-style  {
+        width: 100%;
+        margin: 0px;
+        font-size: 10px;
+    }
+    th, td {
+        padding: 10px 7px;
+    }
 }
