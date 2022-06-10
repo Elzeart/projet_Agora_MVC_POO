@@ -220,6 +220,9 @@ try{
             case "deconnexion" : 
                 $utilisateurController->deconnexion();
             break;
+            case "meteo" : 
+                require "views/meteo.view.php";
+            break;
             default : throw new Exception("La page n'existe pas. Erreur 404 !!!");
         }
     }

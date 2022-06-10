@@ -25,6 +25,7 @@
     <div class="navbar-links">
     <ul>
             <li><a href="<?= URL ?>accueil">Accueil</a></li>
+            <li><a href="<?= URL ?>meteo">Météo Cahors</a></li>
             <li><a href="<?= URL ?>vegetaux">Les végétaux</a></li>
             <li><a href="<?= URL ?>trocs">Espace de troc</a></li>
             <li><a href="<?= URL ?>contact">Contact</a></li>
