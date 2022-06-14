@@ -50,6 +50,8 @@ ob_start();
     </div>
 
 <?php
+$page_title = "Trocs";
+$page_description = "Espace de trocs. Agora Agriculture Urbaine. Partage de savoir et trocs local concernant le monde végétal";
 $content = ob_get_clean();
 require "template.php";
 ?>

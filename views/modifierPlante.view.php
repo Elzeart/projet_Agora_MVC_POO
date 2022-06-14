@@ -54,6 +54,8 @@ ob_start();
 </form>
 
 <?php
+$page_title = "Modifier une plante";
+$page_description = "Modifier une plante par un administrateur. Agora Agriculture Urbaine. Partage de savoir et trocs local concernant le monde végétal";
 $content = ob_get_clean();
 require "template.php";
 ?>

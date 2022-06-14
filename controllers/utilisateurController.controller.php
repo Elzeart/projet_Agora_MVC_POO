@@ -56,8 +56,6 @@ class UtilsateurController
             "message" => "Vous êtes déconnecté"
         ];
         unset($_SESSION['profil']);
-        /* setcookie(Toolbox::COOKIE_NAME,"",time() - 3600); */
-        /* session_destroy(); */
         header('Location: '.URL.'connexionInscription');
     }
 

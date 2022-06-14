@@ -33,6 +33,8 @@ ob_start();
 <script src="<?= URL ?>/public/javascript/modifMdp.js"></script>
 
 <?php
+$page_title = "Modification mot de passe";
+$page_description = "Modification mot de passe. Agora Agriculture Urbaine. Partage de savoir et trocs local concernant le monde végétal";
 $content = ob_get_clean();
 require "template.php";
 ?>

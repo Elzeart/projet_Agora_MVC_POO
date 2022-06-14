@@ -9,6 +9,8 @@ ob_start();
 <h2 class="text-center"><?= $msg; ?></h2>
 
 <?php
+$page_title = "Page d'erreur";
+$page_description = "Page d'erreur. Agora Agriculture Urbaine. Partage de savoir et trocs local concernant le monde végétal";
 $content = ob_get_clean();
 require "template.php";
 ?>

@@ -11,6 +11,8 @@ ob_start();
 <a href="<?= URL ?>espaceMembre/pTroc">Proposer un troc</a> <br>
 
 <?php
+$page_title = "Espace membre";
+$page_description = "Espace membre, Agora Agriculture Urbaine. Partage de savoir et trocs local concernant le monde végétal";
 $content = ob_get_clean();
 require "template.php";
 ?>

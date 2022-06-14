@@ -96,6 +96,8 @@ ob_start();
 </main>
 
 <?php
+$page_title = "Fiches plantes";
+$page_description = "Fiches plantes de l'Agora Agriculture Urbaine. Partage de savoir et trocs local concernant le monde végétal";
 $content = ob_get_clean();
 require "template.php";
 ?>

@@ -14,6 +14,8 @@ ob_start();
 <a href="<?= URL ?>admin/droits" class="text-dark text-decoration-none">Gestion des droits</a> <br>
 
 <?php
+$page_title = "Aministration du site";
+$page_description = "Page d'administration de l'Agora Agriculture Urbaine";
 $content = ob_get_clean();
 require "template.php";
 ?>

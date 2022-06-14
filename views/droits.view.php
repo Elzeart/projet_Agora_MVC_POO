@@ -38,6 +38,8 @@ ob_start();
 
 
 <?php
+$page_title = "Gestions des droits";
+$page_description = "Gestion des droits. Agora Agriculture Urbaine. Partage de savoir et trocs local concernant le monde végétal";
 $content = ob_get_clean();
 require "template.php";
 ?>

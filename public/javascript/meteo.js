@@ -10,7 +10,7 @@ let windSpeed = document.querySelector("#windSpeed");
 let windDirection = document.querySelector("#windDirection");
 
 
-const appId = "";
+const appId = "5a3fca82987095b9779a5a979905469e";
 const link = `https://api.openweathermap.org/data/2.5/weather?q=cahors&appid=${appId}&units=metric&&lang=fr`;	
 
     fetch(link)
@@ -33,13 +33,13 @@ const link = `https://api.openweathermap.org/data/2.5/weather?q=cahors&appid=${a
         windDirection.innerText = data.wind.deg + " m/s";
     })
 
-/*     const appId2 = "";
+/*     const appId2 = "c75e4b8b5cd28e8494baac31a2e3365368b2ccb30b21898dd88c7529c348a811";
     const link2 = `https://api.ambeedata.com/latest/pollen/by-place?place=Bengaluru"`;	 */
 
 /*     fetch("https://api.ambeedata.com/latest/pollen/by-place?place=Bengaluru", {
             "method": "GET",
             "headers": {
-                "x-api-key": "",
+                "x-api-key": "adde060b1df3cd8b98967ce99f7bb58f73e8466f0003c50e6a8d9faed6c7df5a",
                 "Content-type": "application/json"
             }
 		})
@@ -53,7 +53,7 @@ const link = `https://api.openweathermap.org/data/2.5/weather?q=cahors&appid=${a
 /*         fetch("https://api.ambeedata.com/latest/by-city?city=Bengaluru", {
             "method": "GET",
             "headers": {
-                "x-api-key": "",
+                "x-api-key": "c75e4b8b5cd28e8494baac31a2e3365368b2ccb30b21898dd88c7529c348a811",
                 "Content-type": "application/json"
             },
 		})

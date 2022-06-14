@@ -48,6 +48,8 @@ ob_start();
     <button type="submit" class="btn btn-primary">Valider</button>
 </form>
 <?php
+$page_title = "Ajouter une plante";
+$page_description = "Administrateur peut ajouter une plante. Agora Agriculture Urbaine. Partage de savoir et trocs local concernant le monde végétal";
 $content = ob_get_clean();
 require "template.php";
 ?>

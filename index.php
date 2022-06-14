@@ -15,8 +15,9 @@ try{
         $planteController->afficherPlantesVA();     
     } else {
         $url = explode("/", filter_var($_GET['page']),FILTER_SANITIZE_URL);
+        /* var_dump($url); */
 
-        switch($url[0]){
+         switch($url[0]){
             case "accueil" : 
                 $planteController->afficherPlantesVA();
             break;
@@ -66,13 +67,17 @@ try{
             case "inscriptionValidation" : 
                 if(isset($_POST['nomUtilisateur']) && !empty($_POST['nomUtilisateur']) && isset($_POST['prenomUtilisateur']) && !empty($_POST['prenomUtilisateur']) && isset($_POST['pseudoUtilisateur']) && !empty($_POST['pseudoUtilisateur']) && isset($_POST['mailUtilisateur']) && !empty($_POST['mailUtilisateur']) && isset($_POST['mdpUtilisateur']) && !empty($_POST['mdpUtilisateur']) && isset($_POST['confirmMdpUtilisateur']) && !empty($_POST['confirmMdpUtilisateur'])){
                     if($_POST['mdpUtilisateur'] === $_POST['confirmMdpUtilisateur']){
-                        $nomUtilisateur = Toolbox::secureHTML($_POST['nomUtilisateur']);
-                        $prenomUtilisateur = Toolbox::secureHTML($_POST['prenomUtilisateur']);
-                        $pseudoUtilisateur = Toolbox::secureHTML($_POST['pseudoUtilisateur']);
-                        $mailUtilisateur = Toolbox::secureHTML($_POST['mailUtilisateur']);
-                        $mdpUtilisateur = Toolbox::secureHTML($_POST['mdpUtilisateur']);
-                        $confirmMdpUtilisateur = Toolbox::secureHTML($_POST['confirmMdpUtilisateur']);
-                        $utilisateurController->inscriptionValid($nomUtilisateur, $prenomUtilisateur, $pseudoUtilisateur, $mdpUtilisateur, $mailUtilisateur);
+                        if(filter_var($_POST['mailUtilisateur'], FILTER_VALIDATE_EMAIL)){
+                            $nomUtilisateur = Toolbox::secureHTML($_POST['nomUtilisateur']);
+                            $prenomUtilisateur = Toolbox::secureHTML($_POST['prenomUtilisateur']);
+                            $pseudoUtilisateur = Toolbox::secureHTML($_POST['pseudoUtilisateur']);
+                            $mailUtilisateur = Toolbox::secureHTML($_POST['mailUtilisateur']);
+                            $mdpUtilisateur = Toolbox::secureHTML($_POST['mdpUtilisateur']);
+                            $confirmMdpUtilisateur = Toolbox::secureHTML($_POST['confirmMdpUtilisateur']);
+                            $utilisateurController->inscriptionValid($nomUtilisateur, $prenomUtilisateur, $pseudoUtilisateur, $mdpUtilisateur, $mailUtilisateur);
+                        }else{
+                            throw new Exception($_POST["mailUtilisateur"] . " n'est pas un mail valide");
+                        }
                     } else {
                         throw new Exception("Les mots de passes ne sont pas identiques !");
                     }
@@ -89,13 +94,7 @@ try{
                     throw new Exception("Veuillez vous connecter !");
                 } elseif (!empty($_SESSION['profil']) && !empty($_SESSION['profil']['idDroit'] != 2)) {
                     throw new Exception("Vous n'avez pas les droits pour cette page !");
-                } 
-/*                 elseif (!Toolbox::checkCookieConnexion()) {
-                    setcookie(Toolbox::COOKIE_NAME,"",time() - 3600);
-                    unset($_SESSION['profil']);
-                    throw new Exception("Veuillez vous reconnecter !");
-                } */ else {
-                    /* Toolbox::genererCookieConnexion(); *///Regénérer le cookie
+                } else {
                     if(empty($url[1])){
                         require "views/espaceMembre.view.php";
                     } else if($url[1] === "pTroc") {
@@ -156,7 +155,6 @@ try{
                     } else if($url[1] === "a") {
                         $planteController->ajoutPlante();
                     } else if($url[1] === "av") {
-                       /*  var_dump($_POST['titre'],$_POST['infosVegetal'],$_POST['plantationVegetal'],$_FILES['image']["name"], $_POST['idFamilleVegetal'], $_POST['idTypeVegetal']); */
                         $titre = Toolbox::secureHTML($_POST['titre']);
                         $infosVegetal = Toolbox::secureHTML($_POST['infosVegetal']);
                         $plantationVegetal = Toolbox::secureHTML($_POST['plantationVegetal']);

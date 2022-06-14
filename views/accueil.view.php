@@ -84,6 +84,8 @@ ob_start();
 </section>
 
 <?php
+$page_title = "Accueil";
+$page_description = "Accueil de l'Agora Agriculture Urbaine. Partage de savoir et trocs local concernant le monde végétal";
 $content = ob_get_clean();
 require "template.php";
 ?>

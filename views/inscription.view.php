@@ -34,6 +34,8 @@ ob_start();
     </main>
 
 <?php
+$page_title = "Formulaire d'inscription";
+$page_description = "Formulaire d'inscription, Agora Agriculture Urbaine. Partage de savoir et trocs local concernant le monde végétal";
 $content = ob_get_clean();
 require "template.php";
 ?>

@@ -63,6 +63,8 @@ ob_start();
 
 <script src="<?= URL ?>/public/javascript/profil.js"></script>
 <?php
+$page_title = "Gestion du profil";
+$page_description = "Gestion du profile. Agora Agriculture Urbaine. Partage de savoir et trocs local concernant le monde végétal";
 $content = ob_get_clean();
 require "template.php";
 ?>
