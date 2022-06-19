@@ -1,0 +1,8 @@
+Pour tester le site et pour la démonstration, tous les mots de passe des utilisateurs sont 123456789
+
+Trois utilisateurs sont préenregistrés :
+	pseudo=>admin. C'est l'administrateur.	
+	pseudo=>membre1. Membre qui a activé par mail son inscription et a donc accès à l'espace membre 
+	pseudo=>membre2. Membre qui n'a pas activé par mail son inscription. Un mail de confirmation peut lui être envoyé à nouveau. (Mais l'adresse mail est fictive ici) 
+
+Toutes les adresses mails sont fictives. Elles ont été enregistrées au préalable avec de vrais adresses puis changées en bdd pour une question de confidentialité. 

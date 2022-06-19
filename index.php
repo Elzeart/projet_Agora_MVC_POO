@@ -2,7 +2,7 @@
 session_start();
 
 define("URL", str_replace("index.php","",(isset($_SERVER['HTTPS']) ? "https" : "http").
-"://$_SERVER[HTTP_HOST]$_SERVER[PHP_SELF]"));
+"://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']));
 
 require_once "controllers/planteController.controller.php";
 require_once "controllers/utilisateurController.controller.php";
@@ -15,9 +15,7 @@ try{
         $planteController->afficherPlantesVA();     
     } else {
         $url = explode("/", filter_var($_GET['page']),FILTER_SANITIZE_URL);
-        /* var_dump($url); */
-
-         switch($url[0]){
+        switch($url[0]){
             case "accueil" : 
                 $planteController->afficherPlantesVA();
             break;
@@ -41,6 +39,9 @@ try{
                 else {
                     throw new Exception("La page n'existe pas. Erreur 404 !!!");
                 }
+            break;
+            case "planteHasard" :
+                require "views/planteHasard.view.php";
             break;
             case "trocs" : 
                 require "views/trocs.view.php";

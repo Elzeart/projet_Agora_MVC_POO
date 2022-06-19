@@ -9,6 +9,16 @@ class PlanteController{
         $this->planteManager->chargementPlantes();
     }
 
+    public function modifierPlante($id){
+        $plant = $this->planteManager->getPlantById($id);
+        $famillesVegetaux = $this->planteManager->getFamillesVegetauxBd();
+        $typesVegetaux = $this->planteManager->getTypesVegetauxBd();
+        $idVegetal = $plant->getIdVegetal();
+        $typeFamillePlant = $this->planteManager->getFamilleTypeVegetauxPlant($idVegetal);
+        $familleVegetalEnCours = $this->planteManager->getFamillePlant($plant->getIdFamilleVegetal());
+        require "views/modifierPlante.view.php";
+    }
+
     public function afficherPlantes(){
         $plants = $this->planteManager->getPlantes();
         require "views/plantes.admin.view.php";
@@ -73,16 +83,6 @@ class PlanteController{
         header('Location: '. URL . "admin/pAdmin");
     }
 
-    public function modifierPlante($id){
-        $plant = $this->planteManager->getPlantById($id);
-        $famillesVegetaux = $this->planteManager->getFamillesVegetauxBd();
-        $typesVegetaux = $this->planteManager->getTypesVegetauxBd();
-        $idVegetal = $plant->getIdVegetal();
-        $typeFamillePlant = $this->planteManager->getFamilleTypeVegetauxPlant($idVegetal);
-        $familleVegetal = $this->planteManager->getFamillePlant($plant->getFamilleVegetal());
-        require "views/modifierPlante.view.php";
-    }
-
     public function modifierPlanteValidation(){
         $imageActuelle = $this->planteManager->getPlantById($_POST['identifiant'])->getImageVegetal();
         $file = $_FILES['image'];
@@ -94,7 +94,8 @@ class PlanteController{
         } else {
             $nomImageAjoute = $imageActuelle;
         }
-        $this->planteManager->modifierPlanteBD($_POST['identifiant'], $_POST['titre'], $_POST['infos'], $_POST['infoPlantation'], $nomImageAjoute, $_POST['idFamilleVegetal'], $_POST['idTypeVegetal']);
+        $this->planteManager->modifierPlanteBD($_POST['identifiant'], $_POST['titre'], $_POST['infos'], $_POST['infoPlantation'], 
+        $nomImageAjoute, $_POST['idFamilleVegetal'], $_POST['idTypeVegetal']);
         $_SESSION['alert'] = [
             "type" => "success",
             "message" => "Modification Réalisée"

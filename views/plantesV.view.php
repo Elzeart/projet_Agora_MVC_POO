@@ -12,9 +12,8 @@ ob_start();
 
         <div id="container-boxs">
             <h3>Classement par Famille ou Type</h3>
-            <form method="POST" action="<?= URL ?>vegetaux/pTriParFamille/">
+            <form method="POST" action="<?= URL ?>vegetaux/pTriParFamille">
                 <div class="chekboxs">
-                
                     <label for="idFamilleVegetal">Familles de végétaux</label> &ensp;
                     <select name="idFamilleVegetal" onchange="submit()">
                         <?php foreach ($famillesVegetaux as $familleVegetal) : ?>
@@ -23,9 +22,8 @@ ob_start();
                     </select>
                 </div>
             </form>
-            <form method="POST" action="<?= URL ?>vegetaux/pTriParType/">
+            <form method="POST" action="<?= URL ?>vegetaux/pTriParType">
                 <div class="chekboxs">
-                
                     <label for="idTypeVegetal">Types de végétaux</label> &ensp;
                     <select name="idTypeVegetal" onchange="submit()">
                         <?php foreach ($typesVegetaux as $typeVegetal) : ?>
@@ -37,7 +35,7 @@ ob_start();
         </div>
 
         <div id="container-boxs">
-                <form method="POST" action="<?= URL ?>vegetaux/recherche/">
+                <form method="POST" action="<?= URL ?>vegetaux/recherche">
                     <div class="chekboxs">
                         <input type="search" name="recherche" placeholder="recherche">
                     </div>
@@ -48,7 +46,8 @@ ob_start();
         </div>
 
         <div id="container-boxs">
-            <form method="POST" action="<?= URL ?>vegetaux/pTriParFamilleEtType/">
+
+            <form method="POST" action="<?= URL ?>vegetaux/pTriParFamilleEtType">
                 <h3>Classement par Famille et Type</h3>
                 <div class="chekboxs">
                     
@@ -67,10 +66,10 @@ ob_start();
                                 <option value="<?= $typeVegetal['idTypeVegetal'] ?>"><?= $typeVegetal['nomTypeVegetal'] ?></option>
                             <?php endforeach?>
                         </select>
-                    
                 </div>
                 <div class="button"><button>Envoyer</button></div>
             </form>
+
         </div>
 
     </div>
@@ -82,7 +81,7 @@ ob_start();
             <a href="<?= URL ?>vegetaux/p/<?= $plant->getIdVegetal(); ?>">
                 <div class="carte-info">
                     <div class="container-photo-info">
-                        <img src="<?= URL ?>public/images/plants/<?= $plant->getImageVegetal(); ?>" alt="...">
+                        <img src="<?= URL ?>public/images/plants/<?= $plant->getImageVegetal(); ?>" alt=<?= $plant->getNomVegetal(); ?>>
                     </div>
                     <h2><?= $plant->getNomVegetal(); ?></h2>
                     <p>

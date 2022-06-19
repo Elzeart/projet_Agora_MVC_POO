@@ -13,7 +13,7 @@ class Utilisateur
         private $mdpUtilisateur;
         private $droitUtilisateur;
         /*-----------------------------------------------------
-                            Constucteur (vide):
+                            Constucteur :
         -----------------------------------------------------*/        
         public function __construct($idUtilisateur, $nomUtilisateur, $prenomUtilisateur, $pseudoUtilisateur, $mailUtilisateur, $mdpUtilisateur)
         {   

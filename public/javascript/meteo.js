@@ -18,11 +18,11 @@ const link = `https://api.openweathermap.org/data/2.5/weather?q=cahors&appid=${a
         return reponse.json();
     })
     .then((data) => {
-        // console.log(data.weather[0].main);
+        console.log(data);
         let imgAffichage = document.getElementById("img");
-        // description.innerHTML =  `<img src='http://openweathermap.org/img/wn/${data.weather[0].icon}.png'>` + data.weather[0].description;
         imgAffichage.src = 'http://openweathermap.org/img/wn/' + data.weather[0].icon+'.png';
         description.innerText = data.weather[0].description;
+        console.log("console.log de data.weather[0].description : "+ data.weather[0].description);
         temperature.innerText += ' : ' + data.main.temp + " °C";
         temperatureResentie.innerText += ' : ' + data.main.feels_like + " °C";
         minTemperature.innerText = data.main.temp_min + " °C";

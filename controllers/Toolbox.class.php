@@ -1,17 +1,5 @@
 <?php
 class Toolbox {
-/*     public const COULEUR_ROUGE = "alert-danger";
-    public const COULEUR_ORANGE = "alert-warning";
-    public const COULEUR_VERTE = "alert-success"; */
-
-    public const COOKIE_NAME = 'timers';
-
-/*     public static function ajouterMessageAlerte($message,$type){
-        $_SESSION['alert'][]=[
-            "message" => $message,
-            "type" => $type
-        ];
-    } */
 
     public static function secureHTML($chaine){
         return htmlspecialchars(strip_tags(trim($chaine)));
@@ -39,25 +27,5 @@ class Toolbox {
             throw new Exception("l'ajout de l'image n'a pas fonctionné");
         else return ($random."_".$file['name']);
     }
-
-/*     public static function sendMail($destinataire, $sujet, $message){
-        $headers = "From: luipourquoi1@gmail.com";
-        if(mail($destinataire,$sujet,$message,$headers)){
-            self::ajouterMessageAlerte("Mail envoyé", self::COULEUR_VERTE);
-        } else {
-            self::ajouterMessageAlerte("Mail non envoyé", self::COULEUR_ROUGE);
-        }
-    } */
-
-/*     public static function genererCookieConnexion(){
-        $ticket = session_id().microtime().rand(0,99999);
-        $ticket = hash("sha512",$ticket);
-        setcookie(self::COOKIE_NAME,$ticket,time()+(60*20));
-        $_SESSION['profil'][self::COOKIE_NAME] = $ticket;
-    }
-
-    public static function checkCookieConnexion(){
-        return $_COOKIE[self::COOKIE_NAME] === $_SESSION['profil'][self::COOKIE_NAME];
-    } */
 
 }

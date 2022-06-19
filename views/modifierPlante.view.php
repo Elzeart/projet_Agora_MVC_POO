@@ -30,7 +30,7 @@ ob_start();
     <div class="form-group">
         <label for="idFamilleVegetal">Familles de végétaux</label> &ensp;
         <select name="idFamilleVegetal">
-            <option value="<?= $plant->getFamilleVegetal() ?>"><?= $familleVegetal['nomFamilleVegetal'] ?></option>
+            <option value="<?= $plant->getIdFamilleVegetal() ?>"><?= $familleVegetalEnCours['nomFamilleVegetal'] ?></option>
             <?php foreach ($famillesVegetaux as $familleVegetal) : ?>
                 <option value="<?= $familleVegetal['idFamilleVegetal'] ?>"><?= $familleVegetal['nomFamilleVegetal'] ?></option>
             <?php endforeach?>

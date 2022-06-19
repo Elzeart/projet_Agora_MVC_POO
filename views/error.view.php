@@ -14,3 +14,4 @@ $page_description = "Page d'erreur. Agora Agriculture Urbaine. Partage de savoir
 $content = ob_get_clean();
 require "template.php";
 ?>
+

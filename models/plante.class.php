@@ -12,7 +12,7 @@ class Vegetal
         private $imageVegetal;
         private $idFamilleVegetal;
         /*-----------------------------------------------------
-                            Constucteur (vide):
+                            Constucteur :
         -----------------------------------------------------*/        
         public function __construct($idVegetal, $nomVegetal, $infosVegetal, $plantationVegetal, $imageVegetal, $idFamilleVegetal)
         {   
@@ -42,8 +42,8 @@ class Vegetal
         public function getImageVegetal(){return $this->imageVegetal;}
         public function setImageVegetal($newImageVegetal){$this->imageVegetal = $newImageVegetal;}
 
-        public function getFamilleVegetal(){return $this->idFamilleVegetal;}
-        public function setFamilleVegetal($newIdFamilleVegetal){$this->idFamilleVegetal = $newIdFamilleVegetal;}
+        public function getIdFamilleVegetal(){return $this->idFamilleVegetal;}
+        public function setIdFamilleVegetal($newIdFamilleVegetal){$this->idFamilleVegetal = $newIdFamilleVegetal;}
     }
 
 
