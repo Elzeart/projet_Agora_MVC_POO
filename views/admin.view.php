@@ -19,3 +19,4 @@ $page_description = "Page d'administration de l'Agora Agriculture Urbaine";
 $content = ob_get_clean();
 require "template.php";
 ?>
+
