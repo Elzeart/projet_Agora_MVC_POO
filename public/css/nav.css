@@ -5,7 +5,6 @@
     justify-content: space-between;
     align-items: center;
     background: url("../images/nav.jpg");
-    /* background: url("./public/images/nav.jpg"); */
     color: rgb(4, 32, 122);
     z-index: 100;
 }

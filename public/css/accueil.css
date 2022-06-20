@@ -7,7 +7,6 @@
     height: 100vh;
     background-position: center;
     background-size: cover;
-    /* opacity: 0.75; */
 }
 
 #titreAccueil{
@@ -24,12 +23,10 @@ section{
 }
 
 .titre-section-info {
-    /* color: #000; */
     color: rgb(4, 32, 122);
     text-align: center;
     font-size: 65px;
     padding: 0px 20px;
-    /* background: #f1f1f1; */
     font-family: 'Architects Daughter', Arial, Helvetica, sans-serif;
     text-shadow: 5px 8px rgb(4, 32, 122, 0.35);
 }
@@ -46,15 +43,11 @@ article div{
 }
 
 article img{
-    /* margin-right: 10px; */
-    /* height: 100%; */
     width: 15vw;
-    /* height: 200px; */
     object-fit: cover;
 }
 
 article p{
-    /* background: radial-gradient(ellipse at center, rgb(255, 255, 255), rgb(145, 183, 221)); */
     padding: 10px 30px;
     border-radius: 10px;
 }

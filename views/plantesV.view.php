@@ -10,7 +10,7 @@ ob_start();
 
     <div class="contain">
 
-        <div id="container-boxs">
+        <div class="container-boxs">
             <h3>Classement par Famille ou Type</h3>
             <form method="POST" action="<?= URL ?>vegetaux/pTriParFamille">
                 <div class="chekboxs">
@@ -34,7 +34,7 @@ ob_start();
             </form>
         </div>
 
-        <div id="container-boxs">
+        <div class="container-boxs">
                 <form method="POST" action="<?= URL ?>vegetaux/recherche">
                     <div class="chekboxs">
                         <input type="search" name="recherche" placeholder="recherche">
@@ -45,7 +45,7 @@ ob_start();
             </form>
         </div>
 
-        <div id="container-boxs">
+        <div class="container-boxs">
 
             <form method="POST" action="<?= URL ?>vegetaux/pTriParFamilleEtType">
                 <h3>Classement par Famille et Type</h3>
