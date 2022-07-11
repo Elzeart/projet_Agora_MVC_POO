@@ -84,8 +84,7 @@ class PlanteController{
     }
 
     public function modifierPlanteValidation(){
-        var_dump(fileType($_FILES['image']));
-/*         $imageActuelle = $this->planteManager->getPlantById($_POST['identifiant'])->getImageVegetal();
+        $imageActuelle = $this->planteManager->getPlantById($_POST['identifiant'])->getImageVegetal();
         $file = $_FILES['image'];
         if($file['size'] > 0){
             $repertoire = "public/images/plants/";
@@ -99,7 +98,7 @@ class PlanteController{
             "type" => "success",
             "message" => "Modification Réalisée"
         ];
-        header('Location: '. URL . "admin/pAdmin"); */
+        header('Location: '. URL . "admin/pAdmin");
     }
 
     public function afficherPlanteParFamille($idFamilleVegetal){

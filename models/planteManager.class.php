@@ -216,13 +216,4 @@ class PlantManager extends Model{
         $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
         return $resultat;
     }
-
-    // Rappel sur la syntaxe phpmyadmin
-    /* SELECT * FROM `typevegetaux` 
-    INNER JOIN `appartenir` ON `appartenir`.idTypeVegetal = `typevegetaux`.idTypeVegetal
-    INNER JOIN `vegetaux` ON `vegetaux`.idVegetal = `appartenir`.idVegetal
-    WHERE `vegetaux`.idVegetal = 2; */
-    /* SELECT * FROM `famillevegetaux` 
-    WHERE idFamilleVegetal = 2;  */
-
 }
