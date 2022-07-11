@@ -64,7 +64,8 @@ class UtilsateurController
             if($this->utilisateurManager->verifMailDisponible($mailUtilisateur)){
                 $mdpCrypte = password_hash($mdpUtilisateur, PASSWORD_DEFAULT);
                 $clef = rand(0,9999);
-                if($this->utilisateurManager->bdCreerCompte($nomUtilisateur, $prenomUtilisateur, $pseudoUtilisateur, $mdpCrypte, $mailUtilisateur, $clef, "profils/profil.png", 2)){
+                if($this->utilisateurManager->bdCreerCompte($nomUtilisateur, $prenomUtilisateur, $pseudoUtilisateur, $mdpCrypte, 
+                                                            $mailUtilisateur, $clef, "profils/profil.png", 2)){
                     $this->envoiMailValidation($pseudoUtilisateur, $mailUtilisateur, $clef);
                     $_SESSION['alert'][] = [
                         "type" => "alert-success",

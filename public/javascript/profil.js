@@ -1,8 +1,7 @@
 
-// alert("Yéhh");
 
 let btnmodificationMail = document.querySelector("#btnmodificationMail");
-let btnValidationModificationMail = document.querySelector("#btnValidationModificationMail");
+/* let btnValidationModificationMail = document.querySelector("#btnValidationModificationMail"); */
 
 let mail = document.querySelector("#mail");
 let formModificationMail = document.querySelector("#formModificationMail");

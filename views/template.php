@@ -24,7 +24,7 @@
         <span class="bar"></span>
     </a>
     <div class="navbar-links">
-    <ul>
+        <ul>
             <li><a href="<?= URL ?>accueil">Accueil</a></li>
             <li><a href="<?= URL ?>meteo">Météo Cahors</a></li>
             <li><a href="<?= URL ?>planteHasard">Découvrez une plante</a></li>
@@ -61,83 +61,81 @@
     <footer>
     <div class="content-footer">
         <div class="bloc footer-services">
-        <h3>Plan du site</h3>
-        <ul class="services-list">
-            <li><a href="#">Agenda</a></li>
-            <li><a href="#">Actualité</a></li>
-            <li><a href="#">Végétaux</a></li>
-            <li><a href="#">Trocs</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
+            <h3>Plan du site</h3>
+            <ul class="services-list">
+                <li><a href="#">Agenda</a></li>
+                <li><a href="#">Actualité</a></li>
+                <li><a href="#">Végétaux</a></li>
+                <li><a href="#">Trocs</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
         </div>
 
         <div class="bloc footer-contact">
-        <h3>Coordonnées</h3>
-        <p>01 02 03 04 05 06</p>
-        <p>mail@contact.com</p>
-        <p><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2848.4221379156575!2d1.4364570157419192!3d44.44501450888534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12ac8932badf663b%3A0x85534b3fbfe238d1!2sAgora%20d&#39;agriculture%20urbaine!5e0!3m2!1sfr!2sfr!4v1643280721077!5m2!1sfr!2sfr" width="200" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe></p>
+            <h3>Coordonnées</h3>
+            <p>01 02 03 04 05 06</p>
+            <p>mail@contact.com</p>
+            <p><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2848.4221379156575!2d1.4364570157419192!3d44.44501450888534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12ac8932badf663b%3A0x85534b3fbfe238d1!2sAgora%20d&#39;agriculture%20urbaine!5e0!3m2!1sfr!2sfr!4v1643280721077!5m2!1sfr!2sfr" width="200" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe></p>
         </div>
 
         <div class="bloc footer-schedule">
-        <h3>Permanence téléphonique</h3>
-        <ul class="schedule-list">
-            <li>✔️ Lun 18-19</li>
-            <li>✔️ Mar 18-19</li>
-            <li>✔️ Mer 18-19</li>
-            <li>✔️ Jeu 18-19</li>
-            <li>✔️ Ven 18-19</li>
-            <li>❌ Sam</li>
-            <li>❌ Dim</li>
-        </ul>
+            <h3>Permanence téléphonique</h3>
+            <ul class="schedule-list">
+                <li>✔️ Lun 18-19</li>
+                <li>✔️ Mar 18-19</li>
+                <li>✔️ Mer 18-19</li>
+                <li>✔️ Jeu 18-19</li>
+                <li>✔️ Ven 18-19</li>
+                <li>❌ Sam</li>
+                <li>❌ Dim</li>
+            </ul>
         </div>
 
         <div class="bloc footer-medias">
-        <h3>Réseaux sociaux</h3>
-        <ul class="media-list">
-
-            <li>
-            <a href="https://www.facebook.com/groups/780227006229474/" target="_blank">
-                <svg
-                aria-hidden="true"
-                focusable="false"
-                data-prefix="fab"
-                data-icon="facebook"
-                class="svg-inline--fa fa-facebook fa-w-16"
-                role="img"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 512 512"
+            <h3>Réseaux sociaux</h3>
+            <ul class="media-list">
+                <li>
+                <a href="https://www.facebook.com/groups/780227006229474/" target="_blank">
+                    <svg
+                    aria-hidden="true"
+                    focusable="false"
+                    data-prefix="fab"
+                    data-icon="facebook"
+                    class="svg-inline--fa fa-facebook fa-w-16"
+                    role="img"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 512 512"
+                    >
+                    <path
+                        fill="currentColor"
+                        d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"
+                    ></path>
+                    </svg>
+                    Facebook</a
                 >
-                <path
-                    fill="currentColor"
-                    d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"
-                ></path>
-                </svg>
-                Facebook</a
-            >
-            </li>
+                </li>
 
-            <li>
-            <a href="https://www.youtube.com/watch?v=lkskLcBdL4w" target="_blank">
-                <svg
-                aria-hidden="true"
-                focusable="false"
-                data-prefix="fab"
-                data-icon="youtube"
-                class="svg-inline--fa fa-youtube fa-w-18"
-                role="img"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 576 512"
+                <li>
+                <a href="https://www.youtube.com/watch?v=lkskLcBdL4w" target="_blank">
+                    <svg
+                    aria-hidden="true"
+                    focusable="false"
+                    data-prefix="fab"
+                    data-icon="youtube"
+                    class="svg-inline--fa fa-youtube fa-w-18"
+                    role="img"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 576 512"
+                    >
+                    <path
+                        fill="currentColor"
+                        d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"
+                    ></path>
+                    </svg>
+                    Youtube</a
                 >
-                <path
-                    fill="currentColor"
-                    d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"
-                ></path>
-                </svg>
-                Youtube</a
-            >
-            </li>
-        </ul>
-
+                </li>
+            </ul>
         </div>
     </div>
 

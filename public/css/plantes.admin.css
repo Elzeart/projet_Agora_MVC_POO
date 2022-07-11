@@ -63,9 +63,15 @@ tbody a {
     border-radius: 5px;
 }
 
-.alert-success{
+.alert.success{
     background-color:#d1e7dd;
     color: #145a4d;
+    height:30px;
+}
+
+.alert.danger{
+    background-color:#dc3545;
+    color: white;
     height:30px;
 }
 
@@ -77,6 +83,9 @@ tbody a {
         font-size: 10px;
     }
     th, td {
-        padding: 10px 7px;
+        padding: 8px 5px;
+    }
+    .btnSup {
+        font-size: smaller;
     }
 }

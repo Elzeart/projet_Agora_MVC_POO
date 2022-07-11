@@ -1,3 +1,9 @@
+.brand-title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin: .5rem;
+}
+
 .navbar {
     display: flex;
     position: fixed;
@@ -7,12 +13,6 @@
     background: url("../images/nav.jpg");
     color: rgb(4, 32, 122);
     z-index: 100;
-}
-
-.brand-title {
-    font-size: 1rem;
-    font-weight: bold;
-    margin: .5rem;
 }
 
 .navbar-links {
@@ -30,17 +30,18 @@
 }
 
 .navbar-links li a {
-    display: block;
+    display: block;    /* Pour prendre toute la largeur */                      /* (Ainsi ensuite quand 'hover' la couleur appliquée prendra l'espace du block */
     text-decoration: none;
     color: rgb(4, 32, 122);
     padding: 0.8rem;
 }
 
+
 .navbar-links li:hover {
     background-color: rgba(149, 169, 233,0.40);
 }
 
-.toggle-button {
+.toggle-button {                                /* On positionne le burger et les espace entre les traits (span) */
     position: absolute;
     top: .75rem;
     right: 1rem;
@@ -51,7 +52,7 @@
     height: 21px;
 }
 
-.toggle-button .bar {
+.toggle-button .bar {                           /* On dessine le burger, trois traits */
     height: 3px;
     width: 100%;
     background-color: rgb(4, 32, 122);
@@ -59,18 +60,22 @@
 }
 
 @media (max-width: 800px) {
-    .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
     .toggle-button {
+        display: flex;      /* Le burger apparait */
+    }
+    
+    .navbar-links {
+        display: none;      /* les liens disparaisent */
+        width: 100%;        
+    }
+    
+    .navbar-links.active {  /* Les liens apparaissent quand la classe existe (toggle js). Ce selecteur est supérieur à ".navbar-links". display : none devient flex */
         display: flex;
     }
 
-    .navbar-links {
-        display: none;
-        width: 100%;
+    .navbar {
+        flex-direction: column;     
+        align-items: flex-start;
     }
 
     .navbar-links ul {
@@ -85,8 +90,5 @@
     .navbar-links ul li a {
         padding: .5rem 1rem;
     }
-
-    .navbar-links.active {
-        display: flex;
-    }
 }
+

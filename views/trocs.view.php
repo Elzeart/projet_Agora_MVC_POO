@@ -7,7 +7,7 @@ ob_start();
 <h2 class="titre-section-info">Trocs</h2>
 
     <div class="chekboxs">
-        <form method="POST" action="<?= URL ?>vegetaux/pTriParFamille/">
+        <form method="POST" action="#">
             <label class="container">Légumes</label>
             <input type="checkbox" checked="checked" onchange="submit()">
             <label class="container">Fruits</label>

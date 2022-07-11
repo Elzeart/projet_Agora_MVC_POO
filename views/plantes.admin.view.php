@@ -1,15 +1,5 @@
 <?php 
 ob_start(); 
-
-if(!empty($_SESSION['alert'])) :
-?>
-
-<div class="alert alert-<?= $_SESSION['alert']['type'] ?>" role="alert">
-    <?= $_SESSION['alert']['message'] ?>
-</div>
-<?php 
-unset($_SESSION['alert']);
-endif; 
 ?>
 
     <link rel="stylesheet" href="<?= URL ?>/public/css/plantes.admin.css">
@@ -31,7 +21,8 @@ endif;
         for($i=0; $i < count($plants);$i++) : 
         ?>
         <tr>
-            <td class="align-middle"><img src="<?= URL ?>public/images/plants/<?= $plants[$i]->getImageVegetal(); ?>" width="60px;" alt="Image : <?= $plants[$i]->getNomVegetal(); ?>"></td>
+            <td class="align-middle"><img src="<?= URL ?>public/images/plants/<?= $plants[$i]->getImageVegetal(); ?>
+            " width="60px;" alt="Image : <?= $plants[$i]->getNomVegetal(); ?>"></td>
             <td class="align-middle"><a href="<?= URL ?>admin/p/<?= $plants[$i]->getIdVegetal(); ?>"><?= $plants[$i]->getNomVegetal(); ?></a></td>
             <td class="align-middle"><?= $plants[$i]->getInfosVegetal(); ?></td>
             <td class="align-middle"><?= $plants[$i]->getPlantationVegetal(); ?></td>

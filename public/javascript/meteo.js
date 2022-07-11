@@ -10,7 +10,7 @@ let windSpeed = document.querySelector("#windSpeed");
 let windDirection = document.querySelector("#windDirection");
 
 
-const appId = ""; //Renseigner la clef api ici
+const appId = "5a3fca82987095b9779a5a979905469e"; //Renseigner la clef api ici
 const link = `https://api.openweathermap.org/data/2.5/weather?q=cahors&appid=${appId}&units=metric&&lang=fr`;	
 
     fetch(link)

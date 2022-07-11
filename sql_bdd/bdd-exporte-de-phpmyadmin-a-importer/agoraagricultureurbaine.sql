@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 15 juin 2022 à 11:02
+-- Généré le : mer. 06 juil. 2022 à 17:18
 -- Version du serveur : 10.4.21-MariaDB
 -- Version de PHP : 8.0.12
 
@@ -38,9 +38,9 @@ CREATE TABLE `appartenir` (
 
 INSERT INTO `appartenir` (`idTypeVegetal`, `idVegetal`) VALUES
 (2, 27),
-(3, 4),
 (3, 26),
 (4, 3),
+(4, 4),
 (4, 5),
 (5, 1);
 
@@ -316,7 +316,7 @@ CREATE TABLE `utilisateurs` (
 
 INSERT INTO `utilisateurs` (`idUtilisateur`, `nomUtilisateur`, `prenomUtilisateur`, `pseudoUtilisateur`, `mailUtilisateur`, `mdpUtilisateur`, `imageUtilisateur`, `activationCode`, `clef`, `idDroit`) VALUES
 (1, 'NomMembre2', 'PrenomMembre2', 'membre2', 'membre.valide@gmail.com', '$2y$10$bBMUTAenRhTFHDh5X7sT8e7XdOOWlXxVsmmFCbtYgGW2oruanp7du', '', 0, 2603, 2),
-(2, 'NomMembre1', 'PrenomMembre1', 'membre1', 'membre.nonValide@gmail.com', '$2y$10$C/EzsA5tIoHo43UeUR8ZquPmtS9EJwYn7VWZgxchwPxhzww7wwJyC', 'profils/profil.png', 1, 7914, 1),
+(2, 'NomMembre1', 'PrenomMembre1', 'membre1', 'membre.nonValide@gmail.com', '$2y$10$C/EzsA5tIoHo43UeUR8ZquPmtS9EJwYn7VWZgxchwPxhzww7wwJyC', 'profils/profil.png', 1, 7914, 2),
 (3, 'Admin1', 'Admin', 'admin', 'arnaud.depetris@gmail.com', '$2y$10$Vz2QW1MUJzctERK9hW5OluzgcyZeSTSHtCItXpPKPnqdkdEikEtMy', 'profils/profil.png', 1, 8266, 1);
 
 -- --------------------------------------------------------
@@ -329,7 +329,7 @@ CREATE TABLE `vegetaux` (
   `idVegetal` int(11) NOT NULL,
   `nomVegetal` varchar(50) NOT NULL,
   `infosVegetal` text NOT NULL,
-  `imageVegetal` varchar(50) NOT NULL,
+  `imageVegetal` varchar(100) NOT NULL,
   `plantationVegetal` text NOT NULL,
   `idUtilisateur` int(11) DEFAULT NULL,
   `idFamilleVegetal` int(11) DEFAULT NULL
@@ -341,8 +341,8 @@ CREATE TABLE `vegetaux` (
 
 INSERT INTO `vegetaux` (`idVegetal`, `nomVegetal`, `infosVegetal`, `imageVegetal`, `plantationVegetal`, `idUtilisateur`, `idFamilleVegetal`) VALUES
 (1, 'Graines de courges', 'Graines de courges infos', '53628_graines-de-courges.jpg', 'Graines de courges infos plantation', 3, 6),
-(3, 'Roses', 'Roses infos', '19002_RosePetale.jpg', 'Roses infos plantation', 3, 8),
-(4, 'Fruits de la passion', 'Fruits de la passion infos', '65679_Fruit-de-la-passion.png', 'Fruits de la passion infos plantation', 3, 7),
+(3, 'Roses', 'Roses infos', '87598_rose.jpg', 'Roses infos plantation', 3, 8),
+(4, 'Passiflore', 'Passiflore infos', 'b6b2eed45dd375009a29686ebb674422_passiflora-edulis.jpg', 'Passiflore infos plantation', 3, 7),
 (5, 'Violettes', 'Violettes infos', '64125_violette.jpeg', 'Violettes infos plantation', 3, 5),
 (26, 'Prunes', 'Prunes infos', '43400_la-prune.jpg', 'Prunes infos plantation', 3, 8),
 (27, 'Pommes de terre', 'Pommes de terre infos', '9006_potatoes.jpg', 'Pommes de terre infos plantation', 3, 4);
@@ -599,7 +599,7 @@ ALTER TABLE `utilisateurs`
 -- AUTO_INCREMENT pour la table `vegetaux`
 --
 ALTER TABLE `vegetaux`
-  MODIFY `idVegetal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `idVegetal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT pour la table `vegetauxtroc`

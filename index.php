@@ -49,9 +49,6 @@ try{
             case "contact" : 
                 require "views/contact.view.php";
             break;
-            case "connexionInscription" : 
-                $utilisateurController->connexionForm();
-            break;
             case "ValidationConnexion" : 
                 if(!empty($_POST['pseudoUtilisateur']) && !empty($_POST['mdpUtilisateur'])){
                     $pseudo = Toolbox::secureHTML($_POST['pseudoUtilisateur']);
@@ -62,11 +59,16 @@ try{
                     header('Location: '.URL.'connexionInscription');
                 }
             break;
+            case "connexionInscription" : 
+                $utilisateurController->connexionForm();
+            break;
             case "inscription" : 
                 $utilisateurController->inscriptionForm();
             break;
             case "inscriptionValidation" : 
-                if(isset($_POST['nomUtilisateur']) && !empty($_POST['nomUtilisateur']) && isset($_POST['prenomUtilisateur']) && !empty($_POST['prenomUtilisateur']) && isset($_POST['pseudoUtilisateur']) && !empty($_POST['pseudoUtilisateur']) && isset($_POST['mailUtilisateur']) && !empty($_POST['mailUtilisateur']) && isset($_POST['mdpUtilisateur']) && !empty($_POST['mdpUtilisateur']) && isset($_POST['confirmMdpUtilisateur']) && !empty($_POST['confirmMdpUtilisateur'])){
+                if(isset($_POST['nomUtilisateur']) && !empty($_POST['nomUtilisateur']) && isset($_POST['prenomUtilisateur']) && !empty($_POST['prenomUtilisateur']) 
+                && isset($_POST['pseudoUtilisateur']) && !empty($_POST['pseudoUtilisateur']) && isset($_POST['mailUtilisateur']) && !empty($_POST['mailUtilisateur']) 
+                && isset($_POST['mdpUtilisateur']) && !empty($_POST['mdpUtilisateur']) && isset($_POST['confirmMdpUtilisateur']) && !empty($_POST['confirmMdpUtilisateur'])){
                     if($_POST['mdpUtilisateur'] === $_POST['confirmMdpUtilisateur']){
                         if(filter_var($_POST['mailUtilisateur'], FILTER_VALIDATE_EMAIL)){
                             $nomUtilisateur = Toolbox::secureHTML($_POST['nomUtilisateur']);
@@ -149,6 +151,10 @@ try{
                 else {
                     if(empty($url[1])){
                         require "views/admin.view.php";
+                    } else if($url[1] === "m") {
+                        $planteController->modifierPlante(Toolbox::secureHTML($url[2]));
+                    } else if($url[1] === "mv") {
+                        $planteController->modifierPlanteValidation();
                     } else if($url[1] === "pAdmin") {
                         $planteController->afficherPlantes();
                     } else if($url[1] === "p") {
@@ -162,11 +168,7 @@ try{
                         $idFamilleVegetal = Toolbox::secureHTML($_POST['idFamilleVegetal']);
                         $idTypeVegetal = Toolbox::secureHTML($_POST['idTypeVegetal']);
                         $planteController->ajoutPlanteValidation($titre,$infosVegetal,$plantationVegetal,$idFamilleVegetal,$idTypeVegetal);
-                    } else if($url[1] === "m") {
-                        $planteController->modifierPlante(Toolbox::secureHTML($url[2]));
-                    } else if($url[1] === "mv") {
-                        $planteController->modifierPlanteValidation();
-                    } else if($url[1] === "s") {
+                    }  else if($url[1] === "s") {
                         $planteController->supprimerPlante(Toolbox::secureHTML($url[2]));
                     } else if($url[1] === "profil") {
                         $utilisateurController->profil();

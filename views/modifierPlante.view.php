@@ -59,3 +59,4 @@ $page_description = "Modifier une plante par un administrateur. Agora Agricultur
 $content = ob_get_clean();
 require "template.php";
 ?>
+

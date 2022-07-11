@@ -7,8 +7,8 @@ ob_start();
 
 <h2 class="titre-section-info">Bienvenue dans l'espace membre</h2>
 
-<a href="<?= URL ?>espaceMembre/profil">Gestion du profil</a> <br>
-<a href="<?= URL ?>espaceMembre/pTroc">Proposer un troc</a> <br>
+<a href="<?= URL ?>espaceMembre/profil" class="text-dark text-decoration-none">Gestion du profil</a> <br>
+<a href="<?= URL ?>espaceMembre/pTroc" class="text-dark text-decoration-none">Proposer un troc</a> <br>
 
 <?php
 $page_title = "Espace membre";

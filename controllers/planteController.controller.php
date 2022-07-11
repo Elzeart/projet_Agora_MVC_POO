@@ -65,7 +65,7 @@ class PlanteController{
         /* Ajout ici du set. Puis mettre les this-> dans les managers */
 /*         $plant = new Vegetal($vegetal['idVegetal'],$titre,$infosVegetal,$plantationVegetal,$nomImageAjoute,$idFamilleVegetal); */
         $this->planteManager->ajoutPlanteBd($titre,$infosVegetal,$plantationVegetal,$nomImageAjoute,$idFamilleVegetal,$idTypeVegetal, $idUtilisateur);
-        $_SESSION['alert'] = [
+        $_SESSION['alert'] []= [
             "type" => "success",
             "message" => "Ajout Réalisé"
         ];
@@ -74,9 +74,9 @@ class PlanteController{
 
     public function supprimerPlante($id){
         $nomImage = $this->planteManager->getPlantById($id)->getImageVegetal();
-        unlink("public/images/".$nomImage);
+        unlink("public/images/plants/".$nomImage);
         $this->planteManager->supprimerPlanteBD($id);
-        $_SESSION['alert'] = [
+        $_SESSION['alert'] []= [
             "type" => "success",
             "message" => "Suppression Réalisée"
         ];
@@ -84,23 +84,22 @@ class PlanteController{
     }
 
     public function modifierPlanteValidation(){
-        $imageActuelle = $this->planteManager->getPlantById($_POST['identifiant'])->getImageVegetal();
+        var_dump(fileType($_FILES['image']));
+/*         $imageActuelle = $this->planteManager->getPlantById($_POST['identifiant'])->getImageVegetal();
         $file = $_FILES['image'];
-
         if($file['size'] > 0){
-            unlink("public/images/plants/".$imageActuelle);
             $repertoire = "public/images/plants/";
             $nomImageAjoute = Toolbox::ajoutImage($file,$repertoire);
+            unlink("public/images/plants/".$imageActuelle);
         } else {
             $nomImageAjoute = $imageActuelle;
         }
-        $this->planteManager->modifierPlanteBD($_POST['identifiant'], $_POST['titre'], $_POST['infos'], $_POST['infoPlantation'], 
-        $nomImageAjoute, $_POST['idFamilleVegetal'], $_POST['idTypeVegetal']);
-        $_SESSION['alert'] = [
+        $this->planteManager->modifierPlanteBD($_POST, $nomImageAjoute);
+        $_SESSION['alert'] []= [
             "type" => "success",
             "message" => "Modification Réalisée"
         ];
-        header('Location: '. URL . "admin/pAdmin");
+        header('Location: '. URL . "admin/pAdmin"); */
     }
 
     public function afficherPlanteParFamille($idFamilleVegetal){

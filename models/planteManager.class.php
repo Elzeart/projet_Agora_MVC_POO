@@ -99,19 +99,20 @@ class PlantManager extends Model{
         } */
     }
 
-    public function modifierPlanteBD($id, $titre, $infos, $infoPlantation, $image, $idFamilleVegetal, $idTypeVegetal){
-        $req = "
+    public function modifierPlanteBD($post, $image){
+       $req = "
         UPDATE vegetaux 
-        SET nomVegetal = :nomVegetal, infosVegetal = :infosVegetal, plantationVegetal = :plantationVegetal, imageVegetal = :imageVegetal, idFamilleVegetal = :idFamilleVegetal 
+        SET nomVegetal = :nomVegetal, infosVegetal = :infosVegetal, plantationVegetal = :plantationVegetal, 
+        imageVegetal = :imageVegetal, idFamilleVegetal = :idFamilleVegetal 
         WHERE idVegetal = :idVegetal
         ";
         $stmt = $this->getBdd()->prepare($req);
-        $stmt->bindValue(":idVegetal",$id,PDO::PARAM_INT);
-        $stmt->bindValue(":nomVegetal",$titre,PDO::PARAM_STR);
-        $stmt->bindValue(":infosVegetal",$infos,PDO::PARAM_STR);
-        $stmt->bindValue(":plantationVegetal",$infoPlantation,PDO::PARAM_STR);
+        $stmt->bindValue(":idVegetal",$post['identifiant'],PDO::PARAM_INT);
+        $stmt->bindValue(":nomVegetal",$post['titre'],PDO::PARAM_STR);
+        $stmt->bindValue(":infosVegetal",$post['infos'],PDO::PARAM_STR);
+        $stmt->bindValue(":plantationVegetal",$post['infoPlantation'],PDO::PARAM_STR);
         $stmt->bindValue(":imageVegetal",$image,PDO::PARAM_STR);
-        $stmt->bindValue(":idFamilleVegetal",$idFamilleVegetal,PDO::PARAM_INT);
+        $stmt->bindValue(":idFamilleVegetal",$post['idFamilleVegetal'],PDO::PARAM_INT);
         $resultat = $stmt->execute();
         $stmt->closeCursor();
         $req2 = "
@@ -119,18 +120,10 @@ class PlantManager extends Model{
             WHERE idVegetal = :idVegetal
             ";
         $stmt = $this->getBdd()->prepare($req2);
-        $stmt->bindValue(":idTypeVegetal",$idTypeVegetal,PDO::PARAM_INT);
-        $stmt->bindValue(":idVegetal",$id,PDO::PARAM_INT);
+        $stmt->bindValue(":idTypeVegetal",$post['idTypeVegetal'],PDO::PARAM_INT);
+        $stmt->bindValue(":idVegetal",$post['identifiant'],PDO::PARAM_INT);
         $stmt->execute();
         $stmt->closeCursor();
-        // Facultatif ?
-/*         if($resultat > 0){
-            $this->getPlantById($id)->setNomVegetal($titre);
-            $this->getPlantById($id)->setinfosVegetal($infos);
-            $this->getPlantById($id)->setImageVegetal($image);
-            $this->getPlantById($id)->setPlantationVegetal($infoPlantation);
-            $this->getPlantById($id)->setFamilleVegetal($idFamilleVegetal);
-        } */
     }
 
     public function getFamillesVegetauxBd(){

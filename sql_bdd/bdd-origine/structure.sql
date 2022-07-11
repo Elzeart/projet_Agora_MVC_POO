@@ -79,7 +79,7 @@ create table vegetaux(
 	idVegetal int primary key auto_increment not null,
     nomVegetal varchar(50) not null,
     infosVegetal text not null,
-    imageVegetal varchar(50) not null,
+    imageVegetal varchar(100) not null,
     plantationVegetal text not null,
 	idUtilisateur int,
 	idFamilleVegetal int
