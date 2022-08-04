@@ -59,7 +59,7 @@ class UtilsateurController
         header('Location: '.URL.'connexionInscription');
     }
 
-    public function inscriptionValid($nomUtilisateur, $prenomUtilisateur, $pseudoUtilisateur, $mdpUtilisateur, $mailUtilisateur, ){
+    public function inscriptionValid($nomUtilisateur, $prenomUtilisateur, $pseudoUtilisateur, $mdpUtilisateur, $mailUtilisateur){
         if($this->utilisateurManager->verifPseudoDisponible($pseudoUtilisateur)){
             if($this->utilisateurManager->verifMailDisponible($mailUtilisateur)){
                 $mdpCrypte = password_hash($mdpUtilisateur, PASSWORD_DEFAULT);
