@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : dim. 21 août 2022 à 17:44
+-- Généré le : dim. 21 août 2022 à 19:42
 -- Version du serveur : 10.4.24-MariaDB
 -- Version de PHP : 8.1.6
 
@@ -315,9 +315,9 @@ CREATE TABLE `utilisateurs` (
 --
 
 INSERT INTO `utilisateurs` (`idUtilisateur`, `nomUtilisateur`, `prenomUtilisateur`, `pseudoUtilisateur`, `mailUtilisateur`, `mdpUtilisateur`, `imageUtilisateur`, `activationCode`, `clef`, `idDroit`) VALUES
-(1, 'NomMembre2', 'PrenomMembre2', 'membre2', 'membre.valide@gmail.com', '$2y$10$bBMUTAenRhTFHDh5X7sT8e7XdOOWlXxVsmmFCbtYgGW2oruanp7du', '', 0, 2603, 2),
-(2, 'NomMembre1', 'PrenomMembre1', 'membre1', 'membre.nonValide@gmail.com', '$2y$10$C/EzsA5tIoHo43UeUR8ZquPmtS9EJwYn7VWZgxchwPxhzww7wwJyC', 'profils/profil.png', 1, 7914, 2),
-(3, 'Admin1', 'Admin', 'admin', 'arnaud.depetris@gmail.com', '$2y$10$sFAuMWIJ2n0nlmMkbY/fTOFH3ntc93cQCY2UH2lCJHFv28u.4/wb2', 'profils/profil.png', 1, 8266, 1);
+(1, 'NomMembre2', 'PrenomMembre2', 'membre2', 'membre2.nonvalide@gmail.com', '$2y$10$QsxFWVvRIdcUCQHq7Iv/U.bir929LYXOSpZndc1YICr0dgRtJX8l6', 'profils/profil.png', 1, 2603, 2),
+(2, 'NomMembre1', 'PrenomMembre1', 'membre1', 'membre1.Valide@gmail.com', '$2y$10$qtoft1Wdnu1mSJR6Kf3ocedTYK4bQmV3bJCiDxGmSMBdS0J/I4t5W', 'profils/profil.png', 1, 7914, 2),
+(3, 'Admin1', 'Admin', 'admin', 'admin@gmail.com', '$2y$10$.EgsdkFomLP0NpcdE7FIoeRgWI2y8SkZ7Lmv30bulNokZw68uPmvW', 'profils/profil.png', 1, 8266, 1);
 
 -- --------------------------------------------------------
 
@@ -593,7 +593,7 @@ ALTER TABLE `typevegetaux`
 -- AUTO_INCREMENT pour la table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
-  MODIFY `idUtilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idUtilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `vegetaux`
