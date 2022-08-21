@@ -42,11 +42,11 @@ class PlantManager extends Model{
 
     public function getPlantById($id){
         for($i=0; $i < count($this->plants);$i++){
-            if($this->plants[$i]->getIdVegetal() === $id){
+            if($this->plants[$i]->getIdVegetal() == $id){
                 return $this->plants[$i];
             }
         }
-        throw new Exception("La plante n'existe pas");
+        throw new Exception("La plante n'existe pas");       
     }
 
     public function ajoutPlanteBd($titre,$infosVegetal,$plantationVegetal,$image, $idFamilleVegetal, $idTypeVegetal, $idUtilisateur){

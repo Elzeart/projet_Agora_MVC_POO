@@ -21,9 +21,9 @@ ob_start();
                         <label for="mailUtilisateur">Mail</label>
                         <input type="text" name="mailUtilisateur" placeholder="Entrez un mail" required> <br>
                         <label for="mdpUtilisateur">Mot de passe</label>
-                        <input type="password" name="mdpUtilisateur" minlength="10" placeholder="Entrez un mot de passe" required> <br>
+                        <input type="password" name="mdpUtilisateur" minlength="12" placeholder="Entrez un mot de passe" required> <br>
                         <label for="confirmMdpUtilisateur">Confirmer mot de passe</label>
-                        <input type="password" name="confirmMdpUtilisateur" minlength="10" placeholder="Veillez confirmer le mot de passe" required> <br>
+                        <input type="password" name="confirmMdpUtilisateur" minlength="12" placeholder="Veillez confirmer le mot de passe" required> <br>
                     </div>
                 </div>
                 <div class="bouton"><input type="submit" id='submit' value="AJOUTER"></div>
