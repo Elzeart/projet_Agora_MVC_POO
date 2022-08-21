@@ -13,7 +13,7 @@ Pour xampp :
 	=> ouvrir le fichier php.ini. Rechercher [mail function]   
   		* Mettre en commentaire les deux lignes :  
 			`* SMTP=localhost  
-			`* smtp_port=25.  
+			`* smtp_port=25  
   		* Rajouter les quatre lignes :   
 			`* SMTP=smtp.gmail.com  
 			`* smtp_port=587  
