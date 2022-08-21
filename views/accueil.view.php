@@ -10,6 +10,7 @@ ob_start();
     </div>
 
 <section>
+    <a name="ancreAgenda"></a>
     <h3>Evenements à venir</h3>
     <article>
             <h4>Titres</h4>
@@ -47,6 +48,7 @@ ob_start();
 </section>
 
 <section>
+    <a name="ancreActualite"></a>
     <h3>Dernières réalisations</h3>
     <article>
             <h4>Titres</h4>

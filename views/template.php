@@ -63,11 +63,11 @@
         <div class="bloc footer-services">
             <h3>Plan du site</h3>
             <ul class="services-list">
-                <li><a href="#">Agenda</a></li>
-                <li><a href="#">Actualité</a></li>
-                <li><a href="#">Végétaux</a></li>
-                <li><a href="#">Trocs</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="<?= URL ?>accueil#ancreAgenda">Agenda</a></li>
+                <li><a href="<?= URL ?>accueil#ancreActualite">Actualité</a></li>
+                <li><a href="<?= URL ?>vegetaux">Végétaux</a></li>
+                <li><a href="<?= URL ?>trocs">Trocs</a></li>
+                <li><a href="<?= URL ?>contact">Contact</a></li>
             </ul>
         </div>
 
