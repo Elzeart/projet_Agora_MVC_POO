@@ -12,25 +12,25 @@ Exemple de configuration pour xampp et gmail :
 Pour xampp :  
 	=> ouvrir le fichier php.ini. Rechercher [mail function]   
   		* Mettre en commentaire les deux lignes :  
-			`* SMTP=localhost  
-			`* smtp_port=25  
+			SMTP=localhost  
+			smtp_port=25  
   		* Rajouter les quatre lignes :   
-			`* SMTP=smtp.gmail.com  
-			`* smtp_port=587  
-			`* sendmail_from = votre_adresse_gmail@gmail.com  
-			`* sendmail_path="\"C:\xampp\sendmail\sendmail.exe" -t"  
+			SMTP=smtp.gmail.com  
+			smtp_port=587  
+			sendmail_from = votre_adresse_gmail@gmail.com  
+			sendmail_path="\"C:\xampp\sendmail\sendmail.exe" -t"  
 	=> ouvrir le fichier sendmail.ini  
   		* Mettre en commentaire les deux lignes :  
-			`* smtp_server=mail.mydomain.com  
-			`* smtp_port=25  
+			smtp_server=mail.mydomain.com  
+			smtp_port=25  
 	=> Rajouter sous [sendmail] les lignes :  
-    		`* smtp_server=smtp.gmail.com  
-		`* smpt_port=587  
-		`* error_logfile=error.log  
-		`* debug_logfile=debug.log  
-		`* auth_username=votre_adresse_gmail@gmail.com  
-		`* auth_password=votre_mot_de_pass_gmail  
-		`* force_sender=votre_adresse_gmail@gmail.com  
+    		smtp_server=smtp.gmail.com  
+		smpt_port=587  
+		error_logfile=error.log  
+		debug_logfile=debug.log  
+		auth_username=votre_adresse_gmail@gmail.com  
+		auth_password=votre_mot_de_pass_gmail  
+		force_sender=votre_adresse_gmail@gmail.com  
       
 Pour gmail (il est préférable d'avoir un boite mail de testing) :  
 	Débloquer le fait de pouvoir utiliser des applications tierces   
