@@ -12,13 +12,13 @@ Exemple de configuration pour xampp et gmail :
 Pour xampp :  
 	=> ouvrir le fichier php.ini. Rechercher [mail function]   
   		* Mettre en commentaire les deux lignes :  
-			SMTP=localhost  
-			smtp_port=25  
+			  SMTP=localhost  
+			  smtp_port=25  
   		* Rajouter les quatre lignes :   
-			SMTP=smtp.gmail.com  
-			smtp_port=587  
-			sendmail_from = votre_adresse_gmail@gmail.com  
-			sendmail_path="\"C:\xampp\sendmail\sendmail.exe" -t"  
+			  SMTP=smtp.gmail.com  
+			  smtp_port=587  
+			  sendmail_from = votre_adresse_gmail@gmail.com  
+			  sendmail_path="\"C:\xampp\sendmail\sendmail.exe" -t"  
 	=> ouvrir le fichier sendmail.ini  
   		* Mettre en commentaire les deux lignes :  
 			smtp_server=mail.mydomain.com  
